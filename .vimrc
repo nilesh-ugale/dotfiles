@@ -119,6 +119,7 @@ let g:python_highlight_all = 1
 """""""""""""""""""""""""""""""""" Basic Map """"""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""" Start of AirLine Settings """"""""""""""""""""""""""
+let g:airline_powerline_fonts=1
 let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
