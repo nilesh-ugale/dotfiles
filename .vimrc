@@ -121,6 +121,11 @@ map <right> <nop>
 " Cycle through splits.
 nnoremap <S-Tab> <C-w>w
 
+" Save file
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>i
+xnoremap <C-s> <Esc>:w<CR>v
+
 " Press * to search for the term under the cursor or a visual selection and
 " then press a key below to replace all instances of it in the current file.
 nnoremap <leader>r :%s///g<Left><Left>
