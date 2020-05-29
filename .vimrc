@@ -70,9 +70,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
-"Plug 'Lokaltog/powerline'
+" Plug 'Lokaltog/powerline'
 " Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -88,6 +88,7 @@ Plug 'tpope/vim-rhubarb' " hub extension for fugitive
 Plug 'sodapopcan/vim-twiggy'
 Plug 'rbong/vim-flog'
 Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
@@ -346,44 +347,45 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 
 """"""""""""""""""""""""""" Start of Color Scheme """""""""""""""""""""""""""""
 "colorscheme one
-colorscheme molokai              " set color scheme
+"colorscheme molokai              " set color scheme
 "colorscheme skittles_berry       " set color scheme
-"colorscheme sonokai             " set color scheme
-"set background=dark
+"colorscheme sonokai              " set color scheme
+colorscheme gruvbox              " set color scheme
+set background=dark
 """""""""""""""""""""""""""" End of Color Scheme """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""" Coc Config Start """"""""""""""""""""""""""""""""
 " use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-let g:coc_global_extensions = [
-            \'coc-todolist',
-            \'coc-tag',
-            \'coc-syntax',
-            \'coc-marketplace',
-            \'coc-lists',
-            \'coc-highlight',
-            \'coc-git',
-            \'coc-explorer',
-            \'coc-dictionary',
-            \'coc-calc',
-            \'coc-python',
-            \'coc-json',
-            \'coc-gocode',
-            \'coc-cmake',
-            \'coc-tasks'
-            \]
+" function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"
+" let g:coc_global_extensions = [
+"             \'coc-todolist',
+"             \'coc-tag',
+"             \'coc-syntax',
+"             \'coc-marketplace',
+"             \'coc-lists',
+"             \'coc-highlight',
+"             \'coc-git',
+"             \'coc-explorer',
+"             \'coc-dictionary',
+"             \'coc-calc',
+"             \'coc-python',
+"             \'coc-json',
+"             \'coc-gocode',
+"             \'coc-cmake',
+"             \'coc-tasks'
+"             \]
 """"""""""""""""""""""""""""" Coc Config End """"""""""""""""""""""""""""""""""
 
     " NERDTree {{{
@@ -494,6 +496,18 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_enabled = 0
 """"""""""""""""""""""""""" Indent Guide End """"""""""""""""""""""""""""""""""
 
+"let g:vimwiki_list = [{'path': '~/vimwiki/',
+"                      \ 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_global_ext = 0
+
+hi VimwikiHeader1 guifg=#FF0000
+hi VimwikiHeader2 guifg=#00FF00
+hi VimwikiHeader3 guifg=#0000FF
+hi VimwikiHeader4 guifg=#FF00FF
+hi VimwikiHeader5 guifg=#00FFFF
+hi VimwikiHeader6 guifg=#FFFF00
+let g:vimwiki_folding = 'list'
+
 highlight ColorColumn ctermbg=74 guibg=#5fafd7
 
 " Function for triming white spaces
@@ -516,4 +530,5 @@ au!
 autocmd VimEnter * silent !echo -ne "\e[1 q"
 autocmd VimLeave * silent !echo -ne "\e[5 q"
 augroup END
+
 """"""""""""""""""""""""""""""""".vimrc """""""""""""""""""""""""""""""""""""""
