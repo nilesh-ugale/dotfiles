@@ -54,6 +54,7 @@ set updatetime=50
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+set cursorline
 set colorcolumn=81
 
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»
@@ -109,9 +110,9 @@ let mapleader = ","
 
 " Easy split navigation
 map <C-j> <C-w>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
 
 " Disable arrow keys in Escape mode
 map <up> <nop>
@@ -121,6 +122,16 @@ map <right> <nop>
 
 " Cycle through splits.
 nnoremap <S-Tab> <C-w>w
+
+" Move line up or down
+nnoremap <C-M-j> :m .+1<CR>==
+nnoremap <C-M-k> :m .-2<CR>==
+inoremap <C-M-k> <Esc>:m .-2<CR>==gi
+inoremap <C-M-j> <Esc>:m .+1<CR>==gi
+
+" Move selection up or down
+vnoremap <C-M-j> :m '>+1<CR>gv=gv
+vnoremap <C-M-k> :m '<-2<CR>gv=gv
 
 " Save file
 nnoremap <C-s> :w<CR>
