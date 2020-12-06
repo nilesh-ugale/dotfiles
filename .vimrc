@@ -59,6 +59,9 @@ set colorcolumn=81
 
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»
 " set list
+
+set clipboard=unnamedplus
+
 """""""""""""""""""""""""""""""""""" Basic """"""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
@@ -90,6 +93,7 @@ Plug 'sodapopcan/vim-twiggy'
 Plug 'rbong/vim-flog'
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
+Plug 'mhinz/vim-grepper'
 
 call plug#end()
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
@@ -194,6 +198,8 @@ inoremap <F7> <C-o>:set list!<CR>
 cnoremap <F7> <C-c>:set list!<CR>
 
 nnoremap <leader>u :UndotreeShow<CR>
+
+map <leader>cqf :call setqflist([])<CR>:cclose<CR>
 
 let g:python_highlight_all = 1
 """""""""""""""""""""""""""""""""" Basic Map """"""""""""""""""""""""""""""""""
@@ -500,7 +506,30 @@ set background=dark
         nmap <silent><leader>gb :Gblame<cr>
 
     " }}}
+" .............................................................................
+" mhinz/vim-grepper
+" .............................................................................
 
+let g:grepper={}
+let g:grepper.tools=["rg"]
+
+xmap gr <plug>(GrepperOperator)
+
+" After searching for text, press this mapping to do a project wide find and
+" replace. It's similar to <leader>r except this one applies to all matches
+" across all files instead of just the current file.
+nnoremap <Leader>R
+  \ :let @s='\<'.expand('<cword>').'\>'<CR>
+  \ :Grepper -cword -noprompt<CR>
+  \ :cfdo %s/<C-r>s//g \| update
+  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" The same as above except it works with a visual selection.
+xmap <Leader>R
+    \ "sy
+    \ gvgr
+    \ :cfdo %s/<C-r>s//g \| update
+     \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 """""""""""""""""""""""""" Indent Guide Start """""""""""""""""""""""""""""""""
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
