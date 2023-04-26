@@ -15,8 +15,18 @@ lvim.colorscheme = "gruvbox"
 lvim.transparent_window = true
 lvim.lsp.diagnostics.virtual_text = false
 
+lvim.lang.c.lsp = {}
+lvim.lang.cpp = {}
+
+lvim.builtin.lualine.extensions = {
+   "fugitive",
+   "fzf",
+   "nvim-tree",
+   "quickfix"
+}
+
 lvim.builtin.lualine.options = {
-   theme = "onedark",
+    theme = "onedark",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -86,7 +96,7 @@ lvim.builtin.lualine.sections.lualine_z = {
             local index = math.floor(line_ratio * 100)
             return index .. "%%"
         end,
-        padding = { left = 0, right = 0 },
+        padding = { left = 1, right = 1 },
         color = {
             gui = "bold"
         },
@@ -239,7 +249,12 @@ lvim.plugins = {
     {
         'kdheepak/tabline.nvim',
         config = function()
-            require'tabline'.setup {enable = false}
+            require'tabline'.setup {
+                enable = false,
+                options = {
+                    show_filename_only = true
+                }
+            }
         end,
         requires = {'shadmansaleh/lualine.nvim', 'kyazdani42/nvim-web-devicons'}
     }
