@@ -6,6 +6,8 @@ syntax enable
 filetype plugin on
 filetype plugin indent on
 
+set rtp+=~/.vim/autoload
+
 set path+=**
 set wildignore+=**/build/**,**/*Debug*/**
 set wildmenu
@@ -51,7 +53,7 @@ set colorcolumn=81
 """""""""""""""""""""""""""""""""""" Basic """"""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugin')
+call plug#begin('~/.vim/plug')
 
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
@@ -62,7 +64,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
 Plug 'Lokaltog/powerline'
 " Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
