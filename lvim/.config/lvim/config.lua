@@ -130,6 +130,10 @@ vim.api.nvim_set_keymap( "n", "<F3>", ":noh<CR>", { noremap = true, silent = tru
 vim.api.nvim_set_keymap( "i", "<F7>", "<ESC>:set list!<CR>li", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "v", "<F7>", "<ESC>:set list!<CR>v", { noremap = true, silent = true } )
 
+vim.api.nvim_set_keymap( "n", "<F5>", ":set invspell<CR>", { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( "i", "<F5>", "<ESC>:set invspell<CR>li", { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( "v", "<F5>", "<ESC>:set invspell<CR>v", { noremap = true, silent = true } )
+
 -- Prevent x from overriding what's in the clipboard.
 vim.api.nvim_set_keymap( "n", "x", "\"_x", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "X", "\"_x", { noremap = true, silent = true } )
@@ -217,7 +221,8 @@ lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
+lvim.builtin.nvimtree.setup.view.relativenumber = true
+-- lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.bufferline.active = false
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -323,7 +328,18 @@ lvim.plugins = {
             }
         end,
         requires = {'shadmansaleh/lualine.nvim', 'kyazdani42/nvim-web-devicons'}
-    }
+    },
+    {
+        'tools-life/taskwiki',
+        config = function()
+            require'taskwiki'.setup{}
+        end,
+    },
+    { 'blindFS/vim-taskwarrior' },
+    { 'vimwiki/vimwiki', branch = 'dev' },
+    { 'preservim/tagbar' },
+    { 'powerman/vim-plugin-AnsiEsc' },
+    -- { 'github/copilot.vim' },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
