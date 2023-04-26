@@ -13,6 +13,7 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "gruvbox"
 lvim.transparent_window = true
+lvim.lsp.diagnostics.virtual_text = false
 
 lvim.builtin.lualine.options = {
    theme = "onedark",
@@ -147,6 +148,11 @@ vim.api.nvim_set_keymap( "i", "kj", "<ESC>", { noremap = true, silent = true } )
 
 vim.api.nvim_set_keymap( "n", "<leader>ss", ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"Grep For >> \")})<CR>", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "<leader>sw", ":lua require(\"telescope.builtin\").grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", { noremap = true, silent =  true } )
+
+lvim.keys.normal_mode = vim.tbl_deep_extend("force", lvim.keys.normal_mode, {
+    ["<S-l>"] = ":TablineBufferNext<CR>",
+    ["<S-h>"] = ":TablineBufferPrevious<CR>",
+})
 
 local mappings = {
     s = {
