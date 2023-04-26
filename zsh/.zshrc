@@ -166,10 +166,10 @@ conda activate py310
 
 export PATH=~/.npm-global/bin:$PATH
 export PATH=~/.local//bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export GO11MODULE=auto1
-
 alias luamake=/home/nilesh/lua-language-server/3rd/luamake/luamake
 
