@@ -6,6 +6,8 @@ syntax enable
 filetype plugin on
 filetype plugin indent on
 
+scriptencoding utf-8
+
 set path+=**
 set wildignore+=**/build/**,**/*Debug*/**
 set wildmenu
