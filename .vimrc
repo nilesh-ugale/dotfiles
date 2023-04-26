@@ -519,7 +519,7 @@ hi VimwikiHeader5 guifg=#00FFFF
 hi VimwikiHeader6 guifg=#FFFF00
 let g:vimwiki_folding = 'list'
 
-highlight ColorColumn ctermbg=74 guibg=#5fafd7
+" highlight ColorColumn ctermbg=74 guibg=#5fafd7
 
 " Function for triming white spaces
 fun! TrimWhitespace()
