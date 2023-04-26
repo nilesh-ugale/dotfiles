@@ -13,7 +13,7 @@ set wildignore+=**/build/**,**/*Debug*/**
 set wildmenu
 set guioptions=
 set guicursor=
-set guifont=Noto_Mono_for_Powerline:h12:cANSI:qDRAFT
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12:cANSI
 set backspace=indent,eol,start  " more powerful backspacing
 set noshowmatch
 set relativenumber
@@ -35,6 +35,11 @@ set incsearch
 set termguicolors
 set autoread
 set scrolloff=5
+" Show pressed key in normal mode
+set showcmd
+"set ttymouse=xterm2
+set mouse=a
+
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -65,7 +70,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
-Plug 'Lokaltog/powerline'
+"Plug 'Lokaltog/powerline'
 " Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -113,6 +118,64 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" Cycle through splits.
+nnoremap <S-Tab> <C-w>w
+
+" Press * to search for the term under the cursor or a visual selection and
+" then press a key below to replace all instances of it in the current file.
+nnoremap <leader>r :%s///g<Left><Left>
+nnoremap <leader>rc :%s///gc<Left><Left><Left>
+
+" The same as above but instead of acting on the whole file it will be
+" restricted to the previously visually selected range. You can do that by
+" pressing *, visually selecting the range you want it to apply to and then
+" press a key below to replace all instances of it in the current selection.
+xnoremap <leader>r :s///g<Left><Left>
+xnoremap <leader>rc :s///gc<Left><Left><Left>
+
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent> s* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> s* "sy:let @/=@s<CR>cgn
+
+" Clear search highlights.
+map <leader><Space> :let @/=''<CR>
+
+" Format paragraph (selected or not) to 80 character lines.
+"nnoremap <leader>g gqap
+"xnoremap <leader>g gqa
+
+" Prevent x from overriding what's in the clipboard.
+noremap x "_x
+noremap X "_x
+
+" Prevent selecting and pasting from overwriting what you originally copied.
+"xnoremap p pgvy
+
+" Keep cursor at the bottom of the visual selection after you yank it.
+"vmap y ygv<Esc>
+
+" Edit Vim config file in a new tab.
+map <leader>ev :tabnew $MYVIMRC<CR>
+
+" Source Vim config file.
+map <leader>sv :source $MYVIMRC<CR>
+
+" Toggle spell check.
+map <F5> :setlocal spell!<CR>
+
+" Toggle relative line numbers and regular line numbers.
+nmap <F6> :set invrelativenumber<CR>
+
+" Automatically fix the last misspelled word and jump back to where you were.
+"   Taken from this talk: https://www.youtube.com/watch?v=lwD8G1P52Sk
+nnoremap <leader>sp :normal! mz[s1z=`z<CR>
+
+" Toggle visually showing all whitespace characters.
+noremap <F7> :set list!<CR>
+inoremap <F7> <C-o>:set list!<CR>
+cnoremap <F7> <C-c>:set list!<CR>
+
 nnoremap <leader>u :UndotreeShow<CR>
 
 let g:python_highlight_all = 1
@@ -128,7 +191,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 """""""""""""""""""""""""" Start Powerline Settings """""""""""""""""""""""""""
 set guifont=Source\ Code\ Pro\ for\ Powerline:h12:cANSI
-let g:Powerline_symbols = 'fancy'
+"let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 " set t_Co=256
 " set fillchars+=stl:\ ,stlnc:\
@@ -376,7 +439,7 @@ let g:coc_global_extensions = [
 
         nmap <silent> <leader>s :GFiles?<cr>
 
-        nmap <silent> <leader>r :Buffers<cr>
+        nmap <silent> <leader>b :Buffers<cr>
         nmap <silent> <leader>e :FZF<cr>
         nmap <leader><tab> <plug>(fzf-maps-n)
         xmap <leader><tab> <plug>(fzf-maps-x)
@@ -388,7 +451,7 @@ let g:coc_global_extensions = [
         imap <c-x><c-j> <plug>(fzf-complete-file-ag)
         imap <c-x><c-l> <plug>(fzf-complete-line)
 
-        nnoremap <silent> <Leader>C :call fzf#run({
+        nnoremap <silent> <leader>C :call fzf#run({
         \   'source':
         \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
         \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
@@ -439,5 +502,13 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd GUIEnter * simalt ~x
 
 autocmd BufWritePre * :call TrimWhitespace()
-
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[1 q"
+let &t_SR = "\e[3 q"  " blinking underline in replace mode
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[1 q"
+autocmd VimLeave * silent !echo -ne "\e[5 q"
+augroup END
 """"""""""""""""""""""""""""""""".vimrc """""""""""""""""""""""""""""""""""""""
