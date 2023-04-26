@@ -30,7 +30,7 @@ lvim.builtin.lualine.options = {
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline" }
+    disabled_filetypes = { "alpha", "NvimTree", "Outline" }
 }
 
 lvim.builtin.lualine.tabline = {
@@ -187,13 +187,13 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("keep", lvim.builtin.which
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.bufferline.active = false
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
