@@ -10,13 +10,13 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.colorscheme = "gruvbox"
 lvim.transparent_window = true
 lvim.lsp.diagnostics.virtual_text = false
 
-lvim.lang.c.lsp = {}
-lvim.lang.cpp = {}
+-- lvim.lang.c.lsp = {}
+-- lvim.lang.cpp = {}
 
 lvim.builtin.lualine.extensions = {
    "fugitive",
@@ -125,6 +125,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
 --   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 -- end
+vim.g.tokyonight_style = "night"
 vim.o.backspace = "indent,eol,start"
 vim.o.timeoutlen = 400
 vim.o.shiftwidth = 4
@@ -246,6 +247,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.plugins = {
     { 'gruvbox-community/gruvbox' },
+    { 'folke/tokyonight.nvim' },
     {
         'kdheepak/tabline.nvim',
         config = function()
