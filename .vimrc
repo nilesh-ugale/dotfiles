@@ -50,6 +50,9 @@ set updatetime=50
 set shortmess+=c
 
 set colorcolumn=81
+
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»
+set list
 """""""""""""""""""""""""""""""""""" Basic """"""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
@@ -70,6 +73,7 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'wincent/ferret'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 """"""""""""""""""""""""""""""""""" Plugins """""""""""""""""""""""""""""""""""
@@ -303,6 +307,10 @@ let g:coc_global_extensions = [
             \'coc-tasks'
             \]
 """"""""""""""""""""""""""""" Coc Config End """"""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""" Indent Guide Start """""""""""""""""""""""""""""""""
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+""""""""""""""""""""""""""" Indent Guide End """"""""""""""""""""""""""""""""""
 
 highlight ColorColumn ctermbg=74 guibg=#5fafd7
 
