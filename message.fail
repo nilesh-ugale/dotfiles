@@ -1,0 +1,203 @@
+Unexpected messages
+
+E492: Not an editor command: Plug 'Lokaltog/powerline'
+line   65:
+E492: Not an editor command: Plug 'neoclide/coc.nvim'
+line   66:
+E492: Not an editor command: Plug 'sheerun/vim-polyglot'
+line   67:
+E492: Not an editor command: Plug 'mbbill/undotree'
+line   68:
+E492: Not an editor command: Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+line   69:
+E492: Not an editor command: Plug 'junegunn/fzf.vim'
+line   70:
+E492: Not an editor command: Plug 'wincent/ferret'
+[vim-plug] plug#end() called without calling plug#begin() first
+line  265:
+E185: Cannot find color scheme 'molokai'
+Error detected while processing /c/Users/nilesh.ugale/.vim/plugin/ferret/autoload/ferret/private/async.vim:
+line   74:
+E117: Unknown function: ferret#private#limit
+E15: Invalid expression: ferret#private#limit()
+Error detected while processing /c/Users/nilesh.ugale/.vim/plugin/ferret/autoload/ferret/private/nvim.vim:
+line   66:
+E117: Unknown function: ferret#private#limit
+E15: Invalid expression: ferret#private#limit()
+Error detected while processing function ferret#private#init:
+line   30:
+E121: Undefined variable: g:FerretFormat
+E15: Invalid expression: g:FerretFormat
+Error detected while processing function airline#themes#gruvbox#refresh:
+line    2:
+E117: Unknown function: airline#themes#get_highlight
+E15: Invalid expression: airline#themes#get_highlight('Identifier')
+line    3:
+E117: Unknown function: airline#themes#get_highlight
+E15: Invalid expression: airline#themes#get_highlight('Special')
+line    4:
+E121: Undefined variable: M0
+E15: Invalid expression: [M0[0], '', M0[2], '', '']
+line    5:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['Question', 'fg'])
+line    6:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['WarningMsg', 'fg'])
+line    8:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['StatusLineNC', 'bg'])
+line    9:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['StatusLineNC', 'bg'], ['Pmenu', 'bg'])
+line   10:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['StatusLineNC', 'bg'], ['CursorLine', 'bg'])
+line   11:
+E121: Undefined variable: s:N1
+E116: Invalid arguments for function airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+E15: Invalid expression: airline#themes#generate_color_map(s:N1, s:N2, s:N3)
+line   12:
+E121: Undefined variable: modified_group
+E15: Invalid expression: { 'airline_c': modified_group }
+line   13:
+E121: Undefined variable: warning_group
+E15: Invalid expression: warning_group
+line   14:
+E121: Undefined variable: warning_group
+E15: Invalid expression: warning_group
+line   15:
+E121: Undefined variable: error_group
+E15: Invalid expression: error_group
+line   16:
+E121: Undefined variable: error_group
+E15: Invalid expression: error_group
+line   18:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['Identifier', 'fg'])
+line   19:
+E121: Undefined variable: s:N2
+E15: Invalid expression: s:N2
+line   20:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'fg'], ['Pmenu', 'bg'])
+line   21:
+E121: Undefined variable: s:I1
+E116: Invalid arguments for function airline#themes#generate_color_map(s:I1, s:I2, s:I3)
+E15: Invalid expression: airline#themes#generate_color_map(s:I1, s:I2, s:I3)
+line   22:
+E716: Key not present in Dictionary: normal_modified
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified
+line   23:
+E716: Key not present in Dictionary: normal.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_warning
+line   24:
+E716: Key not present in Dictionary: normal_modified.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_warning
+line   25:
+E716: Key not present in Dictionary: normal.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_error
+line   26:
+E716: Key not present in Dictionary: normal_modified.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_error
+line   28:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['Structure', 'fg'])
+line   29:
+E121: Undefined variable: s:I2
+E15: Invalid expression: s:I2
+line   30:
+E121: Undefined variable: s:I3
+E15: Invalid expression: s:I3
+line   31:
+E121: Undefined variable: s:R1
+E116: Invalid arguments for function airline#themes#generate_color_map(s:R1, s:R2, s:R3)
+E15: Invalid expression: airline#themes#generate_color_map(s:R1, s:R2, s:R3)
+line   32:
+E716: Key not present in Dictionary: normal_modified
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified
+line   33:
+E716: Key not present in Dictionary: normal.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_warning
+line   34:
+E716: Key not present in Dictionary: normal_modified.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_warning
+line   35:
+E716: Key not present in Dictionary: normal.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_error
+line   36:
+E716: Key not present in Dictionary: normal_modified.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_error
+line   38:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['Question', 'fg'])
+line   39:
+E121: Undefined variable: s:N2
+E15: Invalid expression: s:N2
+line   40:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['TabLine', 'fg'])
+line   41:
+E121: Undefined variable: s:V1
+E116: Invalid arguments for function airline#themes#generate_color_map(s:V1, s:V2, s:V3)
+E15: Invalid expression: airline#themes#generate_color_map(s:V1, s:V2, s:V3)
+line   42:
+E121: Undefined variable: s:V3
+E15: Invalid expression: { 'airline_c': [ s:V3[0], '', s:V3[2], '', '' ] }
+line   43:
+E716: Key not present in Dictionary: normal.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_warning
+line   44:
+E716: Key not present in Dictionary: normal_modified.airline_warning
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_warning
+line   45:
+E716: Key not present in Dictionary: normal.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal.airline_error
+line   46:
+E716: Key not present in Dictionary: normal_modified.airline_error
+E15: Invalid expression: g:airline#themes#gruvbox#palette.normal_modified.airline_error
+line   48:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['TabLine', 'fg'], ['CursorLine', 'bg'])
+line   49:
+E121: Undefined variable: s:IA
+E116: Invalid arguments for function airline#themes#generate_color_map(s:IA, s:IA, s:IA)
+E15: Invalid expression: airline#themes#generate_color_map(s:IA, s:IA, s:IA)
+line   50:
+E121: Undefined variable: modified_group
+E15: Invalid expression: { 'airline_c': modified_group }
+line   52:
+E121: Undefined variable: accents_group
+E15: Invalid expression: { 'red': accents_group }
+line   54:
+E117: Unknown function: airline#themes#get_highlight2
+E15: Invalid expression: airline#themes#get_highlight2(['Normal', 'bg'], ['Normal', 'bg'])
+line   55:
+E121: Undefined variable: s:N2
+E15: Invalid expression: { 'airline_tab':  s:N2, 'airline_tabsel':  s:N1, 'airline_tabtype':  s:V1, 'airline_tabfill':  s:TF, 'airline_tabhid':  s:IA, 'airline_tabmod':  s:I1 }
+Error detected while processing /c/Users/nilesh.ugale/.vim/plugin/powerline/powerline/bindings/vim/autoload/powerline/debug.vim:
+line    1:
+E370: Could not load library msys-python2.7.dll
+E263: Sorry, this command is disabled, the Python library could not be loaded.
+line    2:
+E370: Could not load library msys-python2.7.dll
+E263: Sorry, this command is disabled, the Python library could not be loaded.
+You need vim compiled with Python 2.6, 2.7 or 3.2 and later support
+for Powerline to work. Please consult the documentation for more
+details.
+Error detected while processing function PyFile:
+line    4:
+E370: Could not load library msys-python3.4m.dll
+E263: Sorry, this command is disabled, the Python library could not be loaded.
+Error detected while processing /c/Users/nilesh.ugale/.vim/plugin/powerline/tests/test_vim/tests/commandt_plugin.vim:
+line    9:
+E492: Not an editor command: CommandTBuffer
+Error detected while processing function RunPython:
+line    4:
+E370: Could not load library msys-python3.4m.dll
+E263: Sorry, this command is disabled, the Python library could not be loaded.
+Error detected while processing function CheckMessages:
+line    1:
+E121: Undefined variable: g:powerline_log_messages
+E116: Invalid arguments for function empty(g:powerline_log_messages)
+E15: Invalid expression: !empty(g:powerline_log_messages)
