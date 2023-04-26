@@ -30,7 +30,7 @@ lvim.builtin.lualine.options = {
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline" }
+    disabled_filetypes = { "alpha", "NvimTree", "Outline" }
 }
 
 lvim.builtin.lualine.tabline = {
@@ -159,6 +159,18 @@ vim.api.nvim_set_keymap( "i", "kj", "<ESC>", { noremap = true, silent = true } )
 
 vim.api.nvim_set_keymap( "n", "<leader>ss", ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"Grep For >> \")})<CR>", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "<leader>sw", ":lua require(\"telescope.builtin\").grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", { noremap = true, silent =  true } )
+vim.api.nvim_set_keymap( "n",
+                         "<leader>si",
+                         ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"Grep For >> \"), vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>",
+                         { noremap = true, silent = true })
+vim.api.nvim_set_keymap( "n",
+                         "<leader>sd",
+                         ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"For >> \"), search_dirs = vim.fn.input(\"In >> \"), vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>",
+                         { noremap = true, silent = true })
+vim.api.nvim_set_keymap( "n",
+                         "<leader>sn",
+                         ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"For >> \"), search_dirs = { vim.fn.input(\"In >> \") }, vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>",
+                         { noremap = true, silent = true })
 
 lvim.keys.normal_mode = vim.tbl_deep_extend("force", lvim.keys.normal_mode, {
     ["<S-l>"] = ":TablineBufferNext<CR>",
@@ -169,6 +181,9 @@ local mappings = {
     s = {
         s = { ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"Grep For >> \")})<CR>", "Search For" },
         w = { ":lua require(\"telescope.builtin\").grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", "CWord" },
+        i = { ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"Grep For >> \"), vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>", "Search All Files" },
+        d = { ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.expand(\"<cword>\"), search_dirs = { vim.fn.input(\"In >> \") }, vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>", "Search In" },
+        n = { ":lua require(\"telescope.builtin\").grep_string({ search = vim.fn.input(\"For >> \"), search_dirs = { vim.fn.input(\"In >> \") }, vimgrep_arguments = { 'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case','-u' } })<CR>", "Search In" }
     }
 }
 lvim.builtin.which_key.mappings = vim.tbl_deep_extend("keep", lvim.builtin.which_key.mappings, mappings)
@@ -187,13 +202,13 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("keep", lvim.builtin.which
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.bufferline.active = false
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
@@ -248,6 +263,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.plugins = {
     { 'gruvbox-community/gruvbox' },
     { 'folke/tokyonight.nvim' },
+    {'nvim-treesitter/playground'},
     {
         'kdheepak/tabline.nvim',
         config = function()
@@ -268,6 +284,7 @@ lvim.plugins = {
 -- }
 
 lvim.autocommands.custom_groups = {
-    { "BufWritePre", "*", ":%s/\\s\\+$//e" }
+    { "BufWritePre", "*", ":%s/\\s\\+$//e" },
+    { "BufWritePre", "*", ":%s/\r//e" }
 }
 
