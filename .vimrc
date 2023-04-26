@@ -73,7 +73,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
 " Plug 'Lokaltog/powerline'
 " Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -361,7 +361,7 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 "colorscheme molokai              " set color scheme
 "colorscheme skittles_berry       " set color scheme
 "colorscheme sonokai              " set color scheme
-colorscheme gruvbox              " set color scheme
+silent! colorscheme gruvbox              " set color scheme
 set background=dark
 """""""""""""""""""""""""""" End of Color Scheme """"""""""""""""""""""""""""""
 
