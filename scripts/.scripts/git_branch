@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+cnt=0;
+if git rev-parse --git-dir > /dev/null 2>&1; then
+    toplevel_cnt=$(git rev-parse --show-superproject-working-tree --show-toplevel | wc -l)
+    if [[ $toplevel_cnt == '2' ]]; then
+        for repo in $(git rev-parse --show-superproject-working-tree --show-toplevel); do
+            if [[ $cnt == 0 ]]; then
+                repo="${repo}/.git";
+                b_name=$(git --git-dir=$repo branch --show-current);
+                cnt=1;
+                echo_str=$b_name;
+            else
+                dir_name=$(basename $repo);
+                repo="${repo}/.git";
+                b_name=$(git --git-dir=$repo branch --show-current);
+                echo_str="${echo_str} <- ${dir_name}:${b_name}";
+            fi
+        done
+    else
+        echo_str=$(git rev-parse --abbrev-ref HEAD);
+    fi
+    echo $echo_str;
+fi

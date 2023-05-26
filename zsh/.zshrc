@@ -134,14 +134,29 @@ function git-worktree-add() {
     fi
 }
 
+function tmux-start() {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        dir_name=$(git rev-parse --show-superproject-working-tree --show-toplevel | head -1)
+        git_dir_name=$(basename "$dir_name")
+        if tmux has-session -t=$git_dir_name 2> /dev/null; then
+            tmux a -t $git_dir_name
+        else
+            tmux new -s $git_dir_name
+        fi
+    else
+        tmux
+    fi
+}
 
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
+alias tms="~/.scripts/tmux-sessionizer"
 alias gite="git.exe"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
 alias wiki="nvim ~/vimwiki/index.wiki"
-
+alias ts="tmux-start"
+alias :q="exit"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
