@@ -188,3 +188,8 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 export GO11MODULE=auto1
 alias luamake=/home/nilesh/lua-language-server/3rd/luamake/luamake
 
+if [[ -f ~/.config.zsh ]]; then
+    source ~/.config.zsh
+else
+    export TMUX_SEARCH_DIR="~"
+fi
