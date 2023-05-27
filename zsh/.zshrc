@@ -191,5 +191,5 @@ alias luamake=/home/nilesh/lua-language-server/3rd/luamake/luamake
 if [[ -f ~/.config.zsh ]]; then
     source ~/.config.zsh
 else
-    export TMUX_SEARCH_DIR="~"
+    export TMUX_SEARCH_DIR=/home
 fi
