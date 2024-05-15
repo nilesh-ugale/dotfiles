@@ -6,11 +6,17 @@ return {
     },
     {
         "nvim-neorg/neorg",
-        dependencies = { "luarocks.nvim" },
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-neorg/neorg-telescope" },
+            { "luarocks.nvim" },
+        },
         version = "*",
         config = function()
             require("neorg").setup {
                 load = {
+                    ["core.integrations.telescope"] = {},
+                    ["config.telescope"] = {},
                     ["core.manoeuvre"] = {},
                     ["core.summary"] = {},
                     ["core.export"] = {},
@@ -27,7 +33,6 @@ return {
                     },
                 },
             }
-
             vim.wo.foldlevel = 99
             vim.wo.conceallevel = 2
         end,
@@ -125,6 +130,53 @@ return {
             })
         end
     },
+    {
+        'nvim-orgmode/orgmode',
+        event = 'VeryLazy',
+        ft = { 'org' },
+        config = function()
+            -- Setup orgmode
+            require('orgmode').setup({
+                org_agenda_files = '~/orgfiles/**/*',
+                org_default_notes_file = '~/orgfiles/refile.org',
+                org_todo_keywords = { 'TODO', 'WAITING', '|', 'DONE', 'DELEGATED' },
+                org_todo_keyword_faces = {
+                    WAITING = ':foreground blue :weight bold',
+                    DELEGATED = ':background #FFFFFF :slant italic :underline on',
+                    TODO = ':background #000000 :foreground red', -- overrides builtin color for `TODO` keyword
+                },
+                win_split_mode = function(name)
+                    -- Make sure it's not a scratch buffer by passing false as 2nd argument
+                    local bufnr = vim.api.nvim_create_buf(false, false)
+                    --- Setting buffer name is required
+                    vim.api.nvim_buf_set_name(bufnr, name)
+
+                    local fill = 0.8
+                    local width = math.floor((vim.o.columns * fill))
+                    local height = math.floor((vim.o.lines * fill))
+                    local row = math.floor((((vim.o.lines - height) / 2) - 1))
+                    local col = math.floor(((vim.o.columns - width) / 2))
+
+                    vim.api.nvim_open_win(bufnr, true, {
+                        relative = "editor",
+                        width = width,
+                        height = height,
+                        row = row,
+                        col = col,
+                        style = "minimal",
+                        border = "rounded"
+                    })
+                end,
+                calendar_week_start_day = 0,
+            })
+            -- NOTE: If you are using nvim-treesitter with `ensure_installed = "all"` option
+            -- add `org` to ignore_install
+            -- require('nvim-treesitter.configs').setup({
+            --   ensure_installed = 'all',
+            --   ignore_install = { 'org' },
+            -- })
+        end,
+    },
     { "renerocksai/calendar-vim" },
     { "tools-life/taskwiki" },
     { "nvim-treesitter/playground" },
@@ -138,4 +190,3 @@ return {
     { "laytan/cloak.nvim" },
     -- { "github/copilot.vim" },
 }
-
