@@ -1,5 +1,5 @@
-require("myconfig.set")
-require("myconfig.remap")
+require("config.set")
+require("config.remap")
 
 local augroup = vim.api.nvim_create_augroup
 local MyGroup = augroup('MyGroup', {})
@@ -22,7 +22,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = MyGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],

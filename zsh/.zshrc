@@ -109,11 +109,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-alias cdd="cd /mnt/d"
 alias cdc="cd /mnt/c"
-alias cdw="cd /mnt/c/Users/nilesh.ugale/work"
-# alias vi="~/.local/bin/lvim"
-# alias vim="~/.local/bin/lvim"
 alias gitl="git log"
 alias gits="git status"
 
@@ -121,7 +117,6 @@ alias ls="ls --color=auto"
 alias grep="grep --colour=auto"
 alias egrep="egrep --colour=auto"
 alias fgrep="fgrep --colour=auto"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 function git-worktree-add() {
     git worktree add "../$1" "$1"
@@ -148,15 +143,25 @@ function tmux-start() {
     fi
 }
 
+function wiki_start() {
+
+    if tmux has-session -t="wiki" 2> /dev/null; then
+        tmux a -t wiki
+    else
+        tmux new-session -s wiki -c '~/wiki' 'nvim ~/wiki/index.md'
+    fi
+}
+
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
 alias tms="~/.scripts/tmux-sessionizer"
 alias gite="git.exe"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
-alias wiki="nvim ~/vimwiki/index.wiki"
+alias wiki="wiki_start"
 alias ts="tmux-start"
 alias :q="exit"
+alias grd='cd $(git rev-parse --show-toplevel)'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -193,3 +198,4 @@ if [[ -f ~/.config.zsh ]]; then
 else
     export TMUX_SEARCH_DIR="~"
 fi
+

@@ -31,4 +31,4 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.opt.listchars = "tab:→\\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»"
 vim.opt.cmdheight = 1
-
+vim.opt.conceallevel = 1

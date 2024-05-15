@@ -5,7 +5,8 @@ require('rose-pine').setup({
 
 require("catppuccin").setup({
     flavour = "frappe", -- latte, frappe, macchiato, mocha
-    background = { -- :h background
+    background = {
+                        -- :h background
         light = "latte",
         dark = "mocha",
     },

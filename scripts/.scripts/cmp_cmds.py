@@ -41,33 +41,25 @@ def _get_compile_cmd(compile_args):
     type = click.STRING,
 )
 @click.option(
-    '-ct', '--crosstool',
+    '-pf', '--platform',
     type = click.STRING,
     required = False,
     default = None,
     help = 'C/C++ cross tool to use'
 )
-@click.option(
-    '-cpu',
-    type = click.STRING,
-    required = False,
-    default = None,
-    help = 'CPU to use'
-)
-def main(target, crosstool, cpu):
+def main(target, platform):
     keys = ''
     command = [
-        'bazelisk',
+        'bazel-7.0.0.exe',
+        '--bazelrc=bazel.rc',
         'aquery',
     ]
-    if crosstool:
-        command.append(f'--crosstool_top={crosstool}')
-    if cpu:
-        command.append(f'--cpu={cpu}')
 
     command.append(f"mnemonic('(Objc|Cpp)Compile',deps('{target}'))")
     command.append('--include_artifacts=false')
     command.append('--output=jsonproto')
+    if platform:
+        command.append(f'--platforms={platform}')
     result = subprocess.run(
         command,
         stdout=subprocess.PIPE
