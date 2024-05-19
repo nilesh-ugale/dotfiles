@@ -26,9 +26,10 @@ return {
                     ["core.dirman"] = {
                         config = {
                             workspaces = {
-                                notes = "~/notes",
+                                work = "~/notes/work",
+                                personal = "~/notes/personal",
                             },
-                            default_workspace = "notes",
+                            default_workspace = "work",
                         },
                     },
                 },
@@ -99,38 +100,6 @@ return {
         name = "catppuccin"
     },
     {
-        "vimwiki/vimwiki",
-        config = function()
-            vim.g.vimwiki_list = {
-                {
-                    path = '~/wiki',
-                    syntax = 'markdown',
-                    ext = '.md',
-                },
-            }
-        end
-    },
-    {
-        'renerocksai/telekasten.nvim',
-        dependencies = {
-            { 'nvim-telescope/telescope.nvim' }
-        },
-        config = function()
-            require('telekasten').setup({
-                home = vim.fn.expand("~/wiki"), -- Put the name of your notes directory here
-            })
-            vim.api.nvim_create_autocmd("VimEnter", {
-                callback = function()
-                    vim.cmd('hi tkTag ctermfg=175 guifg=#8e44ad')
-                    vim.cmd('hi link CalNavi CalRuler')
-                    vim.cmd('hi tkHighlight ctermbg=214 ctermfg=124 cterm=bold guibg=#fabd2f guifg=#9d0006 gui=bold')
-                    vim.cmd('hi tkBrackets ctermfg=gray guifg=gray')
-                    vim.cmd('hi tklink ctermfg=72 guifg=#0096FF cterm=bold,underline gui=bold')
-                end,
-            })
-        end
-    },
-    {
         'nvim-orgmode/orgmode',
         event = 'VeryLazy',
         ft = { 'org' },
@@ -138,7 +107,7 @@ return {
             -- Setup orgmode
             require('orgmode').setup({
                 org_agenda_files = '~/orgfiles/**/*',
-                org_default_notes_file = '~/orgfiles/refile.org',
+                org_default_notes_file = '~/orgfiles/index.org',
                 org_todo_keywords = { 'TODO', 'WAITING', '|', 'DONE', 'DELEGATED' },
                 org_todo_keyword_faces = {
                     WAITING = ':foreground blue :weight bold',
@@ -178,7 +147,6 @@ return {
         end,
     },
     { "renerocksai/calendar-vim" },
-    { "tools-life/taskwiki" },
     { "nvim-treesitter/playground" },
     { "theprimeagen/harpoon" },
     { "theprimeagen/refactoring.nvim" },
