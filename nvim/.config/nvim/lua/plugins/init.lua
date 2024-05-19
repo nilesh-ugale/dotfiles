@@ -17,7 +17,6 @@ return {
                 load = {
                     ["core.integrations.telescope"] = {},
                     ["config.telescope"] = {},
-                    ["core.manoeuvre"] = {},
                     ["core.summary"] = {},
                     ["core.export"] = {},
                     ["core.export.markdown"] = {},
