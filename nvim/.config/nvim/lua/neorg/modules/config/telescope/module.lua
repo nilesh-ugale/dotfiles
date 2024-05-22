@@ -249,7 +249,7 @@ local function do_insert_tag()
         :find()
 end
 module.public = {
-    find_friend = do_find_all_tags,
+    find_friend = do_find_friend,
     find_tags = do_find_tags,
     insert_tag = do_insert_tag,
 }
