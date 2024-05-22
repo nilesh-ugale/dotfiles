@@ -112,6 +112,7 @@ source $ZSH/oh-my-zsh.sh
 alias cdc="cd /mnt/c"
 alias gitl="git log"
 alias gits="git status"
+alias exp="explorer.exe ."
 
 alias ls="ls --color=auto"
 alias grep="grep --colour=auto"
