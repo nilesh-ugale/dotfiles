@@ -12,10 +12,14 @@ local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local neorg = require("neorg.core")
 
-local module = neorg.modules.create("config.telescope")
+local module = neorg.modules.create("external.telescope")
 
 module.setup = function()
-    return { success = true, requires = { "core.keybinds", "core.dirman" } }
+    return {
+        requires = {
+            "core.neorgcmd"
+        }
+    }
 end
 
 module.load = function()
@@ -25,11 +29,24 @@ module.load = function()
 
     telescope.load_extension("neorg")
 
-    module.required["core.keybinds"].register_keybinds(module.name, {
-        "find_friend",
-        "find_tags",
-        "insert_tag",
+    module.required['core.neorgcmd'].add_commands_from_table({
+        [ "find_friend" ] = {
+            args = 0,
+            condition = 'norg',
+            name = 'external.telescope.find_friend'
+        },
+        [ "find_tags" ] = {
+            args = 0,
+            condition = 'norg',
+            name = 'external.telescope.find_tags'
+        },
+        [ "insert_tag" ] = {
+            args = 0,
+            condition = 'norg',
+            name = 'external.telescope.insert_tag'
+        }
     })
+
 end
 
 local function command_find_all_tags(opts)
@@ -248,30 +265,30 @@ local function do_insert_tag()
         })
         :find()
 end
-module.public = {
+module.private = {
     find_friend = do_find_friend,
     find_tags = do_find_tags,
     insert_tag = do_insert_tag,
 }
 
 module.on_event = function(event)
-    if event.split_type[2] == "config.telescope.find_friend" then
-        module.public.find_friend()
+    if event.split_type[2] == "external.telescope.find_friend" then
+        module.private.find_friend()
     end
-    if event.split_type[2] == "config.telescope.find_tags" then
-        module.public.find_tags()
+    if event.split_type[2] == "external.telescope.find_tags" then
+        module.private.find_tags()
     end
-    if event.split_type[2] == "config.telescope.insert_tag" then
-        module.public.insert_tag()
+    if event.split_type[2] == "external.telescope.insert_tag" then
+        module.private.insert_tag()
     end
 end
 
 module.events.subscribed = {
-    ["core.keybinds"] = {
-        ["config.telescope.find_friend"] = true,
-        ["config.telescope.find_tags"] = true,
-        ["config.telescope.insert_tag"] = true,
-    },
+    ['core.neorgcmd'] = {
+        ["external.telescope.find_friend"] = true,
+        ["external.telescope.find_tags"] = true,
+        ["external.telescope.insert_tag"] = true,
+    }
 }
 
 return module

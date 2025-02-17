@@ -15,8 +15,8 @@ return {
         config = function()
             require("neorg").setup {
                 load = {
+                    ["external.telescope"] = {},
                     ["core.integrations.telescope"] = {},
-                    ["config.telescope"] = {},
                     ["core.summary"] = {},
                     ["core.export"] = {},
                     ["core.export.markdown"] = {},

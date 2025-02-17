@@ -24,6 +24,10 @@ def _get_header(compile_args):
             if not 'bazel' in arg:
                 header.append('-isystem')
                 header.append(arg[2:])
+        if arg.startswith('-D'):
+            if not 'bazel' in arg:
+                header.append('-D')
+                header.append(arg[2:])
     return header
 
 def _get_compile_cmd(compile_args):

@@ -6,7 +6,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'tsserver', 'rust_analyzer' },
+    ensure_installed = { 'clangd' },
     handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"

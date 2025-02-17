@@ -1,23 +1,18 @@
-local neorg_callbacks = require("neorg.core.callbacks")
+vim.api.nvim_create_autocmd("Filetype", {
+    pattern = "norg",
+    callback = function()
+        vim.keymap.set("n", "<C-b>", "<Plug>(neorg.telescope.backlinks.file_backlinks)", {buffer = true})
+        vim.keymap.set("n", "<C-h>b", "<Plug>(neorg.telescope.backlinks.header_backlinks)", {buffer = true})
+        vim.keymap.set("n", "<C-s>", "<Plug>(neorg.telescope.find_linkable)", {buffer = true})
+        vim.keymap.set("n", "<C-f>", ":Neorg find_friend<CR>", { buffer = true })
+        vim.keymap.set("n", "<C-t>", ":Neorg find_tags<CR>", { buffer = true })
 
-neorg_callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, keybinds)
-    -- Map all the below keybinds only when the "norg" mode is active
-    keybinds.map_event_to_mode("norg", {
-        n = { -- Bind keys in normal mode
-            { "<C-s>", "core.integrations.telescope.find_linkable" },
-            { "<C-b>", "core.integrations.telescope.find_backlinks" },
-            { "<C-h>", "core.integrations.telescope.find_header_backlinks" },
-            { "<C-f>", "config.telescope.find_friend" },
-            { "<C-t>", "config.telescope.find_tags" },
+        vim.keymap.set("n", "<C-p>", "<Plug>(neorg.telescope.find_norg_files)", {buffer = true})
+        vim.keymap.set("n", "<C-h>h", "<Plug>(neorg.telescope.search_headings)", {buffer = true})
+        vim.keymap.set("n", "<C-n>", "<Plug>(neorg.telescope.switch_workspace)", {buffer = true})
 
-        },
-        i = { -- Bind in insert mode
-            { "<C-l>", "core.integrations.telescope.insert_link" },
-            { "<C-f>", "core.integrations.telescope.insert_file_link" },
-            { "<C-t>", "config.telescope.insert_tag" },
-        },
-    }, {
-        silent = true,
-        noremap = true,
-    })
-end)
+        vim.keymap.set("i", "<C-f>", "<ESC><Plug>(neorg.telescope.insert_file_link)", {buffer = true})
+        vim.keymap.set("i", "<C-l>", "<ESC><Plug>(neorg.telescope.insert_link)", {buffer = true})
+        vim.keymap.set("i", "<C-t>", "<ESC>:Neorg insert_tag<CR>", { buffer = true })
+    end,
+})
