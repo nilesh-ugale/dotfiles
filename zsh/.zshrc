@@ -144,12 +144,22 @@ function tmux-start() {
     fi
 }
 
-function wiki_start() {
+function notes_start() {
 
-    if tmux has-session -t="wiki" 2> /dev/null; then
-        tmux a -t wiki
+    tmux_running=$(pgrep tmux)
+
+    if [[ -z $TMUX ]]; then
+        if [[ $tmux_running ]] && tmux has-session -t="notes" 2> /dev/null; then
+            tmux a -t "notes"
+        else
+            tmux new-session -s "notes" -c '~/notes' 'nvim ~/notes/work/index.norg'
+        fi
     else
-        tmux new-session -s wiki -c '~/wiki' 'nvim ~/wiki/index.md'
+        if ! tmux has-session -t="notes" 2> /dev/null; then
+            tmux new-session -ds "notes" -c '~/notes' 'nvim ~/notes/work/index.norg'
+        fi
+
+        tmux switch-client -t "notes"
     fi
 }
 
@@ -159,7 +169,7 @@ alias tms="~/.scripts/tmux-sessionizer"
 alias gite="git.exe"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
-alias wiki="wiki_start"
+alias notes="notes_start"
 alias ts="tmux-start"
 alias :q="exit"
 alias grd='cd $(git rev-parse --show-toplevel)'
