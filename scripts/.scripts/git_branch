@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Used in tmux status wrapper script to get the current branch
 cnt=0;
 if git rev-parse --git-dir > /dev/null 2>&1; then
     toplevel_cnt=$(git rev-parse --show-superproject-working-tree --show-toplevel | wc -l)
