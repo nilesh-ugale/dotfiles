@@ -1,47 +1,72 @@
 news.version = 3.3.1
 # [Created by task 3.3.0 2/7/2025 15:59:58]
-data.location = ~/notes/tasks
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
+# data.location=~/.local/share/task
 
-#data.location=~/.local/share/task
+# Database and hooks location configurations
 hooks.location = ~/.scripts/tw_hooks
+data.location = ~/notes/tasks
 
 # Color theme (uncomment one to use)
-#include light-16.theme
-#include light-256.theme
 include bubblegum-256.theme
-#include dark-16.theme
-#include dark-256.theme
-#include dark-red-256.theme
-#include dark-green-256.theme
-#include dark-blue-256.theme
-#include dark-violets-256.theme
-#include dark-yellow-green.theme
-#include dark-gray-256.theme
-#include dark-gray-blue-256.theme
-#include solarized-dark-256.theme
-#include solarized-light-256.theme
-#include no-color.theme
+
+## supported themes
+### light-16.theme
+### light-256.theme
+### dark-16.theme
+### dark-256.theme
+### dark-red-256.theme
+### dark-green-256.theme
+### dark-blue-256.theme
+### dark-violets-256.theme
+### dark-yellow-green.theme
+### dark-gray-256.theme
+### dark-gray-blue-256.theme
+### solarized-dark-256.theme
+### solarized-light-256.theme
+### no-color.theme
 
 color.overdue                             = red
 color.active                              = green
 color.blocked                             = yellow on black
 color.blocking                            = yellow on black
 
-uda.reviewed.type                         = date
-uda.reviewed.label                        = Reviewed
+# Reports
+## tashsh related reports
 report._reviewed.description              = Tasksh review report.
 report._reviewed.columns                  = uuid
 report._reviewed.sort                     = reviewed+,modified+
 report._reviewed.filter                   = ( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
+## Next report table format
+report.next.columns=id,entry.age,priority,project,tags,description.desc,due.relative,due,follow,depends,urgency,hands_on
+report.next.labels=ID,Age,P,Project,Tag,Description,Due In,Due Date,Follow,Depends,Urg,Hands-On
 
+# User defined attributes
+uda.reviewed.type                         = date
+uda.reviewed.label                        = Reviewed
+
+## TUI attributes
 uda.taskwarrior-tui.selection.indicator   =->
 uda.taskwarrior-tui.selection.bold        = yes
 uda.taskwarrior-tui.selection.blink       = no
 uda.taskwarrior-tui.selection.reverse     = yes
 #uda.taskwarrior-tui.task-report.show-info = false
-
 uda.taskwarrior-tui.shortcuts.1=~/.scripts/tw_hooks/taskopen-annotation.zsh
+
+## General attributes
+uda.follow.type=string
+uda.follow.label=follow
+uda.follow.values=Y,N
+uda.hands_on.type=string
+uda.hands_on.label=Hands-On
+
+# Context
+context.work.read  = +work
+context.work.write = +work
+context.home.read  = +home
+context.home.write = +home
+
+context=work

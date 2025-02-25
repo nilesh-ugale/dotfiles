@@ -27,6 +27,7 @@ return {
                             workspaces = {
                                 work = "~/notes/work",
                                 personal = "~/notes/personal",
+                                tasknotes = "~/notes/tasknotes",
                             },
                             default_workspace = "work",
                         },
