@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-taskopen "$1"
+taskopen -a "$1"
