@@ -1,4 +1,3 @@
-
 --[[
     A Neorg module designed to integrate telescope.nvim
 --]]
@@ -30,23 +29,22 @@ module.load = function()
     telescope.load_extension("neorg")
 
     module.required['core.neorgcmd'].add_commands_from_table({
-        [ "find_friend" ] = {
+        ["find_friend"] = {
             args = 0,
             condition = 'norg',
             name = 'external.telescope.find_friend'
         },
-        [ "find_tags" ] = {
+        ["find_tags"] = {
             args = 0,
             condition = 'norg',
             name = 'external.telescope.find_tags'
         },
-        [ "insert_tag" ] = {
+        ["insert_tag"] = {
             args = 0,
             condition = 'norg',
             name = 'external.telescope.insert_tag'
         }
     })
-
 end
 
 local function command_find_all_tags(opts)
@@ -122,7 +120,6 @@ local function do_find_all_tags(opts)
                 print(j:result()[1])
                 print("rg return value: " .. tostring(return_val))
                 print("stderr: ", vim.inspect(j:stderr_result()))
-
             end
         end,
         on_stderr = function(err, data, _)
@@ -143,10 +140,10 @@ local function do_find_friend()
 
     local current_workspace = require("neorg.telescope_utils").get_current_workspace()
     require("telescope.builtin").grep_string({
-            search = title,
-            use_regex = false,
-            search_dirs = { tostring(current_workspace) },
-            prompt_title = "Links",
+        search = title,
+        use_regex = false,
+        search_dirs = { tostring(current_workspace) },
+        prompt_title = "Links",
     })
 end
 
@@ -193,10 +190,10 @@ local function do_find_tags()
                     vim.schedule(function()
                         local current_workspace = require("neorg.telescope_utils").get_current_workspace()
                         require("telescope.builtin").grep_string({
-                                search = selection,
-                                use_regex = false,
-                                search_dirs = { tostring(current_workspace) },
-                                prompt_title = "Tags",
+                            search = selection,
+                            use_regex = false,
+                            search_dirs = { tostring(current_workspace) },
+                            prompt_title = "Tags",
                         })
                     end)
                 end)
@@ -251,7 +248,7 @@ local function do_insert_tag()
 
                     if selection == nil then
                         vim.api.nvim_put({
-                            "{" .. "# " .. search_text.. "}",
+                            "{" .. "# " .. search_text .. "}",
                         }, "c", false, true)
                     else
                         vim.api.nvim_put({

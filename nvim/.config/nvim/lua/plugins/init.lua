@@ -59,14 +59,8 @@ return {
     },
     {
         "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-                icons = false,
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -76,11 +70,9 @@ return {
         end
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'neovim/nvim-lspconfig',
         dependencies = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
             -- Autocompletion
@@ -93,60 +85,23 @@ return {
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
         }
     },
     {
         "catppuccin/nvim",
         name = "catppuccin"
     },
-    {
-        'nvim-orgmode/orgmode',
-        event = 'VeryLazy',
-        ft = { 'org' },
-        config = function()
-            -- Setup orgmode
-            require('orgmode').setup({
-                org_agenda_files = '~/orgfiles/**/*',
-                org_default_notes_file = '~/orgfiles/index.org',
-                org_todo_keywords = { 'TODO', 'WAITING', '|', 'DONE', 'DELEGATED' },
-                org_todo_keyword_faces = {
-                    WAITING = ':foreground blue :weight bold',
-                    DELEGATED = ':background #FFFFFF :slant italic :underline on',
-                    TODO = ':background #000000 :foreground red', -- overrides builtin color for `TODO` keyword
-                },
-                win_split_mode = function(name)
-                    -- Make sure it's not a scratch buffer by passing false as 2nd argument
-                    local bufnr = vim.api.nvim_create_buf(false, false)
-                    --- Setting buffer name is required
-                    vim.api.nvim_buf_set_name(bufnr, name)
-
-                    local fill = 0.8
-                    local width = math.floor((vim.o.columns * fill))
-                    local height = math.floor((vim.o.lines * fill))
-                    local row = math.floor((((vim.o.lines - height) / 2) - 1))
-                    local col = math.floor(((vim.o.columns - width) / 2))
-
-                    vim.api.nvim_open_win(bufnr, true, {
-                        relative = "editor",
-                        width = width,
-                        height = height,
-                        row = row,
-                        col = col,
-                        style = "minimal",
-                        border = "rounded"
-                    })
-                end,
-                calendar_week_start_day = 0,
-            })
-            -- NOTE: If you are using nvim-treesitter with `ensure_installed = "all"` option
-            -- add `org` to ignore_install
-            -- require('nvim-treesitter.configs').setup({
-            --   ensure_installed = 'all',
-            --   ignore_install = { 'org' },
-            -- })
-        end,
-    },
-    { "renerocksai/calendar-vim" },
     { "nvim-treesitter/playground" },
     { "theprimeagen/harpoon" },
     { "theprimeagen/refactoring.nvim" },
@@ -154,8 +109,7 @@ return {
     { "tpope/vim-fugitive" },
     { "nvim-treesitter/nvim-treesitter-context" },
     { "folke/zen-mode.nvim" },
-    { "eandrju/cellular-automaton.nvim" },
-    { "laytan/cloak.nvim" },
+    -- { "laytan/cloak.nvim" },
     {
         'stevearc/oil.nvim',
         ---@module 'oil'
@@ -167,13 +121,7 @@ return {
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
         config = function()
-            require("oil").setup({
-                view_options = {
-                    -- Show files and directories that start with "."
-                    show_hidden = true,
-                },
-            })
+            require("oil").setup()
         end,
-      },
-    -- { "github/copilot.vim" },
+    },
 }
