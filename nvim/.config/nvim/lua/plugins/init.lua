@@ -51,13 +51,6 @@ return {
         end
     },
     {
-        'rose-pine/neovim',
-        name = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    },
-    {
         "folke/trouble.nvim",
         opts = {}, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
