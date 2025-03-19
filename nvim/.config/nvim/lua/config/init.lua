@@ -3,6 +3,7 @@ require("config.remap")
 
 local augroup = vim.api.nvim_create_augroup
 local MyGroup = augroup('MyGroup', {})
+local remember_folds = augroup('remember_folds', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -26,6 +27,18 @@ autocmd({ "BufWritePre" }, {
     group = MyGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
+})
+
+autocmd({ "BufWinLeave" }, {
+    group = remember_folds,
+    pattern = "*",
+    command = [[silent! mkview]],
+})
+
+autocmd({ "BufWinEnter" }, {
+    group = remember_folds,
+    pattern = "*",
+    command = [[silent! loadview]],
 })
 
 vim.g.netrw_browse_split = 0
