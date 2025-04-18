@@ -1,8 +1,14 @@
 return {
     'echasnovski/mini.indentscope',
-    version = '*' ,
+    version = '*',
     config = function()
-        require('mini.indentscope').setup()
-        require('mini.indentscope').gen_animation.exponential()
+        require('mini.indentscope').setup({
+            draw = {
+                animation = require('mini.indentscope').gen_animation.exponential({
+                    duration = 10,
+                    unit = "total",
+                }),
+            },
+        })
     end
 }

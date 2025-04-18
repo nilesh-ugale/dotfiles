@@ -1,20 +1,31 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
-    -- Replace the language servers listed here
+    -- replace the language servers listed here
     -- with the ones you want to install
     automatic_installation = {},
     ensure_installed = {
-       'clangd',
-       'harper_ls',
+        'clangd',
+        'harper_ls',
     },
     handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
         function(server_name)
-            -- config.capabilities = require('blink.cmp').get_lsp_capabilities()
-            require('lspconfig')[server_name].setup({
-                capabilities = require('blink.cmp').get_lsp_capabilities()
+            vim.lsp.enable(server_name)
+        end,
+
+        ['harper_ls'] = function()
+            vim.lsp.config('harper_ls', {
+                -- Server-specific settings. See `:help lsp-quickstart`
+                settings = {
+                    ['harper-ls'] = {
+                        linters = {
+                            SentenceCapitalization = false,
+                        }
+                    },
+                },
             })
+            vim.lsp.enable('harper_ls')
         end,
     }
 })
