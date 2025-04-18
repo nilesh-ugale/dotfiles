@@ -146,7 +146,7 @@ function tmux-start() {
 }
 
 # Create or attach to taskwarrior-tui tmux session
-function tasks_start() {
+function taskwarrior_tui_start() {
     tmux_running=$(pgrep tmux)
     if [[ -z $TMUX ]]; then
         if [[ $tmux_running ]] && tmux has-session -t="tasks" 2> /dev/null; then
@@ -180,18 +180,6 @@ function notes_start() {
     fi
 }
 
-# Create task and notes tmux session in background
-function startup() {
-    tmux_running=$(pgrep tmux)
-    if ! tmux has-session -t="notes" 2> /dev/null; then
-        tmux new-session -ds "notes" -c '~/notes' 'nvim ~/notes/work/index.norg'
-    fi
-    if ! tmux has-session -t="tasks" 2> /dev/null; then
-        tmux new-session -ds "tasks" -c '~' 'taskwarrior-tui'
-    fi
-}
-
-
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
 alias tms="~/.scripts/tmux-sessionizer"
@@ -199,7 +187,7 @@ alias gite="git.exe"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
 alias notes="notes_start"
-alias tasks="tasks_start"
+alias tasks="taskwarrior_tui_start"
 alias ts="tmux-start"
 alias :q="exit"
 alias tcw="task context work"
@@ -227,5 +215,3 @@ else
     export TMUX_SEARCH_DIR="$HOME"
 fi
 
-# Create default tmux sessions
-startup

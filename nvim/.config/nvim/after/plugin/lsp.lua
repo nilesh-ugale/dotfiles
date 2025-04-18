@@ -3,7 +3,10 @@ require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
     automatic_installation = {},
-    ensure_installed = { 'clangd' },
+    ensure_installed = {
+       'clangd',
+       'harper_ls',
+    },
     handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
