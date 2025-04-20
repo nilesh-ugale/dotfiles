@@ -1,4 +1,5 @@
-require 'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
+    modules  = {},
     -- A list of parser names, or "all"
     ensure_installed = {
         "vimdoc",
@@ -6,7 +7,9 @@ require 'nvim-treesitter.configs'.setup {
         "lua",
         "markdown_inline",
     },
-
+    ignore_install = {
+        'org',
+    },
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
