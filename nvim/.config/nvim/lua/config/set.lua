@@ -31,7 +31,8 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
 vim.opt.listchars = "tab:→\\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»"
 vim.opt.cmdheight = 1
-vim.opt.conceallevel = 3
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
 
 local in_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
 

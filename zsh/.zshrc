@@ -145,53 +145,14 @@ function tmux-start() {
     fi
 }
 
-# Create or attach to taskwarrior-tui tmux session
-function taskwarrior_tui_start() {
-    tmux_running=$(pgrep tmux)
-    if [[ -z $TMUX ]]; then
-        if [[ $tmux_running ]] && tmux has-session -t="tasks" 2> /dev/null; then
-            tmux a -t "tasks"
-        else
-            tmux new-session -s "tasks" -c '~' 'taskwarrior-tui'
-        fi
-    else
-        if ! tmux has-session -t="tasks" 2> /dev/null; then
-            tmux new-session -ds "tasks" -c '~' 'taskwarrior-tui'
-        fi
-        tmux switch-client -t "tasks"
-    fi
-}
-
-# Create or attach to notes tmux session
-function notes_start() {
-    tmux_running=$(pgrep tmux)
-    if [[ -z $TMUX ]]; then
-        if [[ $tmux_running ]] && tmux has-session -t="notes" 2> /dev/null; then
-            tmux a -t "notes"
-        else
-            tmux new-session -s "notes" -c '~/notes' 'nvim ~/notes/work/index.norg'
-        fi
-    else
-        if ! tmux has-session -t="notes" 2> /dev/null; then
-            tmux new-session -ds "notes" -c '~/notes' 'nvim ~/notes/work/index.norg'
-        fi
-
-        tmux switch-client -t "notes"
-    fi
-}
-
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
 alias tms="~/.scripts/tmux-sessionizer"
 alias gite="git.exe"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
-alias notes="notes_start"
-alias tasks="taskwarrior_tui_start"
 alias ts="tmux-start"
 alias :q="exit"
-alias tcw="task context work"
-alias tch="task context home"
 alias grd='cd $(git rev-parse --show-toplevel)'
 alias tk='tmux kill-server'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

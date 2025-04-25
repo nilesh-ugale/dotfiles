@@ -32,15 +32,24 @@ autocmd({ "BufWritePre" }, {
 autocmd({ "BufWinLeave" }, {
     group = remember_folds,
     pattern = "*",
-    command = [[silent! mkview]],
+    callback = function()
+        if vim.bo.filetype ~= 'org' then
+            vim.cmd([[silent! mkview]])
+        end
+    end,
 })
 
 autocmd({ "BufWinEnter" }, {
     group = remember_folds,
     pattern = "*",
-    command = [[silent! loadview]],
+    callback = function()
+        if vim.bo.filetype ~= 'org' then
+            vim.cmd([[silent! loadview]])
+        end
+    end,
 })
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
