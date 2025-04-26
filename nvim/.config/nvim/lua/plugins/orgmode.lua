@@ -21,12 +21,12 @@ return {
                 org_default_notes_file = '~/org/orgmode/refile.org',
                 org_todo_keywords = { 'TODO(t!)', 'WAITING(w!)', 'NEXT(n!)', 'PROG(p!)', 'DELEGATED(d!)', '|', 'DONE(x@)' },
                 org_todo_keyword_faces = {
-                    PROG      = ':foreground #EE82EE :weight bold :slant italic',
-                    DELEGATED = ':foreground #00BFFF :weight bold :slant italic',
+                    PROG      = ':foreground #FF69B4 :weight bold :slant italic',
+                    DELEGATED = ':foreground #FF00FF :weight bold :slant italic',
                     WAITING   = ':foreground #FFFF00 :weight bold :slant italic',
                     TODO      = ':foreground #00BFFF :weight bold :slant italic',
-                    NEXT      = ':foreground #BA55D3 :weight bold :slant italic',
-                    DONE      = ':foreground #ADFF2F :weight bold :slant italic',
+                    NEXT      = ':foreground #FFA500 :weight bold :slant italic',
+                    DONE      = ':foreground #00FF00 :weight bold :slant italic',
                 },
                 ---@diagnostic disable-next-line: assign-type-mismatch
                 win_split_mode = 'tabnew',
@@ -73,7 +73,7 @@ return {
                 },
                 org_agenda_custom_commands = {
                     -- "c" is the shortcut that will be used in the prompt
-                    c = {
+                    a = {
                         description = 'Combined view', -- Description shown in the prompt for the shortcut
                         types = {
                             {
@@ -85,7 +85,8 @@ return {
                             {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'My daily agenda',
-                                org_agenda_span = 'day' -- can be any value as org_agenda_span
+                                org_agenda_span = 'day', -- can be any value as org_agenda_span
+                                org_agenda_tag_filter_preset = '-hide',
                             },
                             {
                                 type = 'tags_todo',
@@ -98,7 +99,8 @@ return {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Whole week overview',
                                 org_agenda_span = 'week',     -- 'week' is default, so it's not necessary here, just an example
-                                org_agenda_remove_tags = true -- Do not show tags only for this view
+                                org_agenda_remove_tags = true, -- Do not show tags only for this view
+                                org_agenda_tag_filter_preset = '-hide',
                             },
                         }
                     },
@@ -146,17 +148,6 @@ return {
                                 string.format('%s %s %s', string.rep('*', task.level), task.todo, task.title),
                                 string.format('%s: <%s>', task.type, task.time:to_string())
                             })
-                            -- local title = string.format('%s (%s)', task.category, task.humanized_duration)
-                            -- local subtitle = string.format('%s %s %s', string.rep('*', task.level), task.todo, task
-                            --     .title)
-                            -- local date = string.format('%s: %s', task.type, task.time:to_string())
-                            -- vim.system({
-                            --     'wsl-notify-send.exe',
-                            --     '--appId=orgmode',
-                            --     '--category=Notify',
-                            --     '--icon=C:\\Users\\nilesh.ugale\\nvim-orgmode-small.png',
-                            --     string.format('%s\n%s\n%s', title, subtitle, date),
-                            -- })
                         end
 
                         if not vim.tbl_isempty(result) then
@@ -203,9 +194,9 @@ return {
             require("org-roam").setup({
                 directory = "~/org/orgroam",
                 -- optional
-                org_files = {
-                    "~/org/orgmode",
-                }
+                -- org_files = {
+                --     "~/org/orgmode",
+                -- }
             })
         end
     },
