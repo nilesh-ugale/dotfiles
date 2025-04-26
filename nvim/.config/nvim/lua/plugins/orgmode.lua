@@ -19,13 +19,13 @@ return {
             require('orgmode').setup({
                 org_agenda_files = '~/org/orgmode/**/*',
                 org_default_notes_file = '~/org/orgmode/refile.org',
-                org_todo_keywords = { 'TODO(t!)', 'WAITING(w!)', 'NEXT(n!)', 'PROG(p!)', 'DELEGATED(d!)', '|', 'DONE(x@)' },
+                org_todo_keywords = { 'TODO(t!)', 'DELEGATED(d!)', 'NEXT(n!)', 'ACTIVE(a!)', 'WAITING(w!)', '|', 'DONE(x@)' },
                 org_todo_keyword_faces = {
-                    PROG      = ':foreground #FF69B4 :weight bold :slant italic',
-                    DELEGATED = ':foreground #FF00FF :weight bold :slant italic',
-                    WAITING   = ':foreground #FFFF00 :weight bold :slant italic',
                     TODO      = ':foreground #00BFFF :weight bold :slant italic',
-                    NEXT      = ':foreground #FFA500 :weight bold :slant italic',
+                    NEXT      = ':foreground #BA55D3 :weight bold :slant italic',
+                    ACTIVE    = ':foreground #ADFF2F :weight bold :slant italic',
+                    DELEGATED = ':foreground #FFFF66 :weight bold :slant italic',
+                    WAITING   = ':foreground #FFFF66 :weight bold :slant italic',
                     DONE      = ':foreground #00FF00 :weight bold :slant italic',
                 },
                 ---@diagnostic disable-next-line: assign-type-mismatch
@@ -98,7 +98,7 @@ return {
                             {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Whole week overview',
-                                org_agenda_span = 'week',     -- 'week' is default, so it's not necessary here, just an example
+                                org_agenda_span = 'week',      -- 'week' is default, so it's not necessary here, just an example
                                 org_agenda_remove_tags = true, -- Do not show tags only for this view
                                 org_agenda_tag_filter_preset = '-hide',
                             },
