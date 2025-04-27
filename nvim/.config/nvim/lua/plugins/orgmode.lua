@@ -86,8 +86,8 @@ return {
                     },
                 },
                 org_agenda_custom_commands = {
-                    -- "c" is the shortcut that will be used in the prompt
-                    a = {
+                    -- "w" is the shortcut that will be used in the prompt
+                    w = {
                         description = 'Combined view', -- Description shown in the prompt for the shortcut
                         types = {
                             {
@@ -107,13 +107,11 @@ return {
                                 match = 'work',                           --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
                                 org_agenda_overriding_header = 'Todos',
                                 org_agenda_todo_ignore_scheduled = 'all', -- Ignore all headlines that are scheduled. Possible values: past | future | all
-                                org_agenda_files = { '~/org/orgmode/**/*' }
                             },
                             {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Whole week overview',
                                 org_agenda_span = 'week',      -- 'week' is default, so it's not necessary here, just an example
-                                org_agenda_remove_tags = true, -- Do not show tags only for this view
                                 org_agenda_tag_filter_preset = '-hide',
                             },
                         }
@@ -131,7 +129,6 @@ return {
                                 type = 'tags_todo',              -- Type can be agenda | tags | tags_todo
                                 match = 'work+TODO="DELEGATED"', --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
                                 org_agenda_overriding_header = 'All tasks',
-                                -- org_agenda_todo_ignore_deadlines = 'far',          -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
                             },
                         }
                     },
@@ -140,7 +137,7 @@ return {
                         types = {
                             {
                                 type = 'tags_todo', -- Type can be agenda | tags | tags_todo
-                                match = 'personal',
+                                match = 'personal-hide',
                                 org_agenda_overriding_header = 'All todos',
                             },
                         }
