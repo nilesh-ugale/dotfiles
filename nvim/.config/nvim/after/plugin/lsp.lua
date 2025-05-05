@@ -100,5 +100,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.diagnostic.config({
     virtual_lines = {
         current_line = true,
+        severity = vim.diagnostic.severity.WARN
     },
 })

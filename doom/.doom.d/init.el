@@ -191,3 +191,6 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+(set-frame-parameter nil 'alpha-background 100) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
+

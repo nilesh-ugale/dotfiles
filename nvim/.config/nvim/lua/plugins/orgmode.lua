@@ -1,16 +1,18 @@
 return {
     {
-        'nvim-orgmode/orgmode',
+        -- 'nvim-orgmode/orgmode',
+        'nilesh-ugale/orgmode',
+        -- branch = 'develop',
         dependencies = {
             'nvim-telescope/telescope.nvim',
             'nvim-orgmode/telescope-orgmode.nvim',
             'Saghen/blink.cmp',
-            -- {
-            --     'nvim-orgmode/org-bullets.nvim',
-            --     config = function()
-            --         require('org-bullets').setup()
-            --     end
-            -- }
+            {
+                'nvim-orgmode/org-bullets.nvim',
+                config = function()
+                    require('org-bullets').setup()
+                end
+            }
         },
         event = 'VeryLazy',
         ft = { 'org' },
@@ -25,33 +27,37 @@ return {
                     'NEXT(n!)',
                     'ACTIVE(a!)',
                     'WAITING(w!)',
-                    'MEET(m)',
-                    'HOLD(h)',
+                    'MEET(m!)',
+                    'HOLD(h@)',
                     '|',
                     'DONE(x@)',
                     'CANCELLED(c@)',
                 },
                 org_todo_keyword_faces = {
-                    TODO = ":foreground OrangeRed :weight bold :slant italic",
-                    NEXT = ":foreground DeepSkyBlue :weight bold :slant italic",
-                    DONE = ":foreground LightGreen :weight bold :slant italic",
+                    TODO      = ":foreground OrangeRed :weight bold :slant italic",
+                    NEXT      = ":foreground DeepSkyBlue :weight bold :slant italic",
+                    DONE      = ":foreground LightGreen :weight bold :slant italic",
                     CANCELLED = ":foreground LightGreen :weight bold :slant italic",
-                    WAITING = ":foreground Yellow :weight bold :slant italic",
-                    HOLD = ":foreground Magenta :weight bold :slant italic",
-                    DELEGATED  = "foreground LightCoral :weight bold :slant italic",
-                    ACTIVE = ":foreground LawnGreen :weight bold :slant italic",
-                    MEET = ":foreground Gold :weight bold :slant italic",
+                    WAITING   = ":foreground Yellow :weight bold :slant italic",
+                    HOLD      = ":foreground Magenta :weight bold :slant italic",
+                    DELEGATED = "foreground LightCoral :weight bold :slant italic",
+                    ACTIVE    = ":foreground LawnGreen :weight bold :slant italic",
+                    MEET      = ":foreground Gold :weight bold :slant italic",
                 },
+                org_todo_repeat_to_state = 'TODO',
                 ---@diagnostic disable-next-line: assign-type-mismatch
                 win_split_mode = 'tabnew',
                 org_log_done = 'note',
-                org_log_repeat = 'note',
+                org_log_repeat = 'time',
                 org_log_into_drawer = 'LOGBOOK',
                 calendar_week_start_day = 0,
                 org_agenda_start_on_weekday = 0,
-                org_tags_column = -100,
+                org_agenda_skip_scheduled_if_done = true,
+                org_agenda_skip_deadline_if_done = true,
+                org_tags_column = -80,
                 org_startup_indented = true,
                 org_hide_leading_stars = true,
+                org_ellipsis = " [...] ",
                 org_id_link_to_org_use_id = true,
                 org_capture_templates = {
 
@@ -67,7 +73,7 @@ return {
                     },
                     m = {
                         description = 'Minutes of Meet',
-                        template = '* %?\n:Created: %T\n** Notes\n** Action Items\n*** TODO ',
+                        template = '* %?\n:Created: %U\n** Notes\n** Action Items\n*** TODO ',
                         target = '~/org/orgmode/meetings.org',
                         ---@diagnostic disable-next-line: missing-fields
                         datetree = {
@@ -76,13 +82,23 @@ return {
                     },
                     M = {
                         description = 'Minutes of Meet',
-                        template = '* %?\n:Created: %^T\n** Notes\n** Action Items\n*** TODO ',
+                        template = '* %?\n:Created: %^U\n** Notes\n** Action Items\n*** TODO ',
                         target = '~/org/orgmode/meetings.org',
                         ---@diagnostic disable-next-line: missing-fields
                         datetree = {
                             time_prompt = true,
                             tree_type = 'week',
-                        }
+                        },
+                    },
+                    g = {
+                        description = 'Gym Workout',
+                        template = '* Workout :workout:\n%?',
+                        target = '~/org/orgmode/journal.org',
+                        ---@diagnostic disable-next-line: missing-fields
+                        datetree = {
+                            time_prompt = true,
+                            tree_type = 'week',
+                        },
                     },
                 },
                 org_agenda_custom_commands = {
@@ -111,7 +127,7 @@ return {
                             {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Whole week overview',
-                                org_agenda_span = 'week',      -- 'week' is default, so it's not necessary here, just an example
+                                org_agenda_span = 'week', -- 'week' is default, so it's not necessary here, just an example
                                 org_agenda_tag_filter_preset = '-hide',
                             },
                         }
@@ -139,6 +155,8 @@ return {
                                 type = 'tags_todo', -- Type can be agenda | tags | tags_todo
                                 match = 'personal-hide',
                                 org_agenda_overriding_header = 'All todos',
+                                org_agenda_todo_ignore_deadlines = 'far', -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
+                                org_agenda_todo_ignore_scheduled = 'future',
                             },
                         }
                     },
@@ -197,8 +215,8 @@ return {
         -- tag = "0.1.1",
         dependencies = {
             {
-                "nvim-orgmode/orgmode",
-                -- tag = "0.3.7",
+                "nilesh-ugale/orgmode",
+                -- branch = "develop",
             },
         },
         config = function()

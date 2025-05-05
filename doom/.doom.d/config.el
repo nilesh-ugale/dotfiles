@@ -34,6 +34,8 @@
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
 (load-theme 'catppuccin :no-confirm)
+(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+(catppuccin-reload)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -77,3 +79,23 @@
 ;; they are implemented.
 (menu-bar-mode -1)
 (setq confirm-kill-emacs nil)
+;; write todo state changes into LOGBOOK drawer
+(after! org
+    (setq org-log-into-drawer "LOGBOOK")
+    (setq org-todo-keywords '((sequence "TODO(t!)" "DELEGATED(d!)" "NEXT(n!)" "ACTIVE(a!)" "WAITING(w!)" "MEET(m)" "HOLD(h)" "|" "DONE(x@)" "CANCELLED(c@)")))
+    (setq org-todo-keyword-faces
+        '(("TODO" . (:foreground "OrangeRed" :weight bold :slant italic))
+         ("NEXT" . (:foreground "DeepSkyBlue" :weight bold :slant italic))
+         ("DONE" . (:foreground "LightGreen" :weight bold :slant italic))
+         ("CANCELLED" . (:foreground "LightGreen" :weight bold :slant italic))
+         ("WAITING" . (:foreground "Yellow" :weight bold :slant italic))
+         ("HOLD" . (:foreground "Magenta" :weight bold :slant italic))
+         ("DELEGATED" . (foreground "LightCoral" :weight bold :slant italic))
+         ("ACTIVE" . (:foreground "LawnGreen" :weight bold :slant italic))
+         ("MEET" . (:foreground "Gold" :weight bold :slant italic)))
+    )
+    (setq org-tags-column -100)
+)
+(custom-set-faces!
+  '(default :background nil))
+;; (push '(tty-color-mode . 16) default-frame-alist)
