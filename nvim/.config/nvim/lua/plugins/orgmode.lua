@@ -26,7 +26,7 @@ return {
                     'DELEGATED(d!)',
                     'NEXT(n!)',
                     'ACTIVE(a!)',
-                    'WAITING(w!)',
+                    'WAITING(w@)',
                     'MEET(m!)',
                     'HOLD(h@)',
                     '|',
@@ -40,7 +40,7 @@ return {
                     CANCELLED = ":foreground LightGreen :weight bold :slant italic",
                     WAITING   = ":foreground Yellow :weight bold :slant italic",
                     HOLD      = ":foreground Magenta :weight bold :slant italic",
-                    DELEGATED = "foreground LightCoral :weight bold :slant italic",
+                    DELEGATED = ":foreground DarkOrange :weight bold :slant italic",
                     ACTIVE    = ":foreground LawnGreen :weight bold :slant italic",
                     MEET      = ":foreground Gold :weight bold :slant italic",
                 },
@@ -54,11 +54,12 @@ return {
                 org_agenda_start_on_weekday = 0,
                 org_agenda_skip_scheduled_if_done = true,
                 org_agenda_skip_deadline_if_done = true,
-                org_tags_column = -80,
+                org_tags_column = -100,
                 org_startup_indented = true,
                 org_hide_leading_stars = true,
                 org_ellipsis = " [...] ",
                 org_id_link_to_org_use_id = true,
+                org_agenda_block_separator = '=',
                 org_capture_templates = {
 
                     t = {
@@ -73,7 +74,7 @@ return {
                     },
                     m = {
                         description = 'Minutes of Meet',
-                        template = '* %?\n:Created: %U\n** Notes\n** Action Items\n*** TODO ',
+                        template = '* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n** Notes\n** Action Items\n*** TODO ',
                         target = '~/org/orgmode/meetings.org',
                         ---@diagnostic disable-next-line: missing-fields
                         datetree = {
@@ -82,7 +83,7 @@ return {
                     },
                     M = {
                         description = 'Minutes of Meet',
-                        template = '* %?\n:Created: %^U\n** Notes\n** Action Items\n*** TODO ',
+                        template = '* %?\n:PROPERTIES:\n:CREATED: %^U\n:END:\n** Notes\n** Action Items\n*** TODO ',
                         target = '~/org/orgmode/meetings.org',
                         ---@diagnostic disable-next-line: missing-fields
                         datetree = {
@@ -109,24 +110,35 @@ return {
                             {
                                 type = 'tags_todo',                       -- Type can be agenda | tags | tags_todo
                                 match = '+PRIORITY="A"',                  --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
-                                org_agenda_overriding_header = 'High priority todos',
+                                org_agenda_overriding_header = 'High priority',
+                                org_agenda_todo_ignore_deadlines = 'far', -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
+                            },
+                            {
+                                type = 'tags_todo',                       -- Type can be agenda | tags | tags_todo
+                                match = 'work+TODO="WAITING"',                  --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
+                                org_agenda_overriding_header = 'Waiting',
                                 org_agenda_todo_ignore_deadlines = 'far', -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
                             },
                             {
                                 type = 'agenda',
-                                org_agenda_overriding_header = 'My daily agenda',
+                                org_agenda_overriding_header = 'Daily agenda',
                                 org_agenda_span = 'day', -- can be any value as org_agenda_span
                                 org_agenda_tag_filter_preset = '-hide',
                             },
                             {
                                 type = 'tags_todo',
-                                match = 'work',                           --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
-                                org_agenda_overriding_header = 'Todos',
+                                match = 'work-TODO="DELEGATED"',                           --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
+                                org_agenda_overriding_header = 'All Todos',
                                 org_agenda_todo_ignore_scheduled = 'all', -- Ignore all headlines that are scheduled. Possible values: past | future | all
                             },
                             {
+                                type = 'tags_todo',              -- Type can be agenda | tags | tags_todo
+                                match = 'work+TODO="DELEGATED"', --Same as providing a "Match:" for tags view <leader>oa + m, See: https://orgmode.org/manual/Matching-tags-and-properties.html
+                                org_agenda_overriding_header = 'Deligated',
+                            },
+                            {
                                 type = 'agenda',
-                                org_agenda_overriding_header = 'Whole week overview',
+                                org_agenda_overriding_header = 'Week overview',
                                 org_agenda_span = 'week', -- 'week' is default, so it's not necessary here, just an example
                                 org_agenda_tag_filter_preset = '-hide',
                             },
@@ -153,10 +165,9 @@ return {
                         types = {
                             {
                                 type = 'tags_todo', -- Type can be agenda | tags | tags_todo
-                                match = 'personal-hide',
+                                match = 'personal',
                                 org_agenda_overriding_header = 'All todos',
                                 org_agenda_todo_ignore_deadlines = 'far', -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
-                                org_agenda_todo_ignore_scheduled = 'future',
                             },
                         }
                     },
@@ -223,9 +234,9 @@ return {
             require("org-roam").setup({
                 directory = "~/org/orgroam",
                 -- optional
-                -- org_files = {
-                --     "~/org/orgmode",
-                -- }
+                org_files = {
+                    "~/org/orgmode",
+                }
             })
         end
     },
