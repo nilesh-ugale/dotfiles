@@ -91,6 +91,32 @@ return {
                             tree_type = 'week',
                         },
                     },
+                    g = {
+                        description = 'Goal',
+                        subtemplates = {
+                            ---@diagnostic disable-next-line: missing-fields
+                            l = {
+                                description = 'Long Term Goal (2-5 years form now)',
+                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                target = '~/org/orgmode/goals.org',
+                                headline = 'Long Term Goals',
+                            },
+                            ---@diagnostic disable-next-line: missing-fields
+                            m = {
+                                description = 'Medium Term Goal (6 months up to 2 years)',
+                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                target = '~/org/orgmode/goals.org',
+                                headline = 'Medium Term Goals',
+                            },
+                            ---@diagnostic disable-next-line: missing-fields
+                            s = {
+                                description = 'Short Term Goal (next 6 months)',
+                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                target = '~/org/orgmode/goals.org',
+                                headline = 'Short Term Goals',
+                            },
+                        },
+                    },
                 },
                 org_agenda_custom_commands = {
                     -- "w" is the shortcut that will be used in the prompt
