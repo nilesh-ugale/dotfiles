@@ -64,7 +64,7 @@ return {
 
                     t = {
                         description = 'Task',
-                        template = '* TODO %?',
+                        template = '* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:',
                     },
                     j = {
                         description = 'Journal',
@@ -85,16 +85,6 @@ return {
                         description = 'Minutes of Meet',
                         template = '* %?\n:PROPERTIES:\n:CREATED: %^U\n:END:\n** Notes\n** Action Items\n*** TODO ',
                         target = '~/org/orgmode/meetings.org',
-                        ---@diagnostic disable-next-line: missing-fields
-                        datetree = {
-                            time_prompt = true,
-                            tree_type = 'week',
-                        },
-                    },
-                    g = {
-                        description = 'Gym Workout',
-                        template = '* Workout :workout:\n%?',
-                        target = '~/org/orgmode/journal.org',
                         ---@diagnostic disable-next-line: missing-fields
                         datetree = {
                             time_prompt = true,
@@ -123,7 +113,7 @@ return {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Daily agenda',
                                 org_agenda_span = 'day', -- can be any value as org_agenda_span
-                                org_agenda_tag_filter_preset = '-hide',
+                                org_agenda_tag_filter_preset = '+work-hide',
                             },
                             {
                                 type = 'tags_todo',
@@ -140,7 +130,7 @@ return {
                                 type = 'agenda',
                                 org_agenda_overriding_header = 'Week overview',
                                 org_agenda_span = 'week', -- 'week' is default, so it's not necessary here, just an example
-                                org_agenda_tag_filter_preset = '-hide',
+                                org_agenda_tag_filter_preset = '+work-hide',
                             },
                         }
                     },
@@ -168,6 +158,12 @@ return {
                                 match = 'personal',
                                 org_agenda_overriding_header = 'All todos',
                                 org_agenda_todo_ignore_deadlines = 'far', -- Ignore all deadlines that are too far in future (over org_deadline_warning_days). Possible values: all | near | far | past | future
+                            },
+                            {
+                                type = 'agenda',
+                                org_agenda_overriding_header = 'Daily agenda',
+                                org_agenda_span = 'day', -- can be any value as org_agenda_span
+                                org_agenda_tag_filter_preset = '+personal',
                             },
                         }
                     },
