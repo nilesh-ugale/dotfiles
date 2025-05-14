@@ -23,6 +23,8 @@ return {
                 org_default_notes_file = '~/org/orgmode/refile.org',
                 org_todo_keywords = {
                     'TODO(t!)',
+                    'REPEAT(r!)',
+                    'GOAL',
                     'DELEGATED(d!)',
                     'NEXT(n!)',
                     'ACTIVE(a!)',
@@ -31,12 +33,16 @@ return {
                     'HOLD(h@)',
                     '|',
                     'DONE(x@)',
+                    'ACHIEVED(a@)',
                     'CANCELLED(c@)',
                 },
                 org_todo_keyword_faces = {
                     TODO      = ":foreground OrangeRed :weight bold :slant italic",
+                    REPEAT    = ":foreground OrangeRed :weight bold :slant italic",
+                    GOAL      = ":foreground OrangeRed :weight bold :slant italic",
                     NEXT      = ":foreground DeepSkyBlue :weight bold :slant italic",
                     DONE      = ":foreground LightGreen :weight bold :slant italic",
+                    ACHIEVED  = ":foreground LightGreen :weight bold :slant italic",
                     CANCELLED = ":foreground LightGreen :weight bold :slant italic",
                     WAITING   = ":foreground Yellow :weight bold :slant italic",
                     HOLD      = ":foreground Magenta :weight bold :slant italic",
@@ -44,7 +50,7 @@ return {
                     ACTIVE    = ":foreground LawnGreen :weight bold :slant italic",
                     MEET      = ":foreground Gold :weight bold :slant italic",
                 },
-                org_todo_repeat_to_state = 'TODO',
+                org_todo_repeat_to_state = 'REPEAT',
                 ---@diagnostic disable-next-line: assign-type-mismatch
                 win_split_mode = 'tabnew',
                 org_log_done = 'note',
@@ -97,21 +103,21 @@ return {
                             ---@diagnostic disable-next-line: missing-fields
                             l = {
                                 description = 'Long Term Goal (2-5 years form now)',
-                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                template = '** GOAL %^{Goal}\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS: %^{Specifics}\n:MEASURABLE: %^{Measurable}\n:ACHIEVABLE: %^{Achievable}\n:RELEVANT: %^{Relevant}\n:TIMEBOUND: %^{Time Bound}\n:END:\n:ACTIONS:\n:END:',
                                 target = '~/org/orgmode/goals.org',
                                 headline = 'Long Term Goals',
                             },
                             ---@diagnostic disable-next-line: missing-fields
                             m = {
                                 description = 'Medium Term Goal (6 months up to 2 years)',
-                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                template = '** GOAL %^{Goal}\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS: %^{Specifics}\n:MEASURABLE: %^{Measurable}\n:ACHIEVABLE: %^{Achievable}\n:RELEVANT: %^{Relevant}\n:TIMEBOUND: %^{Time Bound}\n:END:\n:ACTIONS:\n:END:',
                                 target = '~/org/orgmode/goals.org',
                                 headline = 'Medium Term Goals',
                             },
                             ---@diagnostic disable-next-line: missing-fields
                             s = {
                                 description = 'Short Term Goal (next 6 months)',
-                                template = '** %?\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS:\n:MEASURABLE:\n:ACHIEVABLE:\n:RELEVANT:\n:TIMEBOUND:\n:END:\n:ACTIONS:\n:END:',
+                                template = '** GOAL %^{Goal}\nRecorded on %U - Last reviewed on %U\n:SMART:\n:SPECIFICS: %^{Specifics}\n:MEASURABLE: %^{Measurable}\n:ACHIEVABLE: %^{Achievable}\n:RELEVANT: %^{Relevant}\n:TIMEBOUND: %^{Time Bound}\n:END:\n:ACTIONS:\n:END:',
                                 target = '~/org/orgmode/goals.org',
                                 headline = 'Short Term Goals',
                             },
@@ -121,7 +127,7 @@ return {
                 org_agenda_custom_commands = {
                     -- "w" is the shortcut that will be used in the prompt
                     w = {
-                        description = 'Combined view', -- Description shown in the prompt for the shortcut
+                        description = 'Work', -- Description shown in the prompt for the shortcut
                         types = {
                             {
                                 type = 'tags_todo',                       -- Type can be agenda | tags | tags_todo
@@ -245,11 +251,9 @@ return {
     },
     {
         "chipsenkbeil/org-roam.nvim",
-        -- tag = "0.1.1",
         dependencies = {
             {
                 "nilesh-ugale/orgmode",
-                -- branch = "develop",
             },
         },
         config = function()

@@ -1,34 +1,19 @@
 require('mason').setup()
-require('mason-lspconfig').setup({
-    -- replace the language servers listed here
-    -- with the ones you want to install
-    automatic_installation = {},
-    ensure_installed = {
-        'clangd',
-        'harper_ls',
-    },
-    handlers = {
-        -- this first function is the "default handler"
-        -- it applies to every language server without a "custom handler"
-        function(server_name)
-            vim.lsp.enable(server_name)
-        end,
 
-        ['harper_ls'] = function()
-            vim.lsp.config('harper_ls', {
-                -- Server-specific settings. See `:help lsp-quickstart`
-                settings = {
-                    ['harper-ls'] = {
-                        linters = {
-                            SentenceCapitalization = false,
-                        }
-                    },
-                },
-            })
-            vim.lsp.enable('harper_ls')
-        end,
-    }
+vim.lsp.config('harper_ls', {
+    -- Server-specific settings. See `:help lsp-quickstart`
+    settings = {
+        ['harper-ls'] = {
+            linters = {
+                SentenceCapitalization = false,
+            }
+        },
+    },
 })
+
+vim.lsp.enable('clangd')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('harper_ls')
 
 local set_sign_icons = function(opts)
     opts = opts or {}
@@ -98,8 +83,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.diagnostic.config({
-    virtual_lines = {
+    underline = false,
+    virtual_text = {
         current_line = true,
-        severity = vim.diagnostic.severity.WARN
+        severity = { min = vim.diagnostic.severity.WARN },
+        spacing = 4,
+        prefix = "●",
+    },
+    virtual_lines = false,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        border = "single",
+        spacing = 4,
+        source = true,
+        header = " Diagnostics:",
+        prefix = "● ",
     },
 })
