@@ -124,7 +124,8 @@
   (setq org-habit-graph-column 60)
   (setq org-habit-preceding-days 7)
   (setq org-habit-following-days 7)
-
+  (setq org-log-reschedule 'logreschedule)
+  (setq org-log-redeadline 'logredeadline)
   (setq org-capture-templates
     '(
       (
@@ -282,6 +283,7 @@
               (org-agenda-show-all-dates t)
               (org-agenda-sorting-strategy '(time-up priority-down))
               (org-deadline-warning-days 3)
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "CANCELLED" "ACHIEVED" "HABIT")))
             )
           )
           ;; Waiting tasks
@@ -306,7 +308,7 @@
               (org-agenda-start-on-weekday 1)
               (org-agenda-start-day "+1d")
               (org-agenda-overriding-header "📅 Week Overview")
-              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "CANCELLED" "ACHIEVED")))
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "CANCELLED" "ACHIEVED" "HABIT")))
             )
           )
         )
