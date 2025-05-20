@@ -34,7 +34,7 @@
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-one)
 (load-theme 'catppuccin :no-confirm)
-(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha or 'frappe
 (catppuccin-reload)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -97,18 +97,24 @@
       ("TODO" . (:foreground "OrangeRed" :weight bold :slant italic))
       ("REPEAT" . (:foreground "OrangeRed" :weight bold :slant italic))
       ("REVIEW". (:foreground "OrangeRed" :weight bold :slant italic))
-      ("GOAL" . (:foreground "OrangeRed" :weight bold :slant italic))
+
+      ("MEET" . (:foreground "Gold" :weight bold :slant italic))
+
+      ("DELEGATED" . (:foreground "DarkOrange" :weight bold :slant italic))
+      ("WAITING" . (:foreground "Yellow" :weight bold :slant italic))
+
       ("NEXT" . (:foreground "DeepSkyBlue" :weight bold :slant italic))
       ("HABIT" . (:foreground "DeepSkyBlue" :weight bold :slant italic))
+      ("ACTIVE" . (:foreground "LawnGreen" :weight bold :slant italic))
+
+      ("GOAL" . (:foreground "OrangeRed" :weight bold :slant italic))
+
+      ("HOLD" . (:foreground "Magenta" :weight bold :slant italic))
+      ("SOMEDAY" . (:foreground "Magenta" :weight bold :slant italic))
+
       ("DONE" . (:foreground "LightGreen" :weight bold :slant italic))
       ("ACHIEVED" . (:foreground "LightGreen" :weight bold :slant italic))
       ("CANCELLED" . (:foreground "LightGreen" :weight bold :slant italic))
-      ("WAITING" . (:foreground "Yellow" :weight bold :slant italic))
-      ("HOLD" . (:foreground "Magenta" :weight bold :slant italic))
-      ("SOMEDAY" . (:foreground "Magenta" :weight bold :slant italic))
-      ("DELEGATED" . (:foreground "DarkOrange" :weight bold :slant italic))
-      ("ACTIVE" . (:foreground "LawnGreen" :weight bold :slant italic))
-      ("MEET" . (:foreground "Gold" :weight bold :slant italic))
     )
   )
   (setq org-tags-column -100)
@@ -299,6 +305,7 @@
             (
               (org-agenda-overriding-header "All Tasks")
               (org-agenda-todo-ignore-scheduled 'all)
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("WAITING" "REPEAT")))
             )
           )
           ;; Upcoming Week
@@ -340,3 +347,14 @@
 (add-to-list 'default-frame-alist
   '(font . "MesloLGSDZ Nerd Font-12:slant=italic:weight=semibold")
 )
+
+;; start org agenda at startup
+(defun emacs-startup-screen ()
+  "Display the weekly org-agenda and all todos."
+  (org-agenda nil "d"))
+(add-hook 'emacs-startup-hook #'emacs-startup-screen)
+
+;; auto-fill-mode is automatic line break
+(remove-hook! 'text-mode-hook #'auto-fill-mode)
+ ;; Can be enabled when you want with SPC-t-w
+(remove-hook! 'text-mode-hook #'visual-line-mode)
