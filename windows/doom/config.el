@@ -305,7 +305,14 @@
             (
               (org-agenda-overriding-header "All Tasks")
               (org-agenda-todo-ignore-scheduled 'all)
-              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("WAITING" "REPEAT")))
+              (org-agenda-skip-function
+                (lambda ()
+                  (or
+                    (org-agenda-skip-entry-if 'timestamp)
+                    (org-agenda-skip-entry-if 'todo '("WAITING" "REPEAT"))
+                  )
+                )
+              )
             )
           )
           ;; Upcoming Week
