@@ -132,6 +132,8 @@
   (setq org-habit-following-days 7)
   (setq org-log-reschedule 'logreschedule)
   (setq org-log-redeadline 'logredeadline)
+
+  ;; Or make it buffer-local inside a hook
   (setq org-capture-templates
     '(
       (
@@ -147,12 +149,12 @@
       (
         "m" "Minutes of Meet (auto timestamp)"
         entry (file+datetree+prompt "//wsl.localhost/Ubuntu-24.04/home/nilesh/org/meetings.org")
-        "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n** Notes\n** Action Items\n*** TODO "
+        "* %? :meeting:\n:PROPERTIES:\n:CREATED: %U\n:END:\n** Notes\n** Action Items\n*** TODO "
       )
       (
         "M" "Minutes of Meet (prompt for timestamp)"
         entry (file+datetree+prompt "//wsl.localhost/Ubuntu-24.04/home/nilesh/org/meetings.org")
-        "* %?\n:PROPERTIES:\n:CREATED: %^U\n:END:\n** Notes\n** Action Items\n*** TODO "
+        "* %? :meeting:\n:PROPERTIES:\n:CREATED: %^U\n:END:\n** Notes\n** Action Items\n*** TODO "
       )
       (
         "g" "Goal"
@@ -303,13 +305,13 @@
           ;; All Tasks
           (tags-todo "work-TODO=\"DELEGATED\""
             (
-              (org-agenda-overriding-header "All Tasks")
+              (org-agenda-overriding-header "Tasks")
               (org-agenda-todo-ignore-scheduled 'all)
               (org-agenda-skip-function
                 (lambda ()
                   (or
                     (org-agenda-skip-entry-if 'timestamp)
-                    (org-agenda-skip-entry-if 'todo '("WAITING" "REPEAT"))
+                    (org-agenda-skip-entry-if 'todo '("WAITING" "REPEAT" "HOLD"))
                   )
                 )
               )
@@ -365,3 +367,16 @@
 (remove-hook! 'text-mode-hook #'auto-fill-mode)
  ;; Can be enabled when you want with SPC-t-w
 (remove-hook! 'text-mode-hook #'visual-line-mode)
+
+(add-hook 'org-mode-hook
+  (lambda ()
+    (when
+      (and buffer-file-name
+          (string-match "meetings.org$" buffer-file-name)
+      )
+    (setq-local org-use-tag-inheritance nil)
+    )
+  )
+)
+
+(setq display-line-numbers-type 'relative)
