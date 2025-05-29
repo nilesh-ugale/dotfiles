@@ -49,3 +49,5 @@
 ;; (unpin! t)
 (package! catppuccin-theme)
 (package! solaire-mode :disable t)
+(unpin! org-roam)
+(package! org-roam-ui)
