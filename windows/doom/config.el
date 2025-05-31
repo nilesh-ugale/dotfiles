@@ -400,3 +400,7 @@
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
+
+(let ((tex-path "C:/texlive/2025/bin/windows")) ;; or MiKTeX path
+  (setenv "PATH" (concat tex-path ";" (getenv "PATH")))
+  (add-to-list 'exec-path tex-path))
