@@ -187,13 +187,13 @@
       (
         "D" "Delegated"
         (
-          (tags-todo "work+PRIORITY=\"A\"+TODO=\"DELEGATED\""
+          (tags-todo "-personal+PRIORITY=\"A\"+TODO=\"DELEGATED\""
             (
               (org-agenda-overriding-header "🔥 High priority")
               (org-agenda-todo-ignore-deadlines 'far)
             )
           )
-          (tags-todo "work+TODO=\"DELEGATED\""
+          (tags-todo "-personal+TODO=\"DELEGATED\""
             (
               (org-agenda-overriding-header "All Tasks")
             )
