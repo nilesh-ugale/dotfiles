@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find $TMUX_SEARCH_DIR -mindepth 1 -maxdepth 3 -type d | fzf --layout=reverse --info=inline --border --margin=1 --padding=1 --header="Use CTRL-C to cancel" --preview "ls {}" --color="bg+:-1,fg+:white,spinner:0,hl:yellow,header:blue,info:green,pointer:red,marker:blue,hl+:red")
+    selected=$(find $TMUX_SEARCH_DIR -mindepth 1 -maxdepth 4 -type d | fzf --layout=reverse --info=inline --border --margin=1 --padding=1 --header="Use CTRL-C to cancel" --preview "ls {}" --color="bg+:-1,fg+:white,spinner:0,hl:yellow,header:blue,info:green,pointer:red,marker:blue,hl+:red")
 fi
 
 if [[ -z $selected ]]; then
