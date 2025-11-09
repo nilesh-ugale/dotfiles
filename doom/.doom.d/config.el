@@ -80,6 +80,8 @@
 
 (after! org-roam
   (setq org-roam-directory "~/org/roam/")
+  (org-roam-db-sync)
+  (org-roam-db-autosync-mode)
 )
 
 
