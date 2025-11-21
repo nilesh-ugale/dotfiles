@@ -145,6 +145,15 @@ function tmux-start() {
     fi
 }
 
+# use Windows' git when working under C:\ drive
+function git() {
+  if $(pwd -P | grep -q "^\\/mnt\\/*"); then
+    git.exe "$@"
+  else
+    command git "$@"
+  fi
+}
+
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
 alias tms="~/.scripts/tmux-sessionizer"
@@ -153,7 +162,7 @@ alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
 alias ts="tmux-start"
 alias :q="exit"
-alias grd='cd $(git rev-parse --show-toplevel)'
+alias grd='cd $(command git rev-parse --show-toplevel)'
 alias tk='tmux kill-server'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
