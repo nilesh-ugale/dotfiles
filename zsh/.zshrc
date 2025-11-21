@@ -145,13 +145,17 @@ function tmux-start() {
     fi
 }
 
-# use Windows' git when working under C:\ drive
 function git() {
-  if $(pwd -P | grep -q "^\\/mnt\\/*"); then
-    git.exe "$@"
-  else
-    command git "$@"
+  if uname -r | grep -qi microsoft; then
+    case "$(pwd -P)" in
+      /mnt/[a-z]/*)
+        git.exe "$@"
+        return
+        ;;
+    esac
   fi
+
+  command git "$@"
 }
 
 alias gwta="git-worktree-add"
