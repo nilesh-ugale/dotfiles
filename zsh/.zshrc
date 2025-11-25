@@ -145,18 +145,18 @@ function tmux-start() {
     fi
 }
 
-function git() {
-  if uname -r | grep -qi microsoft; then
-    case "$(pwd -P)" in
-      /mnt/[a-z]/*)
-        git.exe "$@"
-        return
-        ;;
-    esac
-  fi
-
-  command git "$@"
-}
+# function git() {
+#   if uname -r | grep -qi microsoft; then
+#     case "$(pwd -P)" in
+#       /mnt/[a-z]/*)
+#         git.exe "$@"
+#         return
+#         ;;
+#     esac
+#   fi
+#
+#   command git "$@"
+# }
 
 alias gwta="git-worktree-add"
 alias clr="~/.scripts/clr_scr.zsh"
@@ -188,4 +188,10 @@ if [[ -f ~/.config.zsh ]]; then
 else
     export TMUX_SEARCH_DIR="$HOME"
 fi
+
+# Remove default CTRL-T for fzf
+bindkey -r '^T'
+
+# Use ALT-t for fzf file search
+bindkey '\et' fzf-file-widget
 
