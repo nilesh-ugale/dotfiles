@@ -2,13 +2,15 @@
     "appLauncher": {
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
-        "enableClipboardHistory": false,
+        "enableClipPreview": true,
+        "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
-        "position": "center",
+        "position": "follow_bar",
         "sortByMostUsed": true,
         "terminalCommand": "xterm -e",
-        "useApp2Unit": false
+        "useApp2Unit": false,
+        "viewMode": "list"
     },
     "audio": {
         "cavaFrameRate": 30,
@@ -19,7 +21,7 @@
         "visualizerQuality": "high",
         "visualizerType": "linear",
         "volumeOverdrive": false,
-        "volumeStep": 5
+        "volumeStep": 2
     },
     "bar": {
         "backgroundOpacity": 1,
@@ -30,15 +32,17 @@
         "marginHorizontal": 0,
         "marginVertical": 0,
         "monitors": [
+            "DP-1"
         ],
         "outerCorners": false,
-        "position": "bottom",
+        "position": "top",
         "showCapsule": true,
         "widgets": {
             "center": [
                 {
                     "characterCount": 2,
-                    "hideUnoccupied": true,
+                    "followFocusedScreen": true,
+                    "hideUnoccupied": false,
                     "id": "Workspace",
                     "labelMode": "index"
                 }
@@ -47,16 +51,16 @@
                 {
                     "colorizeDistroLogo": false,
                     "customIconPath": "",
-                    "icon": "noctalia",
+                    "icon": "",
                     "id": "ControlCenter",
-                    "useDistroLogo": false
+                    "useDistroLogo": true
                 },
                 {
                     "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": true,
                     "showCpuUsage": true,
-                    "showDiskUsage": false,
+                    "showDiskUsage": true,
                     "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
                     "showNetworkStats": true,
@@ -77,11 +81,12 @@
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "scrollingMode": "hover",
-                    "showAlbumArt": false,
+                    "showAlbumArt": true,
                     "showArtistFirst": true,
+                    "showProgressRing": true,
                     "showVisualizer": false,
                     "useFixedWidth": false,
-                    "visualizerType": "linear"
+                    "visualizerType": "mirrored"
                 }
             ],
             "right": [
@@ -122,12 +127,15 @@
                     "id": "Clock",
                     "useCustomFont": false,
                     "usePrimaryColor": true
+                },
+                {
+                    "id": "NoctaliaPerformance"
                 }
             ]
         }
     },
     "brightness": {
-        "brightnessStep": 5,
+        "brightnessStep": 2,
         "enableDdcSupport": true,
         "enforceMinimum": true
     },
@@ -203,25 +211,26 @@
         "backgroundOpacity": 1,
         "colorizeIcons": true,
         "displayMode": "auto_hide",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 0,
         "monitors": [
         ],
         "onlySameOutput": true,
         "pinnedApps": [
         ],
+        "radiusRatio": 0.1,
         "size": 0.7000000000000001
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 1,
-        "avatarImage": "/home/nilesh/.face",
+        "avatarImage": "/home/nilesh/128.png",
         "compactLockScreen": false,
-        "dimmerOpacity": 0.5,
+        "dimmerOpacity": 0.2,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
-        "language": "",
+        "language": "en",
         "lockOnSuspend": true,
         "radiusRatio": 1,
         "scaleRatio": 1,
@@ -229,6 +238,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
+        "showHibernateOnLockScreen": false,
         "showScreenCorners": false
     },
     "hooks": {
@@ -258,7 +268,7 @@
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4000"
+        "nightTemp": "3000"
     },
     "notifications": {
         "backgroundOpacity": 1,
@@ -348,6 +358,7 @@
     },
     "templates": {
         "alacritty": false,
+        "cava": false,
         "code": false,
         "discord": false,
         "enableUserTemplates": false,
@@ -360,16 +371,17 @@
         "pywalfox": false,
         "qt": false,
         "spicetify": false,
+        "telegram": false,
         "vicinae": false,
         "walker": false,
         "wezterm": false
     },
     "ui": {
-        "fontDefault": "MesloLGSDZ Nerd Font",
+        "fontDefault": "JetBrainsMono Nerd Font",
         "fontDefaultScale": 1,
-        "fontFixed": "Monospace",
+        "fontFixed": "JetBrainsMono Nerd Font",
         "fontFixedScale": 1,
-        "panelBackgroundOpacity": 1,
+        "panelBackgroundOpacity": 0.5,
         "panelsAttachedToBar": true,
         "settingsPanelAttachToBar": false,
         "tooltipsEnabled": true
@@ -391,7 +403,7 @@
         ],
         "overviewEnabled": false,
         "panelPosition": "center",
-        "randomEnabled": true,
+        "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
