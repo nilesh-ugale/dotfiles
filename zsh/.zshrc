@@ -189,6 +189,9 @@ else
     export TMUX_SEARCH_DIR="$HOME"
 fi
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # Remove default CTRL-T for fzf
 bindkey -r '^T'
 

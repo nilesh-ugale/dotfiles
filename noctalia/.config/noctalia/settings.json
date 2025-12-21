@@ -28,7 +28,7 @@
         "capsuleOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
-        "floating": true,
+        "floating": false,
         "marginHorizontal": 0,
         "marginVertical": 0,
         "monitors": [
@@ -50,7 +50,9 @@
             "left": [
                 {
                     "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "none",
                     "customIconPath": "",
+                    "enableColorization": false,
                     "icon": "",
                     "id": "ControlCenter",
                     "useDistroLogo": true
@@ -139,12 +141,40 @@
         "enableDdcSupport": true,
         "enforceMinimum": true
     },
+    "calendar": {
+        "cards": [
+            {
+                "enabled": false,
+                "id": "calendar-header-card"
+            },
+            {
+                "enabled": false,
+                "id": "calendar-month-card"
+            },
+            {
+                "enabled": true,
+                "id": "calendar-header-card"
+            },
+            {
+                "enabled": true,
+                "id": "calendar-month-card"
+            },
+            {
+                "enabled": true,
+                "id": "timer-card"
+            },
+            {
+                "enabled": true,
+                "id": "weather-card"
+            }
+        ]
+    },
     "changelog": {
         "lastSeenVersion": ""
     },
     "colorSchemes": {
         "darkMode": true,
-        "generateTemplatesForPredefined": false,
+        "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-fruit-salad",
@@ -218,14 +248,13 @@
         "onlySameOutput": true,
         "pinnedApps": [
         ],
-        "radiusRatio": 0.1,
         "size": 0.7000000000000001
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 1,
-        "avatarImage": "/home/nilesh/128.png",
+        "avatarImage": "/home/nilesh/Pictures/avatar.png",
         "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableShadows": true,
@@ -259,15 +288,15 @@
         "weatherShowEffects": true
     },
     "network": {
-        "wifiEnabled": true
+        "wifiEnabled": false
     },
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
         "forced": false,
-        "manualSunrise": "06:30",
-        "manualSunset": "18:30",
+        "manualSunrise": "07:00",
+        "manualSunset": "18:00",
         "nightTemp": "3000"
     },
     "notifications": {
@@ -287,6 +316,11 @@
         "autoHideMs": 2000,
         "backgroundOpacity": 1,
         "enabled": true,
+        "enabledTypes": [
+            0,
+            1,
+            2
+        ],
         "location": "top_right",
         "monitors": [
         ],
@@ -341,17 +375,21 @@
         ],
         "showHeader": true
     },
-    "settingsVersion": 23,
-    "setupCompleted": true,
+    "settingsVersion": 26,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
+        "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
         "criticalColor": "#d20f39",
         "diskCriticalThreshold": 90,
+        "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
         "memCriticalThreshold": 90,
+        "memPollingInterval": 3000,
         "memWarningThreshold": 80,
+        "networkPollingInterval": 3000,
         "tempCriticalThreshold": 90,
+        "tempPollingInterval": 3000,
         "tempWarningThreshold": 80,
         "useCustomColors": false,
         "warningColor": "#40a02b"
@@ -361,13 +399,15 @@
         "cava": false,
         "code": false,
         "discord": false,
+        "emacs": false,
         "enableUserTemplates": false,
         "foot": false,
-        "fuzzel": false,
+        "fuzzel": true,
         "ghostty": false,
         "gtk": false,
         "kcolorscheme": false,
-        "kitty": false,
+        "kitty": true,
+        "niri": false,
         "pywalfox": false,
         "qt": false,
         "spicetify": false,
@@ -387,19 +427,13 @@
         "tooltipsEnabled": true
     },
     "wallpaper": {
-        "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
         "directory": "/home/nilesh/wallpaper",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
-        "monitors": [
-            {
-                "directory": "/home/nilesh",
-                "name": "DP-1",
-                "wallpaper": "/home/nilesh/wallpaper/wallhaven_r25x6m.jpg"
-            }
+        "monitorDirectories": [
         ],
         "overviewEnabled": false,
         "panelPosition": "center",
@@ -410,7 +444,7 @@
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
-        "useWallhaven": false,
+        "useWallhaven": true,
         "wallhavenCategories": "100",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",

@@ -72,7 +72,7 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    gaps 2
+    gaps 0.5
 
     background-color "transparent"
 
@@ -125,7 +125,7 @@ layout {
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -154,10 +154,10 @@ animations {
     // slowdown 3.0
 }
 
-layer-rule {
-  match namespace="^noctalia-wallpaper*"
-  place-within-backdrop true
-}
+// layer-rule {
+//   match namespace="^noctalia-wallpaper*"
+//   place-within-backdrop true
+// }
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -178,7 +178,7 @@ window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"brave-bin$"# title="^Picture-in-Picture$"
+    match app-id=r#"librewolf$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
@@ -232,7 +232,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+B hotkey-overlay-title="Open a Browser: brave" { spawn "brave"; }
+    Mod+B hotkey-overlay-title="Open a Browser: LibreWolf" { spawn "librewolf"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -483,19 +483,27 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     // Core Noctalia binds
-    Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+S { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-    Mod+Comma { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    // Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    // Mod+S { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+    // Mod+Comma { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+S { spawn "dms" "ipc" "call" "dash" "toggle" ""; }
+    Mod+Comma { spawn "dms" "ipc" "call" "settings" "toggle"; }
 
     // Audio controls
-    XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    XF86AudioMicMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
+    // XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    // XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    // XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    // XF86AudioMicMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
+    XF86AudioRaiseVolume { spawn "dms" "ipc" "call" "audio" "increment" "2"; }
+    XF86AudioLowerVolume { spawn "dms" "ipc" "call" "audio" "decrement" "2"; }
+    XF86AudioMute        { spawn "dms" "ipc" "call" "audio" "mute"; }
 
     // Brightness controls
-    XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    // XF86MonBrightnessUp  { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    // XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
 
     // Utility shortcuts
     // Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
@@ -503,4 +511,4 @@ binds {
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 }
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-at-startup "qs" "-c" "noctalia-shell"
