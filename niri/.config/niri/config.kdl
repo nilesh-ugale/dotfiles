@@ -1,35 +1,53 @@
 prefer-no-csd
 
+environment {
+    QT_QPA_PLATFORM "wayland"
+    DISPLAY null
+}
+
 input {
     keyboard {
         repeat-delay 200
         repeat-rate 35
         xkb {
         }
-        numlock
     }
 
     touchpad {
-        // off
-        tap
-        // dwt
-        // dwtp
-        // drag false
-        // drag-lock
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
+        off
     }
 
     mouse {
     }
 
     trackpoint {
+        off
     }
     focus-follows-mouse max-scroll-amount="0%"
 }
+
+cursor {
+    xcursor-theme "gentoo-blue"
+    xcursor-size 30
+
+    hide-when-typing
+    hide-after-inactive-ms 1000
+}
+
+xwayland-satellite {
+    on
+    path "xwayland-satellite"
+}
+
+
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -37,7 +55,7 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-/-output "eDP-1" {
+output "DP-1" {
     // Uncomment this line to disable this output.
     // off
 
@@ -47,10 +65,10 @@ input {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+    // mode "2560x1440@144"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 2
+    scale 1
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -65,20 +83,28 @@ input {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-    position x=1280 y=0
+    // position x=0 y=0
+    variable-refresh-rate
 }
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    gaps 0.5
+    gaps 5
 
     background-color "transparent"
 
     center-focused-column "never"
+    always-center-single-column
 
     preset-column-widths {
+        proportion 0.33333
+        proportion 0.7
+        proportion 0.66667
+    }
+
+    preset-window-heights {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
@@ -86,26 +112,25 @@ layout {
 
     default-column-width { proportion 0.5; }
     focus-ring {
-        off
-        width 0.5
-
-        active-color "#7fc8ff"
-
-        inactive-color "#505050"
+        on
+        width 2
+        // active-color "#cba6f7ff"
+        // inactive-color "#505050"
+        // urgent-color "#9b0000"
     }
 
     border {
         off
 
-        width 1.5
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
+        // width 1.5
+        // active-color "#ffc87f"
+        // inactive-color "#505050"
+        // urgent-color "#9b0000"
 
     }
 
     shadow {
-        on
+        off
 
         softness 30
         spread 5
@@ -148,12 +173,65 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
+    // You can also put "off" into each individual animation to disable it.
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-}
+    slowdown 2
 
+    // Individual animations.
+
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    // window-open {
+    //     duration-ms 150
+    //     curve "ease-out-expo"
+    // }
+
+    window-open {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.0001
+    }
+
+    window-close {
+        duration-ms 150
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+    }
+
+    exit-confirmation-open-close {
+        spring damping-ratio=0.6 stiffness=500 epsilon=0.01
+    }
+
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    recent-windows-close {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.001
+    }
+}
 // layer-rule {
 //   match namespace="^noctalia-wallpaper*"
 //   place-within-backdrop true
@@ -165,7 +243,7 @@ animations {
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
-window-rule {
+/-window-rule {
     // This regular expression is intentionally made as specific as possible,
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
@@ -174,11 +252,11 @@ window-rule {
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
-window-rule {
+/-window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"librewolf$"# title="^Picture-in-Picture$"
+    match app-id=r#"firefox-bin$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
@@ -216,6 +294,7 @@ window-rule {
 
   // Clips window contents to the rounded corner boundaries.
   clip-to-geometry true
+  tiled-state true
 }
 
 debug {
@@ -483,32 +562,21 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     // Core Noctalia binds
-    // Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    // Mod+S { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-    // Mod+Comma { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
     Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+S { spawn "dms" "ipc" "call" "dash" "toggle" ""; }
     Mod+Comma { spawn "dms" "ipc" "call" "settings" "toggle"; }
 
     // Audio controls
-    // XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    // XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    // XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    // XF86AudioMicMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
     XF86AudioRaiseVolume { spawn "dms" "ipc" "call" "audio" "increment" "2"; }
     XF86AudioLowerVolume { spawn "dms" "ipc" "call" "audio" "decrement" "2"; }
     XF86AudioMute        { spawn "dms" "ipc" "call" "audio" "mute"; }
 
     // Brightness controls
-    // XF86MonBrightnessUp  { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    // XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-
     // Utility shortcuts
     // Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 }
-
 // spawn-at-startup "qs" "-c" "noctalia-shell"
