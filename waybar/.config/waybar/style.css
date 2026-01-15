@@ -1,113 +1,137 @@
-
-@define-color selected-text #8caaee;
-@define-color text #c6d0f5;
-@define-color base #24273a;
-@define-color border #c6d0f5;
-@define-color foreground #c6d0f5;
-@define-color background #24273a;
-@define-color mag   #ad8ee6;
-@define-color red   #f7768e;
-
 * {
-  background-color: @background;
-  color: @foreground;
-
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 20px;
-  font-weight: 600;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: 600;
+    /* font-style: italic; */
+    font-size: 16px;
+    color: #dcdfe1;
 }
 
-.modules-left {
-  margin-left: 8px;
-}
-
-.modules-right {
-  margin-right: 8px;
-}
-
-#workspaces button {
-  all: initial;
-  padding: 0 10px;
-  margin: 0 1.5px;
-  min-width: 9px;
-}
-
-#workspaces button.empty {
-  opacity: 0.5;
-}
-
-#workspaces button.active {
-    color: @cyn;
-    border-bottom: 2px solid @mag;
-}
-
-#workspaces button.empty.active {
-    color: @cyn;
-    border-bottom: 2px solid @mag;
-}
-
-#workspaces button.urgent {
-    background-color: @red;
-}
-
-
-#cpu,
-#battery,
-#pulseaudio,
-#custom-gentoo,
-#custom-powermenu,
-#custom-screenrecording-indicator,
-#custom-update {
-  min-width: 12px;
-  margin: 0 10px;
-}
-
-#tray {
-  margin-right: 16px;
-}
-
-#bluetooth {
-  margin-right: 17px;
-}
-
-#network {
-  margin-right: 13px;
-}
-
-#custom-expand-icon {
-  margin-right: 18px;
-}
-
-tooltip {
-  padding: 2px;
-}
-
-#custom-update {
-  font-size: 10px;
-}
-
-#clock {
-  margin-left: 8.75px;
-}
-
-.hidden {
-  opacity: 0;
-}
-
-#custom-screenrecording-indicator {
-  min-width: 12px;
-  margin-left: 8.75px;
-  font-size: 10px;
-}
-
-#custom-screenrecording-indicator.active {
-  color: #a55555;
+/* Waybar */
+#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    box-shadow: none;
 }
 
 #custom-gentoo {
-    color: @mag;
+    font-size: 20px;
+    background-color: rgba(15,27,53,0.9);
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    padding: 4px 2px;
+    border-radius: 10px 10px 10px 10px;
+    border-width: 0px;
 }
 
+#workspaces,
+#window,
+#tray{
+    background-color: rgba(15,27,53,0.9);
+    padding: 4px 6px;
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 10px;
+    border-width: 0px;
+    margin-bottom: 4px;
+}
+
+#clock,
+#custom-power{
+    background-color: rgba(15,27,53,0.9);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    padding: 4px 2px;
+    border-radius: 0 10px 10px 0;
+    border-width: 0px;
+}
+
+#network {
+    background-color: rgba(15,27,53,0.9);
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding: 4px 2px;
+    border-width: 0;
+}
+
+#bluetooth,
+#custom-lock{
+    background-color: rgba(15,27,53,0.9);
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-bottom: 4px;
+    padding: 4px 2px;
+    border-radius: 10px 0 0 10px;
+    border-width: 0px;
+}
+
+#custom-reboot,
+#battery,
+#pulseaudio,
+#backlight,
+#custom-temperature,
+#memory,
+#cpu{
+    background-color: rgba(15,27,53,0.9);
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding: 4px 2px;
+    border-width: 0px;
+}
+
+#custpm-temperature.critical,
+#pulseaudio.muted {
+    color: #FF0000;
+    padding-top: 0;
+}
+
+#bluetooth:hover,
+#network:hover,
+/*#tray:hover,*/
+#pulseaudio:hover,
+#custom-temperature:hover,
+#memory:hover,
+#cpu:hover,
+#clock:hover,
+#custom-lock:hover,
+#custom-reboot:hover,
+#custom-power:hover,
+#custom-gentoo:hover,
+#window:hover {
+    background-color: rgba(70, 75, 90, 0.9);
+}
+
+#workspaces button:hover{
+    background-color: rgba(97, 175, 239, 0.2);
+    padding: 2px 8px;
+    margin: 0 2px;
+    border-radius: 10px;
+}
+
+#workspaces button.active {
+    background-color: #61afef;
+    color: #ffffff;
+    padding: 2px 8px;
+    margin: 0 2px;
+    border-radius: 10px;
+}
+
+#workspaces button {
+    background: transparent;
+    border: none;
+    color: #888888;
+    padding: 2px 8px;
+    margin: 0 2px;
+    font-weight: bold;
+}
+
+#window {
+    font-style: italic;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+}

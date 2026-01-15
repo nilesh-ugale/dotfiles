@@ -1,165 +1,156 @@
 {
-  "reload_style_on_change": true,
-  "layer": "top",
-  "position": "top",
-  "spacing": 4,
-  "height": 26,
-  "exclusive": true,
-  "modules-left": [
-      "custom/gentoo",
-      "hyprland/workspaces",
-      "hyprland/window"
-  ],
-  // "modules-center": ["clock", "custom/update", "custom/screenrecording-indicator"],
-  "modules-center": ["clock"],
-  "modules-right": [
-    "group/tray-expander",
-    "bluetooth",
-    "network",
-    "pulseaudio",
-    "cpu",
-    "custom/powermenu"
-  ],
-  "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{name}",
-    // "format-icons": {
-    //   "default": "",
-    //   "1": "1",
-    //   "2": "2",
-    //   "3": "3",
-    //   "4": "4",
-    //   "5": "5",
-    //   "6": "6",
-    //   "7": "7",
-    //   "8": "8",
-    //   "9": "9",
-    //   "active": "󱓻"
-    // },
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-      "6": [],
-      "7": [],
-      "8": [],
-      "9": []
-    }
-  },
-  "hyprland/window" : {
-      "format": "{title}",
-      "max-length": 40,
-      "seperate-outputs": false
-  },
-  // "custom/sep": {
-  //     "format" : "|",
-  //     "interval" : 0
-  // },
+    "layer": "top",
+    "position": "top",
+    "height": 26,
+    "spacing": 0,
+    "modules-left": [
+        "custom/gentoo",
+        "hyprland/workspaces",
+        "tray",
+        "custom/lock",
+        "custom/reboot",
+        "custom/power"
+    ],
 
-  "custom/powermenu": {
-    "format": "󰐥",
-    "tooltip": "Power Menu",
-    "on-click": "~/.scripts/powermenu.sh"
-  },
-  "custom/gentoo": {
-    "format": "",
-    "tooltip": "Gentoo Linux",
-    "on-click": "wofi --config ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
-  },
-  // "custom/update": {
-  //   "format": "",
-  //   "exec": "omarchy-update-available",
-  //   "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
-  //   "tooltip-format": "Omarchy update available",
-  //   "signal": 7,
-  //   "interval": 21600
-  // },
+    "modules-center": [
+        "hyprland/window"
+    ],
 
-  "cpu": {
-    "interval": 5,
-    "format": "󰍛",
-    "on-click": "hyprctl dispatch exec \"[float; size 40% 70%; move 59% 2%] kitty -e btop\"",
-    "on-click-right": "kitty"
-  },
-  "clock": {
-    "interval": 1,
-    "format": "{:L%a %d %b %Y %T}",
-    "tooltip": false,
-    // "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
-  },
-  "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format": "{icon}",
-    "format-wifi": "{icon}",
-    "format-ethernet": "󰀂",
-    "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
-    "interval": 3,
-    "spacing": 1,
-    "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 2%] kitty -e impala\""
-  },
-  // "battery": {
-  //   "format": "{capacity}% {icon}",
-  //   "format-discharging": "{icon}",
-  //   "format-charging": "{icon}",
-  //   "format-plugged": "",
-  //   "format-icons": {
-  //     "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-  //     "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-  //   },
-  //   "format-full": "󰂅",
-  //   "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-  //   "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-  //   "interval": 5,
-  //   "on-click": "omarchy-menu power",
-  //   "states": {
-  //     "warning": 20,
-  //     "critical": 10
-  //   }
-  // },
-  "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱",
-    "format-no-controller": "",
-    "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 2%] kitty -e bluetui\""
-  },
-  "pulseaudio": {
-    "format": "{icon}",
-    "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 2%] kitty -e wiremix --tab output\"",
-    // "on-click-right": "pamixer -t",
-    "tooltip-format": "Playing at {volume}%",
-    "scroll-step": 5,
-    "format-muted": "",
-    "format-icons": {
-      "default": ["", "", ""]
-    }
-  },
-  "group/tray-expander": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 600,
-      "children-class": "tray-group-item"
+    "modules-right": [
+        "bluetooth",
+        "network#wifi",
+        "network#ethernet",
+        "pulseaudio",
+        "custom/temperature",
+        "memory",
+        "cpu",
+        "clock"
+    ],
+
+    "custom/gentoo": {
+        "format": "<span color='#9984FF'>  </span>",
+        "tooltip": "Gentoo Linux",
+        "on-click": "wofi --config ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
     },
-    "modules": ["custom/expand-icon", "tray"]
-  },
-  "custom/expand-icon": {
-    "format": "",
-    "tooltip": false
-  },
-  // "custom/screenrecording-indicator": {
-  //   "on-click": "omarchy-cmd-screenrecord",
-  //   "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
-  //   "signal": 8,
-  //   "return-type": "json"
-  // },
-  "tray": {
-    "icon-size": 12,
-    "spacing": 17
-  }
+
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{name}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*":[1,2,3,4,5,6,7,8,9]
+        }
+    },
+
+    "hyprland/window" : {
+        "format": "{class}",
+        "icon": true,
+        "max-length": 40,
+        "seperate-outputs": false
+    },
+
+    "custom/lock": {
+        "format": "<span color='#00FFFF'>  </span>",
+        "on-click": "hyprlock",
+        "tooltip": true
+    },
+
+    "custom/reboot": {
+        "format": "<span color='#FFD700'>  </span>",
+        "on-click": "systemctl reboot",
+        "tooltip": true
+    },
+    "custom/power": {
+        "format": "<span color='#FF4040'>  </span>",
+        "on-click": "systemctl poweroff",
+        "tooltip": true
+    },
+
+    "network#wifi": {
+        "interface": "wlan0",
+        "format-wifi": "<span color='#00FFFF'> 󰤨 </span>{essid} ",
+        "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
+        "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
+        "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
+        "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e impala\"",
+        "interval": 1
+    },
+
+    "network#ethernet": {
+        "interface": "eno1",
+        "format-ethernet": "<span color='#7FFF00'>󰈁 </span>Wired ",
+        "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
+        "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
+        "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
+        "interval": 1
+    },
+
+    "pulseaudio": {
+        "format": "<span color='#00FF7F'>{icon}</span>{volume}% ",
+        "format-muted": "<span color='#FF4040'> 󰖁 </span>0% ",
+        "format-icons": {
+            "headphone": "<span color='#BF00FF'>  </span>",
+            "hands-free": "<span color='#BF00FF'>  </span>",
+            "headset": "<span color='#BF00FF'>  </span>",
+            "phone": "<span color='#00FFFF'>  </span>",
+            "portable": "<span color='#00FFFF'>  </span>",
+            "car": "<span color='#FFA500'>  </span>",
+            "default": [
+                "<span color='#808080'>  </span>",
+                "<span color='#FFFF66'>  </span>",
+                "<span color='#00FF7F'>  </span>"
+            ]
+        },
+    // "on-click-right": "pavucontrol -t 3",
+    // "on-click": "pactl -- set-sink-mute 0 toggle",
+    "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e wiremix --tab output\"",
+    "tooltip": true,
+    "tooltip-format": "{volume}%"
+    },
+
+    "custom/temperature": {
+        "exec": "awk '{print int($1/1000)}' /sys/class/hwmon/hwmon2/temp1_input",
+        "format": "<span color='#FFA500'> </span>{}°C ",
+        "interval": 5,
+        "tooltip": true,
+        "tooltip-format": "CPU : {}°C"
+    },
+
+    "memory": {
+        "format": "<span color='#8A2BE2'>  </span>{used:0.1f}G/{total:0.1f}G ",
+        "tooltip": true,
+        "tooltip-format": "{used:0.2f}G/{total:0.2f}G"
+    },
+
+    "cpu": {
+        "format": "<span color='#FF9F0A'>  </span>{usage}% ",
+        "on-click": "hyprctl dispatch exec \"[float; size 40% 70%; move 59% 3%] kitty -e btop\"",
+        "tooltip": true
+    },
+
+    "clock": {
+        "interval": 1,
+        "timezone": "Asia/Kolkata",
+        "format": "<span color='#BF00FF'>  </span>{:%H:%M} ",
+        "tooltip": true,
+        "tooltip-format": "{:L%d %b %Y, %a}"
+    },
+
+    "tray": {
+        "icon-size": 17,
+        "spacing": 6
+    },
+
+    "bluetooth": {
+        "format": "<span color='#00BFFF'>  </span>{status} ",
+        "format-connected": "<span color='#00BFFF'>  </span>{device_alias} ",
+        "format-connected-battery": "<span color='#00BFFF'>  </span>{device_alias} {device_battery_percentage}% ",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e bluetui\""
+    }
 }
+
