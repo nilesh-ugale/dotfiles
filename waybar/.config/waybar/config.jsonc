@@ -6,7 +6,8 @@
     "modules-left": [
         "custom/gentoo",
         "hyprland/workspaces",
-        "hyprland/window"
+        "hyprland/window",
+        "privacy"
     ],
 
     "modules-center": [
@@ -26,6 +27,40 @@
         "custom/power"
     ],
 
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 18,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ],
+        "ignore-monitor": true,
+        "ignore": [
+            {
+                "type": "audio-in",
+                "name": "cava"
+            },
+            {
+                "type": "screenshare",
+                "name": "obs"
+            }
+        ]
+    },
+
     "custom/gentoo": {
         "format": "<span color='#9984FF'>  </span>",
         "tooltip": "Gentoo Linux",
@@ -41,10 +76,11 @@
             "*":[1,2,3,4,5,6,7,8,9]
         },
         "format-icons": {
-            "1": "  ",
+            "1": "  ",
             "2": "  ",
-            "3": " 󰈙 ",
+            "3": " 󱞎 ",
             "4": "  ",
+            "5": "  ",
             "default": "  "
         }
     },
@@ -68,7 +104,7 @@
         "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
         "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e impala\"",
+        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch exec '[float; size 30% 50%; move 69% 3%] kitty -e impala'",
         "interval": 1
     },
 
