@@ -14,7 +14,7 @@ fi
 # Path to your oh-my-zsh installation.
 LS_COLORS=$LS_COLORS:"ow=01;36"
 export LS_COLORS
-export ZSH="/home/nilesh/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -112,7 +112,6 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-alias cdc="cd /mnt/c"
 alias gitl="git log"
 alias gits="git status"
 alias exp="explorer.exe ."
@@ -121,17 +120,6 @@ alias ls="ls --color=auto"
 alias grep="grep --colour=auto"
 alias egrep="egrep --colour=auto"
 alias fgrep="fgrep --colour=auto"
-
-function git-worktree-add() {
-    git worktree add "../$1" "$1"
-    if [ $? -eq 0 ]; then
-        git_file=$(cat "../$1/.git")
-        current_dir=$(pwd)
-        relative_path=$(realpath --relative-to="../$1" "./" )
-        worktree_path=${git_file//$current_dir/$relative_path}
-        echo "$worktree_path" > "../$1/.git"
-    fi
-}
 
 # Starts tmux session in current directory
 function tmux-start() {
@@ -148,23 +136,8 @@ function tmux-start() {
     fi
 }
 
-# function git() {
-#   if uname -r | grep -qi microsoft; then
-#     case "$(pwd -P)" in
-#       /mnt/[a-z]/*)
-#         git.exe "$@"
-#         return
-#         ;;
-#     esac
-#   fi
-#
-#   command git "$@"
-# }
-
-alias gwta="git-worktree-add"
-alias clr="~/.scripts/clr_scr.zsh"
-alias tms="~/.scripts/tmux-sessionizer"
-alias gite="git.exe"
+alias clr="~/.scripts/clr_scr.sh"
+alias tms="~/.scripts/tmux-sessionizer.sh"
 alias e="nvim"
 alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
 alias ts="tmux-start"
@@ -174,16 +147,10 @@ alias tk='tmux kill-server'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH=~/.npm-global/bin:$PATH
-export PATH=~/.local//bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
+export PATH=~/.local/bin:$PATH
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-export GO11MODULE=auto1
 alias luamake=/home/nilesh/lua-language-server/3rd/luamake/luamake
 
 if [[ -f ~/.config.zsh ]]; then

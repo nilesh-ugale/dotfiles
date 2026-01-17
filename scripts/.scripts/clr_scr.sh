@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 var="true"
 
 # Detect if terminal is Kitty

@@ -6,25 +6,24 @@
     "modules-left": [
         "custom/gentoo",
         "hyprland/workspaces",
-        "tray",
-        "custom/lock",
-        "custom/reboot",
-        "custom/power"
-    ],
-
-    "modules-center": [
         "hyprland/window"
     ],
 
+    "modules-center": [
+        "clock"
+    ],
+
     "modules-right": [
+        "pulseaudio",
         "bluetooth",
         "network#wifi",
         "network#ethernet",
-        "pulseaudio",
         "custom/temperature",
         "memory",
         "cpu",
-        "clock"
+        "custom/lock",
+        "custom/reboot",
+        "custom/power"
     ],
 
     "custom/gentoo": {
@@ -36,50 +35,46 @@
     "hyprland/workspaces": {
         "disable-scroll": false,
         "all-outputs": true,
-        "format": "{name}",
+        "format": "{icon}",
         "on-click": "activate",
         "persistent-workspaces": {
             "*":[1,2,3,4,5,6,7,8,9]
+        },
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " 󰈙 ",
+            "4": "  ",
+            "default": "  "
         }
     },
 
     "hyprland/window" : {
-        "format": "{class}",
+        "format": " {class} ",
         "icon": true,
         "max-length": 40,
         "seperate-outputs": false
     },
 
-    "custom/lock": {
-        "format": "<span color='#00FFFF'>  </span>",
-        "on-click": "hyprlock",
-        "tooltip": true
-    },
-
-    "custom/reboot": {
-        "format": "<span color='#FFD700'>  </span>",
-        "on-click": "systemctl reboot",
-        "tooltip": true
-    },
     "custom/power": {
         "format": "<span color='#FF4040'>  </span>",
-        "on-click": "systemctl poweroff",
+        "on-click": "~/.scripts/powermenu.sh",
         "tooltip": true
     },
 
     "network#wifi": {
         "interface": "wlan0",
-        "format-wifi": "<span color='#00FFFF'> 󰤨 </span>{essid} ",
+        "format-wifi": "<span color='#7FFF00'> 󰤨 </span>{essid} ",
         "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
         "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-        "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e impala\"",
+        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e impala\"",
         "interval": 1
     },
 
     "network#ethernet": {
         "interface": "eno1",
-        "format-ethernet": "<span color='#7FFF00'>󰈁 </span>Wired ",
+        "format-ethernet": "<span color='#7FFF00'> 󰈁 </span>Wired ",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
         "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
         "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
@@ -102,44 +97,35 @@
                 "<span color='#00FF7F'>  </span>"
             ]
         },
-    // "on-click-right": "pavucontrol -t 3",
-    // "on-click": "pactl -- set-sink-mute 0 toggle",
-    "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e wiremix --tab output\"",
-    "tooltip": true,
-    "tooltip-format": "{volume}%"
+        "on-click": "pgrep -x wiremix >/dev/null && pkill wiremix || hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e wiremix --tab output\"",
+        "tooltip": true,
+        "tooltip-format": "{volume}%"
     },
 
     "custom/temperature": {
-        "exec": "awk '{print int($1/1000)}' /sys/class/hwmon/hwmon2/temp1_input",
-        "format": "<span color='#FFA500'> </span>{}°C ",
+        "exec": "~/.scripts/temprature.sh",
+        "format": "<span color='#FFA500'>  </span>{text}°C ",
         "interval": 5,
         "tooltip": true,
-        "tooltip-format": "CPU : {}°C"
+        "return-type": "json"
     },
 
     "memory": {
-        "format": "<span color='#8A2BE2'>  </span>{used:0.1f}G/{total:0.1f}G ",
-        "tooltip": true,
-        "tooltip-format": "{used:0.2f}G/{total:0.2f}G"
+        "format": "<span color='#FF9F0A'>   </span>{used:0.1f}G/{total:0.1f}G ",
+        "tooltip": false
     },
 
     "cpu": {
         "format": "<span color='#FF9F0A'>  </span>{usage}% ",
-        "on-click": "hyprctl dispatch exec \"[float; size 40% 70%; move 59% 3%] kitty -e btop\"",
+        "on-click": "pgrep -x btop >/dev/null && pkill btop || hyprctl dispatch exec \"[float; size 40% 70%; move 59% 3%] kitty -e btop\"",
         "tooltip": true
     },
 
     "clock": {
         "interval": 1,
         "timezone": "Asia/Kolkata",
-        "format": "<span color='#BF00FF'>  </span>{:%H:%M} ",
-        "tooltip": true,
-        "tooltip-format": "{:L%d %b %Y, %a}"
-    },
-
-    "tray": {
-        "icon-size": 17,
-        "spacing": 6
+        "format": "<span color='#BF00FF'>  </span>{:%d %b %Y, %a,<span color='#BF00FF'>  </span>%H:%M} ",
+        "tooltip": false
     },
 
     "bluetooth": {
@@ -150,7 +136,7 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        "on-click": "hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e bluetui\""
+        "on-click": "pgrep -x bluetui >/dev/null && pkill bluetui || hyprctl dispatch exec '[float; size 30% 50%; move 69% 3%] kitty -e bluetui'"
     }
 }
 

@@ -1,7 +1,7 @@
 * {
     font-family: "JetBrainsMono Nerd Font";
     font-weight: 600;
-    /* font-style: italic; */
+    font-style: italic;
     font-size: 16px;
     color: #dcdfe1;
 }
@@ -9,77 +9,39 @@
 /* Waybar */
 #waybar {
     background-color: rgba(0, 0, 0, 0);
-    border: none;
-    box-shadow: none;
-}
-
-#custom-gentoo {
-    font-size: 20px;
-    background-color: rgba(15,27,53,0.9);
-    margin-top: 6px;
-    margin-left: 6px;
-    margin-right: 6px;
-    margin-bottom: 4px;
-    padding: 4px 2px;
-    border-radius: 10px 10px 10px 10px;
-    border-width: 0px;
+    border: solid;
 }
 
 #workspaces,
 #window,
-#tray{
-    background-color: rgba(15,27,53,0.9);
-    padding: 4px 6px;
-    margin-top: 6px;
-    margin-left: 6px;
-    margin-right: 6px;
-    border-radius: 10px;
-    border-width: 0px;
-    margin-bottom: 4px;
-}
-
 #clock,
-#custom-power{
-    background-color: rgba(15,27,53,0.9);
-    margin-top: 6px;
-    margin-right: 6px;
-    margin-bottom: 4px;
-    padding: 4px 2px;
-    border-radius: 0 10px 10px 0;
-    border-width: 0px;
-}
-
-#network {
-    background-color: rgba(15,27,53,0.9);
-    margin-top: 6px;
-    margin-bottom: 4px;
-    padding: 4px 2px;
-    border-width: 0;
-}
-
+#cpu,
+#network,
 #bluetooth,
-#custom-lock{
-    background-color: rgba(15,27,53,0.9);
-    margin-top: 6px;
-    margin-left: 6px;
+#custom-temperature,
+#pulseaudio,
+#memory {
+    background-color: rgba(15,27,53,0.5);
+    padding: 0px 7px 0px 7px;
+    margin-top: 4px;
     margin-bottom: 4px;
-    padding: 4px 2px;
-    border-radius: 10px 0 0 10px;
-    border-width: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 10px;
+    border-top: 1px solid #FFFFFF;
 }
 
-#custom-reboot,
-#battery,
-#pulseaudio,
-#backlight,
-#custom-temperature,
-#memory,
-#cpu{
-    background-color: rgba(15,27,53,0.9);
-    margin-top: 6px;
+
+#custom-gentoo,
+#custom-power {
+    background-color: rgba(15,27,53,0.5);
+    padding: 0px 7px 0px 7px;
+    margin-top: 4px;
     margin-bottom: 4px;
-    padding: 4px 2px;
-    border-width: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 10px;
+    border-top: 1px solid #FFFFFF;
 }
 
 #custpm-temperature.critical,
@@ -90,7 +52,6 @@
 
 #bluetooth:hover,
 #network:hover,
-/*#tray:hover,*/
 #pulseaudio:hover,
 #custom-temperature:hover,
 #memory:hover,
@@ -101,37 +62,44 @@
 #custom-power:hover,
 #custom-gentoo:hover,
 #window:hover {
-    background-color: rgba(70, 75, 90, 0.9);
+    /* background-color: rgba(70, 75, 90, 0.5); */
+    border-bottom: 1px solid #FFFFFF;
 }
 
 #workspaces button:hover{
-    background-color: rgba(97, 175, 239, 0.2);
-    padding: 2px 8px;
-    margin: 0 2px;
+    /* background-color: rgba(97, 175, 239, 0.5); */
+    padding: 0px 2px 0px 0px;
+    margin: 0.5px;
     border-radius: 10px;
+    border-top: 0px;
+    border-bottom: 1px solid #FFFFFF;
 }
 
 #workspaces button.active {
-    background-color: #61afef;
-    color: #ffffff;
-    padding: 2px 8px;
-    margin: 0 2px;
+    /* background-color: #61afef; */
+    /* padding: 0px 0px; */
+    padding: 0px 2px 0px 0px;
+    margin: 0.5px;
     border-radius: 10px;
+    border-bottom: 3px solid #7CFC98;
 }
 
 #workspaces button {
     background: transparent;
     border: none;
-    color: #888888;
-    padding: 2px 8px;
-    margin: 0 2px;
-    font-weight: bold;
+    /* padding: 0px 0px; */
+    padding: 0px 2px 0px 0px;
+    margin: 0.5px;
 }
 
 #window {
     font-style: italic;
 }
 
-window#waybar.empty #window {
+window#waybar.empty #window,
+window#waybar.empty #window:hover {
     background-color: transparent;
+    border-top: 0px;
+    border-bottom: 0px;
 }
+
