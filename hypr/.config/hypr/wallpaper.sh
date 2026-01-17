@@ -6,6 +6,13 @@
 WALLDIR="${WALLDIR:-/usr/share/backgrounds}"
 CURRENT="$HOME/.config/hypr/wallpaper/current"
 
+CUR_DIR="$HOME/.config/hypr/wallpaper"
+
+# Ensure the directory exists
+if [ ! -d "$CUR_DIR" ]; then
+    mkdir -p "$CUR_DIR"
+fi
+
 # Exit quietly if wallpaper directory does not exist
 [ -d "$WALLDIR" ] || exit 0
 
