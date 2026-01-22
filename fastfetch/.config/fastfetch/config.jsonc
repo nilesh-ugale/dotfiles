@@ -36,7 +36,8 @@
     {
       "type": "display",
       "key": "│ ├󱄄",
-      "keyColor": "green"
+      "keyColor": "green",
+      "format": "{width}x{height} in 32\", {refresh-rate} Hz [{type}]"
     },
     {
       "type": "disk",

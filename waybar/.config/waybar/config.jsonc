@@ -147,9 +147,10 @@
     },
 
     "memory": {
-        "format": "<span color='#FF9F0A'>   </span>{used:0.1f}G/{total:0.1f}G ",
+        "format": "<span color='#FF9F0A'>   </span>{used}G/{total}G ",
         "interval": 1,
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format": "Swap {swapUsed}G/{swapTotal}G"
     },
 
     "cpu": {
