@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 choice=$(printf "  Lock\n 󰍃 Logout\n 󰜉 Reboot\n 󰐥 Shutdown" \
-  | wofi --config ~/.config/wofi/config --style ~/.config/wofi/style.css --dmenu --prompt "Power")
+  | wofi --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --dmenu --prompt "Power")
 
 case "$choice" in
   *Lock*)
@@ -9,7 +9,7 @@ case "$choice" in
   *Logout*)
     hyprctl dispatch exit ;;
   *Reboot*)
-    systemctl reboot ;;
+    ~/.config/bin/powermenu-reboot.sh ;;
   *Shutdown*)
-    systemctl poweroff ;;
+    ~/.config/bin/powermenu-shutdown.sh ;;
 esac

@@ -136,10 +136,10 @@ function tmux-start() {
     fi
 }
 
-alias clr="~/.scripts/clr_scr.sh"
-alias tms="~/.scripts/tmux-sessionizer.sh"
+alias clr="~/.config/bin/clr_scr.sh"
+alias tms="~/.config/bin/tmux-sessionizer.sh"
 alias e="nvim"
-alias cmp_cmd="python ~/.scripts/cmp_cmds.py $@"
+alias cmp_cmd="python ~/.config/bin/cmp_cmds.py $@"
 alias ts="tmux-start"
 alias :q="exit"
 alias grd='cd $(command git rev-parse --show-toplevel)'

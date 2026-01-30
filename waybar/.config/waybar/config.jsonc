@@ -94,7 +94,7 @@
 
     "custom/power": {
         "format": "<span color='#FF4040'>  </span>",
-        "on-click": "~/.scripts/powermenu.sh",
+        "on-click": "~/.config/bin/powermenu.sh",
         "tooltip": true
     },
 
@@ -139,7 +139,7 @@
     },
 
     "custom/temperature": {
-        "exec": "~/.scripts/temprature.sh",
+        "exec": "~/.config/bin/temprature.sh",
         "format": "<span color='#FFA500'>  </span>{text}°C ",
         "interval": 5,
         "tooltip": true,
