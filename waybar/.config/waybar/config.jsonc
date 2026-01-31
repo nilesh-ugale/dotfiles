@@ -6,8 +6,8 @@
     "modules-left": [
         "custom/gentoo",
         "hyprland/workspaces",
-        "hyprland/window",
-        "privacy"
+        "privacy",
+        "hyprland/window"
     ],
 
     "modules-center": [
@@ -16,16 +16,44 @@
 
     "modules-right": [
         "pulseaudio",
-        "bluetooth",
-        "network#wifi",
-        "network#ethernet",
-        "custom/temperature",
-        "memory",
-        "cpu",
+        "group/network",
+        "group/cpu",
         "custom/lock",
         "custom/reboot",
         "custom/power"
     ],
+
+	"group/cpu": {
+		"orientation": "horizontal",
+		"modules": [
+            "custom/cpu",
+			"cpu",
+			"memory",
+            "custom/temperature"
+		],
+        "drawer": {
+            "click-to-reveal": false
+        }
+	},
+
+    "group/network": {
+		"orientation": "horizontal",
+		"modules": [
+            "custom/network",
+            "bluetooth",
+            "network#wifi",
+            "network#ethernet"
+		],
+        "drawer": {
+            "click-to-reveal": false
+        }
+	},
+
+
+    "custom/cpu": {
+        "format": "<span color='#FFA500'> 󰍛 </span>",
+        "tooltip": false
+    },
 
     "privacy": {
         "icon-spacing": 4,
@@ -98,11 +126,16 @@
         "tooltip": true
     },
 
+    "custom/network": {
+        "format": "<span color='#FFA500'> 󰒍 </span>",
+        "tooltip": false
+    },
+
     "network#wifi": {
         "interface": "wlan0",
-        "format-wifi": "<span color='#7FFF00'> 󰤨 </span>{essid} ",
-        "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
-        "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
+        "format-wifi": "<span color='#7FFF00'> 󰤨 </span>",
+        "format-linked": "<span color='#FFA500'> 󱘖 </span>",
+        "format-disconnected": "<span color='#FF4040'> 󰤮 </span>",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
         "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch exec '[float; size 30% 50%; move 69% 3%] kitty -e impala'",
         "interval": 1
@@ -110,9 +143,9 @@
 
     "network#ethernet": {
         "interface": "eno1",
-        "format-ethernet": "<span color='#7FFF00'> 󰈁 </span>Wired ",
+        "format-ethernet": "<span color='#7FFF00'> 󰈁 </span>",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-        "format-linked": "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ",
+        "format-linked": "<span color='#FFA500'> 󱘖 </span>",
         "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
         "interval": 1
     },
@@ -147,7 +180,7 @@
     },
 
     "memory": {
-        "format": "<span color='#FF9F0A'>   </span>{used}G/{total}G ",
+        "format": "<span color='#FF9F0A'>   </span>{used:0.2f}G/{total:0.2f}G ",
         "interval": 1,
         "tooltip": true,
         "tooltip-format": "Swap {swapUsed}G/{swapTotal}G"
@@ -167,9 +200,10 @@
     },
 
     "bluetooth": {
-        "format": "<span color='#00BFFF'>  </span>{status} ",
-        "format-connected": "<span color='#00BFFF'>  </span>{device_alias} ",
-        "format-connected-battery": "<span color='#00BFFF'>  </span>{device_alias} {device_battery_percentage}% ",
+        "format": "<span color='#00BFFF'>  </span>",
+        "format-connected": "<span color='#00BFFF'> 󰂱 </span>",
+        "format-disabled": "<span color='#00BFFF'> 󰂲 </span>",
+        "format-connected-battery": "<span color='#00BFFF'> 󰂱 </span>{device_battery_percentage}% ",
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",

@@ -51,30 +51,30 @@
     padding-top: 0;
 }
 
-#privacy:hover,
-#bluetooth:hover,
-#network:hover,
-#pulseaudio:hover,
-#custom-temperature:hover,
-#memory:hover,
-#cpu:hover,
-#clock:hover,
-#custom-lock:hover,
-#custom-reboot:hover,
-#custom-power:hover,
-#custom-gentoo:hover,
-#window:hover {
-    /* background-color: rgba(70, 75, 90, 0.5); */
-    border-bottom: 1px solid #FFFFFF;
-}
+/* #privacy:hover, */
+/* #bluetooth:hover, */
+/* #network:hover, */
+/* #pulseaudio:hover, */
+/* #custom-temperature:hover, */
+/* #memory:hover, */
+/* #cpu:hover, */
+/* #clock:hover, */
+/* #custom-lock:hover, */
+/* #custom-reboot:hover, */
+/* #custom-power:hover, */
+/* #custom-gentoo:hover, */
+/* #window:hover { */
+/*     // background-color: rgba(70, 75, 90, 0.5); */
+/*     border-bottom: 1px solid #FFFFFF; */
+/* } */
 
-#workspaces button:hover{
-    /* background-color: rgba(97, 175, 239, 0.5); */
-    padding: 0px 7px 0px 3px;
-    /* margin: 0.5px; */
-    border-radius: 10px;
-    border-bottom: 1px solid #FFFFFF;
-}
+/* #workspaces button:hover{ */
+/*     // background-color: rgba(97, 175, 239, 0.5); */
+/*     padding: 0px 7px 0px 3px; */
+/*     // margin: 0.5px; */
+/*     border-radius: 10px; */
+/*     border-bottom: 1px solid #FFFFFF; */
+/* } */
 
 #workspaces button.active {
     /* background-color: #61afef; */
