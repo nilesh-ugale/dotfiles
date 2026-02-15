@@ -28,6 +28,14 @@ WALL=$(find "$WALLDIR" -type f \( \
 ln -sf "$WALL" "$CURRENT"
 
 # Apply wallpaper via hyprpaper (single stable path)
-hyprctl hyprpaper unload all
-hyprctl hyprpaper preload "$CURRENT" >/dev/null 2>&1
-hyprctl hyprpaper wallpaper ",$CURRENT" >/dev/null 2>&1
+# hyprctl hyprpaper unload all
+# hyprctl -v hyprpaper preload "$CURRENT" >/dev/null 2>&1
+# hyprctl hyprpaper wallpaper ",$CURRENT" >/dev/null 2>&1
+if pgrep -x "hyprpaper" > /dev/null; then
+    # echo "Hyprpaper is running. Killing and restarting..."
+    pkill -x hyprpaper >/dev/null 2>&1
+    # Wait a moment for the process to actually die
+    # sleep 0.
+fi
+
+hyprpaper >/dev/null 2>&1 &
