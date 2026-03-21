@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 choice=$(printf "  Lock\n 󰍃 Logout\n 󰜉 Reboot\n 󰐥 Shutdown" \
-  | wofi --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --dmenu --prompt "Power")
+  | wofi -n --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --dmenu --prompt "Power")
 
 case "$choice" in
   *Lock*)

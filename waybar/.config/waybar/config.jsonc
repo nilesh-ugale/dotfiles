@@ -92,7 +92,7 @@
     "custom/gentoo": {
         "format": "<span color='#9984FF'>  </span>",
         "tooltip": "Gentoo Linux",
-        "on-click": "wofi --config ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
+        "on-click": "wofi -n --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
     },
 
     "hyprland/workspaces": {
@@ -110,7 +110,6 @@
             "2": "  ",
             "3": " 󱞎 ",
             "4": "  ",
-            "5": "  ",
             "default": "  "
         }
     },
