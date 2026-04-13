@@ -77,16 +77,6 @@ return {
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
-            per_filetype = {
-                org = { 'orgmode' },
-            },
-            providers = {
-                orgmode = {
-                    name = 'Orgmode',
-                    module = 'orgmode.org.autocompletion.blink',
-                    fallbacks = { 'buffer' },
-                },
-            },
         },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
