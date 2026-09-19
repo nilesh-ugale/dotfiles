@@ -10,21 +10,24 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 
+-- <C-o> runs one command and returns to insert at the same spot; <ESC>...li
+-- shifted the cursor whenever it sat in column 1. gv restores the selection
+-- that a bare v would have discarded.
 vim.keymap.set("n", "<F6>", ":set invrelativenumber<CR>", { silent = true })
-vim.keymap.set("v", "<F6>", "<ESC>:set invrelativenumber<CR>v", { silent = true })
-vim.keymap.set("i", "<F6>", "<ESC>:set invrelativenumber<CR>li", { silent = true })
+vim.keymap.set("v", "<F6>", ":<C-u>set invrelativenumber<CR>gv", { silent = true })
+vim.keymap.set("i", "<F6>", "<C-o>:set invrelativenumber<CR>", { silent = true })
 
 vim.keymap.set("n", "<F7>", ":set list!<CR>", { silent = true })
-vim.keymap.set("i", "<F7>", "<ESC>:set list!<CR>li", { silent = true })
-vim.keymap.set("v", "<F7>", "<ESC>:set list!<CR>v", { silent = true })
+vim.keymap.set("i", "<F7>", "<C-o>:set list!<CR>", { silent = true })
+vim.keymap.set("v", "<F7>", ":<C-u>set list!<CR>gv", { silent = true })
 
 vim.keymap.set("n", "<F5>", ":set invspell<CR>", { silent = true })
-vim.keymap.set("i", "<F5>", "<ESC>:set invspell<CR>li", { silent = true })
-vim.keymap.set("v", "<F5>", "<ESC>:set invspell<CR>v", { silent = true })
+vim.keymap.set("i", "<F5>", "<C-o>:set invspell<CR>", { silent = true })
+vim.keymap.set("v", "<F5>", ":<C-u>set invspell<CR>gv", { silent = true })
 
 -- Prevent x from overriding what's in the clipboard.
 vim.keymap.set("n", "x", "\"_x", { silent = true })
-vim.keymap.set("n", "X", "\"_x", { silent = true })
+vim.keymap.set("n", "X", "\"_X", { silent = true })
 
 vim.keymap.set("i", "jk", "<ESC>", { silent = true })
 vim.keymap.set("i", "kj", "<ESC>", { silent = true })
@@ -81,7 +84,9 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- <leader>S rather than <leader>s: as a prefix of <leader>ss/sb/sw/si/sd it had
+-- to wait out 'timeoutlen' on every invocation.
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")

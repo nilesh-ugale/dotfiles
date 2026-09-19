@@ -3,6 +3,9 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -31,7 +34,6 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
 vim.opt.listchars = "tab:→\\ ,space:·,nbsp:␣,trail:•,eol:¬,precedes:«,extends:»"
 vim.opt.cmdheight = 1
-vim.opt.conceallevel = 3
 
 local in_wsl = os.getenv("WSL_DISTRO_NAME") ~= nil
 

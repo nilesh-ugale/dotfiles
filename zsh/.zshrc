@@ -142,7 +142,22 @@ alias e="nvim"
 alias cmp_cmd="python ~/.config/bin/cmp_cmds.py $@"
 alias ts="tmux-start"
 alias :q="exit"
-alias grd='cd $(command git rev-parse --show-toplevel)'
+# grd: jump to the outermost repo root (walks out of submodules)
+grd() {
+  local root super
+  root=$(command git rev-parse --show-toplevel 2>/dev/null) || return 1
+  while true; do
+    super=$(command git -C "$root" rev-parse --show-superproject-working-tree 2>/dev/null)
+    [[ -n $super ]] || break
+    root=$super
+  done
+  cd -- "$root"
+}
+
+# grds: jump to the current submodule root (what grd used to do)
+grds() {
+  cd -- "$(command git rev-parse --show-toplevel)" || return 1
+}
 alias tk='tmux kill-server'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -161,6 +176,13 @@ fi
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+# A stray ESC -- dismissing a popup, or just double-tapping it -- otherwise sits
+# in zsh's buffer for KEYTIMEOUT (400ms by default) waiting to see whether it is
+# the start of an ALT- sequence. Type a command beginning with t or c inside that
+# window and ESC+t or ESC+c reads as ALT-t / ALT-C, which opens fzf. A real ALT-
+# chord arrives as one burst, so 10ms is still ample for the bindings below.
+KEYTIMEOUT=1
 
 # Remove default CTRL-T for fzf
 bindkey -r '^T'

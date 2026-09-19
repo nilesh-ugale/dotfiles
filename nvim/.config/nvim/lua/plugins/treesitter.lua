@@ -1,35 +1,39 @@
+-- Parsers to keep installed. `install` skips any that are already present, so
+-- listing them here is cheap; add a language and restart to pick it up.
+local ensure_installed = {
+    "c",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "vimdoc",
+}
+
 return {
     {
         'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
         build = ':TSUpdate',
-        opts = {
-            modules  = {},
-            -- A list of parser names, or "all"
-            ensure_installed = {
-                "vimdoc",
-                "c",
-                "lua",
-                "markdown_inline",
-            },
-            ignore_install = {
-                'org',
-            },
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
+        -- The main branch does not support lazy-loading.
+        lazy = false,
+        config = function()
+            require('nvim-treesitter').setup()
+            require('nvim-treesitter').install(ensure_installed)
 
-            -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-            auto_install = true,
-
-            highlight = {
-                -- `false` will disable the whole extension
-                enable = true,
-                -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                -- Instead of true it can also be a list of languages
-            },
-        },
+            -- On the main branch, highlighting is Neovim's job rather than the
+            -- plugin's: there is no `highlight.enable` any more.
+            vim.api.nvim_create_autocmd('FileType', {
+                group = vim.api.nvim_create_augroup('TreesitterStart', {}),
+                pattern = '*',
+                callback = function(event)
+                    local lang = vim.treesitter.language.get_lang(event.match)
+                    if lang then
+                        -- Fails when the parser isn't installed, which is fine:
+                        -- we fall back to regex syntax for that filetype.
+                        pcall(vim.treesitter.start, event.buf, lang)
+                    end
+                end,
+            })
+        end,
     },
     {
         'nvim-treesitter/nvim-treesitter-context'

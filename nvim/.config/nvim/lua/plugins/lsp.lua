@@ -1,5 +1,5 @@
 return {
-    { 'williamboman/mason.nvim', },
+    { 'mason-org/mason.nvim', },
     { 'neovim/nvim-lspconfig' },
     {
         "folke/lazydev.nvim",

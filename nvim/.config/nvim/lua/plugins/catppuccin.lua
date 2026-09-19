@@ -19,8 +19,6 @@ return {
 
             vim.cmd('hi CursorLineNr guifg=#ffffaf')
             vim.cmd('hi LineNr guibg=none guifg=#7f6faf')
-            vim.cmd('set cursorline')
-            vim.cmd('set cursorlineopt=number')
         end,
     },
 }
