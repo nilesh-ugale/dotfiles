@@ -16,6 +16,7 @@ hl.monitor({
     cm            = "hdr",
     sdrbrightness = 1.2,
     sdrsaturation = 0.98,
+    sdr_max_luminance = 160,
 })
 
 
