@@ -100,8 +100,8 @@
         "all-outputs": true,
         "format": "{icon}",
         "on-click": "activate",
-        "on-scroll-up": "hyprctl dispatch workspace +1",
-        "on-scroll-down": "hyprctl dispatch workspace -1",
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"+1\" })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"-1\" })'",
         "persistent-workspaces": {
             "*":[1,2,3,4,5,6,7,8,9]
         },
@@ -138,7 +138,7 @@
         "format-linked": "<span color='#FFA500'> 󱘖 </span>",
         "format-disconnected": "<span color='#FF4040'> 󰤮 </span>",
         "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch exec '[float; size 30% 50%; move 69% 3%] kitty -e impala'",
+        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e impala\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
         "interval": 1
     },
 
@@ -167,7 +167,7 @@
                 "<span color='#00FF7F'>  </span>"
             ]
         },
-        "on-click": "pgrep -x wiremix >/dev/null && pkill wiremix || hyprctl dispatch exec \"[float; size 30% 50%; move 69% 3%] kitty -e wiremix --tab output\"",
+        "on-click": "pgrep -x wiremix >/dev/null && pkill wiremix || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e wiremix --tab output\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
         "tooltip": true,
         "tooltip-format": "{volume}%"
     },
@@ -189,7 +189,7 @@
 
     "cpu": {
         "format": "<span color='#FF9F0A'>  </span>{usage}% ",
-        "on-click": "pgrep -x btop >/dev/null && pkill btop || hyprctl dispatch exec \"[float; size 40% 70%; move 59% 3%] kitty -e btop\"",
+        "on-click": "pgrep -x btop >/dev/null && pkill btop || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e btop\", { float = true, size = \"monitor_w*0.4 monitor_h*0.7\", move = \"monitor_w*0.59 monitor_h*0.03\" })'",
         "tooltip": true
     },
 
@@ -209,7 +209,7 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        "on-click": "pgrep -x bluetui >/dev/null && pkill bluetui || hyprctl dispatch exec '[float; size 30% 50%; move 69% 3%] kitty -e bluetui'"
+        "on-click": "pgrep -x bluetui >/dev/null && pkill bluetui || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e bluetui\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'"
     }
 }
 

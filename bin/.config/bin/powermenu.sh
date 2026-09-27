@@ -7,7 +7,7 @@ case "$choice" in
   *Lock*)
     hyprlock ;;
   *Logout*)
-    hyprctl dispatch exit ;;
+    hyprctl dispatch 'hl.dsp.exit()' ;;
   *Reboot*)
     ~/.config/bin/powermenu-reboot.sh ;;
   *Shutdown*)

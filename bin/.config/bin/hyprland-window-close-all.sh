@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # Close all open windows
-hyprctl clients -j | \
-  jq -r ".[].address" | \
-  xargs -I{} hyprctl dispatch closewindow address:{}
+hyprctl dispatch 'function()
+  for _, win in ipairs(hl.get_windows()) do
+    hl.dispatch(hl.dsp.window.close({ window = win }))
+  end
+end'
 
 # Move to first workspace
-hyprctl dispatch workspace 1
-
+hyprctl dispatch 'hl.dsp.focus({ workspace = 1 })'

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 if hyprctl clients | grep -q "class: Logseq"; then
-    hyprctl dispatch focuswindow class:Logseq
+    hyprctl dispatch 'hl.dsp.focus({ window = hl.get_window("class:Logseq") })'
 else
     logseq &
-    hyprctl dispatch focuswindow class:Logseq
+    hyprctl dispatch 'hl.dsp.focus({ window = hl.get_window("class:Logseq") })'
 fi
 
