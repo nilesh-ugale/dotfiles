@@ -31,7 +31,8 @@ local browser        = "~/.config/bin/launch-browser.sh"
 local browserPrivate = browser .. " --private"
 local wallpaper      = "~/.config/bin/wallpaper.sh"
 local powermenu      = "~/.config/bin/powermenu.sh"
-local notes          = "~/.config/bin/logseq.sh"
+local notes          = "~/.config/bin/obsidian.sh"
+local screenshot     = "~/.config/bin/screenshot.sh"
 
 
 -------------------
@@ -40,6 +41,7 @@ local notes          = "~/.config/bin/logseq.sh"
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar & ~/.config/bin/hyprpaper-start.sh")
+    hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
 end)
 
 
@@ -78,9 +80,10 @@ hl.config({
 
         border_size = 2,
 
+        -- MANAS palette: blue bell -> light pink, deep purple when inactive
         col = {
-            active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = { "rgba(9c8fd6ee)", "rgba(f9b0c3ee)" }, angle = 45 },
+            inactive_border = "rgba(6455a4aa)",
         },
 
         resize_on_border = false,
@@ -104,7 +107,7 @@ hl.config({
             enabled      = true,
             range        = 4,
             render_power = 3,
-            color        = "rgba(1a1a1aee)",
+            color        = "rgba(1e1833ee)",
         },
 
         blur = {
@@ -117,14 +120,6 @@ hl.config({
 
     animations = {
         enabled = true,
-    },
-
-    dwindle = {
-        preserve_split = true,
-    },
-
-    master = {
-        new_status = "master",
     },
 
     scrolling = {
@@ -140,7 +135,6 @@ hl.config({
         disable_hyprland_logo           = true,
         disable_hyprland_guiutils_check = true,
         disable_splash_rendering        = true,
-        vrr                             = 1,
     },
 
     input = {
@@ -194,35 +188,37 @@ end
 bind("Return",    hl.dsp.exec_cmd(terminal))
 bind("B",         hl.dsp.exec_cmd(browser))
 bind("SHIFT + B", hl.dsp.exec_cmd(browserPrivate))
-bind("Q",         hl.dsp.window.close(), { repeating = true })
-bind("R",         hl.dsp.exec_cmd("pkill waybar; waybar &"))
+bind("Q",         hl.dsp.window.close())
+bind("R",         hl.dsp.exec_cmd("pkill -SIGUSR2 -x waybar || waybar"))
 bind("SHIFT + E", hl.dsp.exec_cmd(powermenu))
-bind("M",         hl.dsp.exit())
-bind("L",         hl.dsp.exec_cmd("hyprlock"))
+bind("Escape",    hl.dsp.exec_cmd("hyprlock"))
 bind("N",         hl.dsp.exec_cmd(notes))
 bind("E",         hl.dsp.exec_cmd(fileManager))
 bind("V",         hl.dsp.window.float({ action = "toggle" }))
 bind("D",         hl.dsp.exec_cmd(menu))
 
--- Scrolling layout focus
-bind("left",  hl.dsp.layout("focus l"), { repeating = true })
-bind("right", hl.dsp.layout("focus r"), { repeating = true })
-bind("up",    hl.dsp.layout("focus u"), { repeating = true })
-bind("down",  hl.dsp.layout("focus d"), { repeating = true })
+-- Scrolling layout focus (arrows or vim keys)
+for key, dir in pairs({ left = "l", right = "r", up = "u", down = "d", H = "l", L = "r", K = "u", J = "d" }) do
+    bind(key, hl.dsp.layout("focus " .. dir), { repeating = true })
+end
 
 -- Switch between windows in a floating workspace
 bind("Tab", hl.dsp.window.cycle_next())
 bind("Tab", hl.dsp.window.bring_to_top())
 
-bind("SHIFT + left",  hl.dsp.layout("movewindowto l"))
-bind("SHIFT + right", hl.dsp.layout("movewindowto r"))
-bind("CTRL + left",   hl.dsp.layout("swapcol l"))
-bind("CTRL + right",  hl.dsp.layout("swapcol r"))
+for key, dir in pairs({ left = "l", right = "r", H = "l", L = "r" }) do
+    bind("SHIFT + " .. key, hl.dsp.layout("movewindowto " .. dir))
+    bind("CTRL + " .. key,  hl.dsp.layout("swapcol " .. dir))
+end
 
 bind("SHIFT + F", hl.dsp.window.fullscreen())
 bind("F",         hl.dsp.layout("colresize +conf"))
 
 bind("W", hl.dsp.exec_cmd(wallpaper))
+
+-- Screenshots (saved to ~/Pictures/Screenshots and copied)
+hl.bind("Print",         hl.dsp.exec_cmd(screenshot .. " region"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd(screenshot .. " full"))
 
 for i = 1, 9 do
     bind(tostring(i),              hl.dsp.focus({ workspace = i }))
@@ -289,6 +285,12 @@ hl.window_rule({
     name      = "spotify",
     match     = { class = "^(spotify)$" },
     workspace = "4",
+})
+
+hl.window_rule({
+    name      = "obsidian",
+    match     = { class = "^(obsidian)$" },
+    workspace = "3",
 })
 
 hl.window_rule({
