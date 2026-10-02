@@ -1,9 +1,16 @@
+/* Palette from "MANAS | UI UX design" (Behance) */
+@define-color purple   #6455A4;
+@define-color bluebell #9C8FD6;
+@define-color lavender #E0DFFD;
+@define-color pink     #F9B0C3;
+@define-color yellow   #FFC212;
+@define-color sos      #EF6D6C;
+
 * {
-    font-family: "JetBrainsMono Nerd Font";
-    font-weight: 600;
-    font-style: italic;
+    font-family: "Quicksand", "JetBrainsMono Nerd Font";
+    font-weight: 700;
     font-size: 16px;
-    color: #dcdfe1;
+    color: @lavender;
 }
 
 /* Waybar */
@@ -13,6 +20,7 @@
 }
 
 #privacy,
+#tray,
 #workspaces,
 #window,
 #clock,
@@ -21,78 +29,46 @@
 #bluetooth,
 #custom-temperature,
 #pulseaudio,
-#memory {
-    background-color: rgba(15,27,53,0.5);
-    padding: 0px 7px 0px 7px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-left: 2px;
-    margin-right: 2px;
-    border-radius: 15px;
-    border-top: 1px solid #FFFFFF;
-}
-
-
-#custom-gentoo,
+#memory,
+#custom-arch,
 #custom-power {
-    background-color: rgba(15,27,53,0.5);
+    background-color: alpha(@purple, 0.85);
     padding: 0px 7px 0px 7px;
     margin-top: 4px;
     margin-bottom: 4px;
     margin-left: 2px;
     margin-right: 2px;
     border-radius: 15px;
-    border-top: 1px solid #FFFFFF;
+    border-top: 1px solid @bluebell;
 }
 
-#custpm-temperature.critical,
+/* Power turns SOS red on hover, like the app's SOS badge */
+#custom-power:hover {
+    background-color: @sos;
+}
+
+#custom-temperature.critical,
 #pulseaudio.muted {
-    color: #FF0000;
+    color: @sos;
     padding-top: 0;
-}
-
-/* #privacy:hover, */
-/* #bluetooth:hover, */
-/* #network:hover, */
-/* #pulseaudio:hover, */
-/* #custom-temperature:hover, */
-/* #memory:hover, */
-/* #cpu:hover, */
-/* #clock:hover, */
-/* #custom-lock:hover, */
-/* #custom-reboot:hover, */
-/* #custom-power:hover, */
-/* #custom-gentoo:hover, */
-/* #window:hover { */
-/*     // background-color: rgba(70, 75, 90, 0.5); */
-/*     border-bottom: 1px solid #FFFFFF; */
-/* } */
-
-/* #workspaces button:hover{ */
-/*     // background-color: rgba(97, 175, 239, 0.5); */
-/*     padding: 0px 7px 0px 3px; */
-/*     // margin: 0.5px; */
-/*     border-radius: 10px; */
-/*     border-bottom: 1px solid #FFFFFF; */
-/* } */
-
-#workspaces button.active {
-    /* background-color: #61afef; */
-    padding: 0px 7px 0px 3px;
-    /* margin: 0.5px; */
-    border-radius: 10px;
-    border-bottom: 2px solid #7CFC98;
 }
 
 #workspaces button {
     background: transparent;
     border: none;
     padding: 0px 7px 0px 3px;
-    /* margin: 0.5px; */
 }
 
-#window {
-    font-style: italic;
+#workspaces button.active {
+    background-color: alpha(@bluebell, 0.45);
+    padding: 0px 7px 0px 3px;
+    border-radius: 10px;
+    border-bottom: 2px solid @yellow;
+}
+
+#workspaces button:hover {
+    background-color: alpha(@lavender, 0.15);
+    border-radius: 10px;
 }
 
 window#waybar.empty #window,
@@ -102,3 +78,76 @@ window#waybar.empty #window:hover {
     border-bottom: 0px;
 }
 
+/* Groups share their module's name, so flatten the modules inside a group
+   to keep one pill per group */
+box#cpu label,
+box#network label {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0px 4px;
+}
+
+/* No tray icons: no pill */
+#tray.empty {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Tray right-click menus: lavender card like the tooltips */
+#tray > .needs-attention {
+    background-color: alpha(@sos, 0.6);
+    border-radius: 10px;
+}
+
+#tray menu {
+    background-color: @lavender;
+    border: 1px solid @bluebell;
+    border-radius: 12px;
+    padding: 6px;
+}
+
+#tray menu menuitem {
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+#tray menu menuitem label,
+#tray menu menuitem arrow,
+#tray menu menuitem check,
+#tray menu menuitem radio {
+    color: @purple;
+}
+
+#tray menu menuitem:hover {
+    background-color: @bluebell;
+}
+
+#tray menu menuitem:hover label,
+#tray menu menuitem:hover arrow,
+#tray menu menuitem:hover check,
+#tray menu menuitem:hover radio {
+    color: @lavender;
+}
+
+#tray menu menuitem:disabled label {
+    color: alpha(@purple, 0.5);
+}
+
+#tray menu separator {
+    background-color: alpha(@bluebell, 0.5);
+    min-height: 1px;
+    margin: 4px 6px;
+}
+
+tooltip {
+    background-color: @lavender;
+    border: 1px solid @bluebell;
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: @purple;
+}

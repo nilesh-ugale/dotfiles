@@ -1,10 +1,10 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 26,
+    "height": 40,
     "spacing": 0,
     "modules-left": [
-        "custom/gentoo",
+        "custom/arch",
         "hyprland/workspaces",
         "privacy",
         "hyprland/window"
@@ -15,18 +15,16 @@
     ],
 
     "modules-right": [
+        "tray",
         "pulseaudio",
         "group/network",
         "group/cpu",
-        "custom/lock",
-        "custom/reboot",
         "custom/power"
     ],
 
 	"group/cpu": {
 		"orientation": "horizontal",
 		"modules": [
-            "custom/cpu",
 			"cpu",
 			"memory",
             "custom/temperature"
@@ -39,21 +37,11 @@
     "group/network": {
 		"orientation": "horizontal",
 		"modules": [
-            "custom/network",
-            "bluetooth",
+            "network#ethernet",
             "network#wifi",
-            "network#ethernet"
-		],
-        "drawer": {
-            "click-to-reveal": false
-        }
+            "bluetooth"
+		]
 	},
-
-
-    "custom/cpu": {
-        "format": "<span color='#FFA500'> 󰍛 </span>",
-        "tooltip": false
-    },
 
     "privacy": {
         "icon-spacing": 4,
@@ -89,9 +77,10 @@
         ]
     },
 
-    "custom/gentoo": {
-        "format": "<span color='#9984FF'>  </span>",
-        "tooltip": "Gentoo Linux",
+    "custom/arch": {
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>",
+        "tooltip": true,
+        "tooltip-format": "Arch Linux",
         "on-click": "wofi -n --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
     },
 
@@ -103,7 +92,7 @@
         "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"+1\" })'",
         "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"-1\" })'",
         "persistent-workspaces": {
-            "*":[1,2,3,4,5,6,7,8,9]
+            "*": [1, 2, 3, 4]
         },
         "format-icons": {
             "1": "  ",
@@ -115,56 +104,56 @@
     },
 
     "hyprland/window" : {
-        "format": " {class} ",
+        "format": " {title} ",
         "icon": true,
         "max-length": 40,
-        "seperate-outputs": false
+        "separate-outputs": false
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8
     },
 
     "custom/power": {
-        "format": "<span color='#FF4040'>  </span>",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
         "on-click": "~/.config/bin/powermenu.sh",
         "tooltip": true
     },
 
-    "custom/network": {
-        "format": "<span color='#FFA500'> 󰒍 </span>",
-        "tooltip": false
-    },
-
     "network#wifi": {
         "interface": "wlan0",
-        "format-wifi": "<span color='#7FFF00'> 󰤨 </span>",
-        "format-linked": "<span color='#FFA500'> 󱘖 </span>",
-        "format-disconnected": "<span color='#FF4040'> 󰤮 </span>",
-        "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
+        "format-wifi": "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'> 󰤨 </span>",
+        "format-linked": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'> 󱘖 </span>",
+        "format-disconnected": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰤮 </span>",
+        "tooltip-format": "<span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅧 </span>{bandwidthUpBytes}  <span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅢 </span>{bandwidthDownBytes}",
         "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e impala\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
         "interval": 1
     },
 
     "network#ethernet": {
         "interface": "eno1",
-        "format-ethernet": "<span color='#7FFF00'> 󰈁 </span>",
-        "tooltip-format": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-        "format-linked": "<span color='#FFA500'> 󱘖 </span>",
-        "format-disconnected": "<span color='#FF4040'>  </span>Disconnected ",
+        "format-ethernet": "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'> 󰈁 </span>",
+        "format-linked": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'> 󱘖 </span>",
+        "format-disconnected": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰤮 </span>",
+        "tooltip-format": "<span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅧 </span>{bandwidthUpBytes}  <span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅢 </span>{bandwidthDownBytes}",
         "interval": 1
     },
 
     "pulseaudio": {
-        "format": "<span color='#00FF7F'>{icon}</span>{volume}% ",
-        "format-muted": "<span color='#FF4040'> 󰖁 </span>0% ",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>{icon}</span>{volume}% ",
+        "format-muted": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰖁 </span>0% ",
         "format-icons": {
-            "headphone": "<span color='#BF00FF'>  </span>",
-            "hands-free": "<span color='#BF00FF'>  </span>",
-            "headset": "<span color='#BF00FF'>  </span>",
-            "phone": "<span color='#00FFFF'>  </span>",
-            "portable": "<span color='#00FFFF'>  </span>",
-            "car": "<span color='#FFA500'>  </span>",
+            "headphone": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+            "hands-free": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+            "headset": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+            "phone": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+            "portable": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+            "car": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>",
             "default": [
-                "<span color='#808080'>  </span>",
-                "<span color='#FFFF66'>  </span>",
-                "<span color='#00FF7F'>  </span>"
+                "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'>  </span>",
+                "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+                "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>"
             ]
         },
         "on-click": "pgrep -x wiremix >/dev/null && pkill wiremix || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e wiremix --tab output\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
@@ -174,37 +163,46 @@
 
     "custom/temperature": {
         "exec": "~/.config/bin/temprature.sh",
-        "format": "<span color='#FFA500'>  </span>{text}°C ",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>{text}°C ",
         "interval": 5,
         "tooltip": true,
         "return-type": "json"
     },
 
     "memory": {
-        "format": "<span color='#FF9F0A'>   </span>{used:0.2f}G/{total:0.2f}G ",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>   </span>{used:0.2f}G/{total:0.2f}G ",
         "interval": 1,
         "tooltip": true,
         "tooltip-format": "Swap {swapUsed}G/{swapTotal}G"
     },
 
     "cpu": {
-        "format": "<span color='#FF9F0A'>  </span>{usage}% ",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>{usage}% ",
         "on-click": "pgrep -x btop >/dev/null && pkill btop || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e btop\", { float = true, size = \"monitor_w*0.4 monitor_h*0.7\", move = \"monitor_w*0.59 monitor_h*0.03\" })'",
         "tooltip": true
     },
 
     "clock": {
-        "interval": 1,
+        "interval": 60,
         "timezone": "Asia/Kolkata",
-        "format": "<span color='#BF00FF'>  </span>{:%d %b %Y, %a,<span color='#BF00FF'>  </span>%T} ",
-        "tooltip": false
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>{:%a %d %b<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>%H:%M} ",
+        "tooltip": true,
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<b>{}</b>",
+                "weekdays": "<span color='#9C8FD6'><b>{}</b></span>",
+                "today": "<span color='#EF6D6C'><b><u>{}</u></b></span>"
+            }
+        }
     },
 
     "bluetooth": {
-        "format": "<span color='#00BFFF'>  </span>",
-        "format-connected": "<span color='#00BFFF'> 󰂱 </span>",
-        "format-disabled": "<span color='#00BFFF'> 󰂲 </span>",
-        "format-connected-battery": "<span color='#00BFFF'> 󰂱 </span>{device_battery_percentage}% ",
+        "format": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'>  </span>",
+        "format-connected": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'> 󰂱 </span>",
+        "format-disabled": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'> 󰂲 </span>",
+        "format-connected-battery": "<span font_family='JetBrainsMono Nerd Font' color='#F9B0C3'> 󰂱 </span>{device_battery_percentage}% ",
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
