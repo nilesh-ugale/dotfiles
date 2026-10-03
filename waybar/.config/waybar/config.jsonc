@@ -126,8 +126,9 @@
         "format-wifi": "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'> 󰤨 </span>",
         "format-linked": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'> 󱘖 </span>",
         "format-disconnected": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰤮 </span>",
+        "format-disabled": "",
         "tooltip-format": "<span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅧 </span>{bandwidthUpBytes}  <span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅢 </span>{bandwidthDownBytes}",
-        "on-click": "pgrep -x impala >/dev/null && pkill impala || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e impala\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
+        "on-click": "pgrep -x nmtui >/dev/null && pkill -x nmtui || hyprctl dispatch 'hl.dsp.exec_cmd(\"kitty -e nmtui\", { float = true, size = \"monitor_w*0.3 monitor_h*0.5\", move = \"monitor_w*0.69 monitor_h*0.03\" })'",
         "interval": 1
     },
 
@@ -135,7 +136,7 @@
         "interface": "eno1",
         "format-ethernet": "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'> 󰈁 </span>",
         "format-linked": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'> 󱘖 </span>",
-        "format-disconnected": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰤮 </span>",
+        "format-disconnected": "",
         "tooltip-format": "<span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅧 </span>{bandwidthUpBytes}  <span font_family='JetBrainsMono Nerd Font' color='#6455A4'> 󰅢 </span>{bandwidthDownBytes}",
         "interval": 1
     },
