@@ -1,0 +1,12 @@
+#!/bin/sh
+# Wi-Fi only when no Ethernet connection is up.
+case "$2" in
+  up|down|connectivity-change) ;;
+  *) exit 0 ;;
+esac
+
+if nmcli -t -f TYPE,STATE device | grep -q '^ethernet:connected$'; then
+  nmcli radio wifi off
+else
+  nmcli radio wifi on
+fi
