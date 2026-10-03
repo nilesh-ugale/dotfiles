@@ -122,7 +122,7 @@
     },
 
     "network#wifi": {
-        "interface": "wlan0",
+        "interface": "wl*",
         "format-wifi": "<span font_family='JetBrainsMono Nerd Font' color='#E0DFFD'> 󰤨 </span>",
         "format-linked": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'> 󱘖 </span>",
         "format-disconnected": "<span font_family='JetBrainsMono Nerd Font' color='#EF6D6C'> 󰤮 </span>",
