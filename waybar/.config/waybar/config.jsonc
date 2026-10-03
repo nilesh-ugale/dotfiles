@@ -78,7 +78,7 @@
     },
 
     "custom/arch": {
-        "format": "<span font_family='JetBrainsMono Nerd Font' color='#FFC212'>  </span>",
+        "format": "<span font_family='JetBrainsMono Nerd Font Propo' color='#FFC212'>  </span>",
         "tooltip": true,
         "tooltip-format": "Arch Linux",
         "on-click": "wofi -n --conf ~/.config/wofi/config --style ~/.config/wofi/style.css --show drun"
@@ -95,16 +95,16 @@
             "*": [1, 2, 3, 4]
         },
         "format-icons": {
-            "1": "  ",
-            "2": "  ",
-            "3": " 󱞎 ",
-            "4": "  ",
-            "default": "  "
+            "1": "",
+            "2": "",
+            "3": "󱞎",
+            "4": "",
+            "default": ""
         }
     },
 
     "hyprland/window" : {
-        "format": " {title} ",
+        "format": "{title}",
         "icon": true,
         "max-length": 40,
         "separate-outputs": false
