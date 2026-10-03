@@ -1,4 +1,4 @@
-if command -v fastfetch >/dev/null 2>&1; then
+if [[ -z $TMUX ]] && command -v fastfetch >/dev/null 2>&1; then
     fastfetch
 fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
