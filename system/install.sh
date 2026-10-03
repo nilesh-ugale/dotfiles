@@ -9,7 +9,10 @@ sudo install -Dm644 -o root -g root etc/nftables.conf /etc/nftables.conf
 sudo install -Dm755 -o root -g root etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive \
     /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive
 sudo install -Dm644 -o root -g root etc/sysctl.d/90-arp.conf /etc/sysctl.d/90-arp.conf
+sudo install -Dm644 -o root -g root etc/mkinitcpio.conf /etc/mkinitcpio.conf
+sudo install -Dm644 -o root -g root etc/mkinitcpio.d/linux.preset /etc/mkinitcpio.d/linux.preset
 
 sudo nft -c -f /etc/nftables.conf
 sudo systemctl enable --now nftables
 sudo sysctl --system >/dev/null
+sudo mkinitcpio -P
