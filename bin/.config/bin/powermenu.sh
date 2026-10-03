@@ -5,7 +5,7 @@ choice=$(printf "  Lock\n 󰍃 Logout\n 󰜉 Reboot\n 󰐥 Shutdown" \
 
 case "$choice" in
   *Lock*)
-    hyprlock ;;
+    loginctl lock-session ;;
   *Logout*)
     hyprctl dispatch 'hl.dsp.exit()' ;;
   *Reboot*)

@@ -42,6 +42,7 @@ local screenshot     = "~/.config/bin/screenshot.sh"
 hl.on("hyprland.start", function()
     hl.exec_cmd("waybar & ~/.config/bin/hyprpaper-start.sh")
     hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
+    hl.exec_cmd("hypridle")
 end)
 
 
@@ -191,7 +192,7 @@ bind("SHIFT + B", hl.dsp.exec_cmd(browserPrivate))
 bind("Q",         hl.dsp.window.close())
 bind("R",         hl.dsp.exec_cmd("pkill -SIGUSR2 -x waybar || waybar"))
 bind("SHIFT + E", hl.dsp.exec_cmd(powermenu))
-bind("Escape",    hl.dsp.exec_cmd("hyprlock"))
+bind("Escape",    hl.dsp.exec_cmd("loginctl lock-session"))
 bind("N",         hl.dsp.exec_cmd(notes))
 bind("E",         hl.dsp.exec_cmd(fileManager))
 bind("V",         hl.dsp.window.float({ action = "toggle" }))
