@@ -275,7 +275,7 @@ setup_dotfiles() {
     # stow refuses to replace a real file, and oh-my-zsh, the skel or a
     # previous Claude install may have left one. Move those aside, not lose them.
     local f
-    for f in "$HOME/.zshrc" "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"; do
+    for f in "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"; do
         if [[ -f $f && ! -L $f ]]; then
             warn "moving existing ${f#$HOME/} aside to $(basename "$f").pre-stow"
             mv "$f" "$f.pre-stow"
@@ -397,8 +397,6 @@ Done. Open a new shell to pick it all up.
 
 Still to do by hand:
   * add the printed SSH key to GitHub, if it generated one
-  * run "p10k configure", or copy ~/.p10k.zsh over from the old box -- the
-    prompt config is machine-local and not tracked in the repo
   * copy ~/.claude/c-style-guide.md over by hand. CLAUDE.md points at it,
     but it is a SEDEMAC internal document and this repo is public
   * run "claude" once to sign in; that writes ~/.claude/.credentials.json,

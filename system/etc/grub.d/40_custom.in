@@ -4,38 +4,42 @@ exec tail -n +3 $0
 # menu entries you want to add after this comment.  Be careful not to change
 # the 'exec tail' line above.
 
+#@windows-begin@
 menuentry "Windows 11" --class windows {
     savedefault
     insmod part_gpt
     insmod fat
-    search --no-floppy --fs-uuid --set=root DEB5-FEB0
+    search --no-floppy --fs-uuid --set=root @WIN_ESP_UUID@
     chainloader /EFI/Microsoft/Boot/bootmgfw.efi
 }
+#@windows-end@
 
 submenu "Tools" --class recovery {
+#@iso-begin@
     menuentry "Arch Linux rescue (ISO)" --class arch {
         insmod part_gpt
         insmod ext2
         insmod loopback
         insmod iso9660
-        search --no-floppy --fs-uuid --set=root 403dc0e2-bfcc-4939-951d-a352ea901825
+        search --no-floppy --fs-uuid --set=root @ROOT_UUID@
         set isofile=/boot/iso/archlinux-x86_64.iso
         loopback loop $isofile
-        linux (loop)/arch/boot/x86_64/vmlinuz-linux img_dev=UUID=403dc0e2-bfcc-4939-951d-a352ea901825 img_loop=$isofile
+        linux (loop)/arch/boot/x86_64/vmlinuz-linux img_dev=UUID=@ROOT_UUID@ img_loop=$isofile
         initrd (loop)/arch/boot/x86_64/initramfs-linux.img
     }
+#@iso-end@
 
     menuentry "Memory test (memtest86+)" --class memtest {
         insmod part_gpt
         insmod ext2
-        search --no-floppy --fs-uuid --set=root 403dc0e2-bfcc-4939-951d-a352ea901825
+        search --no-floppy --fs-uuid --set=root @ROOT_UUID@
         linux /boot/memtest86+/memtest.efi
     }
 
     menuentry "UEFI Shell" --class efi {
         insmod part_gpt
         insmod ext2
-        search --no-floppy --fs-uuid --set=root 403dc0e2-bfcc-4939-951d-a352ea901825
+        search --no-floppy --fs-uuid --set=root @ROOT_UUID@
         chainloader /usr/share/edk2-shell/x64/Shell.efi
     }
 
