@@ -1,19 +1,44 @@
-# Global Instructions
+# Global instructions
 
-- Don't spawn more than 5 agents at any point during this session.
-- If additional work is needed, queue it rather than creating more concurrent agents.
+## Asking vs. changing
+
+- When I ask a question, just answer it. A question about the code ("what about
+  naming it X?", "similarly for Y") is a request for analysis only, never
+  approval to apply the change.
+- Ask for confirmation before editing any file. Do not install anything or run
+  system-changing commands unless I explicitly ask for the change.
+- When I ask for a change that affects my system, describe the plan first and
+  wait for my go-ahead before applying it.
+- Explicit approval covers only the change it was given for. It does not carry
+  over to the next one.
+
+## Git
+
+- Never add a `Co-Authored-By` trailer or any other Claude attribution to git
+  commits or pull requests.
+
+## Agents
+
+- Don't spawn more than 5 agents at any point during a session.
+- If more work is needed, queue it rather than creating more concurrent agents.
 - Prefer sequential execution over excessive parallelism.
 
-# Working style
-
-Ask for confirmation before editing any file. Treat a question about the code
-("what about naming it X?", "similarly for Y") as a request for analysis only,
-never as approval to apply the change. Explicit approval covers only the change
-it was given for — it does not carry over to the next one.
+## Writing style
 
 Write in simple English. Use short sentences and common words. Avoid idioms,
 rare vocabulary, and long subordinate clauses. Keep technical terms — it is the
 prose around them that should be plain.
+
+# Machines
+
+This file is shared through `~/dotfiles` (stow package `claude`) by two machines:
+
+- **Arch desktop**: bare metal, Hyprland. Files it changes in `/etc` are kept in
+  `~/dotfiles/system` and restored with `system/install.sh`.
+- **Arch on WSL**: the work PC, rebuilt with `~/dotfiles/wsl/install.sh`.
+
+On WSL, `uname -r` contains `microsoft`. Check which machine you are on before
+assuming paths or tools.
 
 # Claude Code gotchas
 
@@ -32,7 +57,7 @@ prose around them that should be plain.
   snapshot is already captured; verify with `bash -lc '...'`, which builds a
   fresh shell.
 
-# Embedded toolchains live on the Windows side
+# WSL only: embedded toolchains live on the Windows side
 
 The RH850 (Renesas CC-RH), C2000 (TI CGT) and STM32 (STM32CubeCLT) toolchains
 are installed under Windows, not in this distro. They are reachable through
@@ -44,12 +69,15 @@ paths and the IDE already line up.
 Native here: `python` (`/usr/sbin/python`), `gcc`, `cmake`, `ninja`, `make`.
 No `arm-none-eabi-gcc`.
 
-Miniforge is installed at `~/miniforge3` (conda 25.11.0, Python 3.12.12) but no
-rc file has a `conda init` block, so neither `conda` nor its `python` is on
-PATH — `python` resolves to the system one. Call `~/miniforge3/bin/conda` and
-`~/miniforge3/bin/python` by absolute path, or run `~/miniforge3/bin/conda init
-bash` to wire it up. Note this is a separate installation from the Windows
-miniforge; the two share nothing.
+# Conda
+
+Miniforge is installed at `~/miniforge3`, with a `py314` environment. How it is
+wired into the shell is machine-local (`~/.config.zsh`, not in the repo), so
+check there. If `conda` is not on PATH, call `~/miniforge3/bin/conda` and
+`~/miniforge3/bin/python` by absolute path. On the Arch desktop, `conda` is set
+up on first use, and `python` is the system one until you `conda activate`. On
+WSL, this is a separate installation from the Windows miniforge; the two share
+nothing.
 
 # C/C++ style (SEDEMAC)
 

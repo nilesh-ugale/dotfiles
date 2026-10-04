@@ -1,5 +1,11 @@
 {
-  "model": "opus[1m]",
+  "model": "opus",
   "effortLevel": "high",
-  "theme": "auto"
+  "theme": "auto",
+  "preferredNotifChannel": "notifications_disabled",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
 }
