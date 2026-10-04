@@ -402,11 +402,11 @@ Still to do by hand:
   * run "claude" once to sign in; that writes ~/.claude/.credentials.json,
     which is deliberately untracked
   * nvim will fetch its plugins through lazy.nvim on first start
-  * Windows Terminal background: point the Arch Linux profile's
-    backgroundImage at kitty/.config/kitty/dog.png in this repo (the
-    other profiles use backgroundImageOpacity around 0.34). Windows
-    Terminal cannot read a \\wsl$ path reliably, so copy it to the
-    Windows side first.
+  * Windows Terminal: merge wsl/manas-windows-terminal.json into its
+    settings.json for the MANAS colour scheme, tab-row theme and
+    background picture; the file says where each piece goes. Copy
+    kitty/.config/kitty/dog-manas.png to the Windows side first, since
+    Windows Terminal cannot read a \\wsl$ path reliably.
 
 DONE
 }

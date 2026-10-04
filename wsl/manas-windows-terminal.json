@@ -1,0 +1,69 @@
+{
+  "_readme": [
+    "MANAS for Windows Terminal, matching kitty's manas-theme.conf on the Arch desktop.",
+    "Merge by hand into Windows Terminal's settings.json (Settings > Open JSON file):",
+    "  - add the object in \"schemes\" to settings.json's \"schemes\" list",
+    "  - add the object in \"themes\" to settings.json's \"themes\" list",
+    "  - set the top-level \"theme\" to \"MANAS\" (colours the tab row and title bar)",
+    "  - copy the keys in \"archProfile\" into the Arch Linux entry under profiles.list",
+    "backgroundImage must be a Windows path: copy kitty/.config/kitty/dog-manas.png to the",
+    "Windows side first, because Windows Terminal cannot read \\\\wsl$ paths reliably.",
+    "Opacity 0.34 matches kitty's background_tint 0.66. Unlike kitty, Windows Terminal can",
+    "anchor the picture, so bottomRight keeps the puppy in view at any window shape."
+  ],
+
+  "schemes": [
+    {
+      "name": "MANAS",
+      "background": "#1E1833",
+      "foreground": "#E0DFFD",
+      "cursorColor": "#9C8FD6",
+      "selectionBackground": "#6455A4",
+      "black": "#2E2650",
+      "red": "#EF6D6C",
+      "green": "#9ADBB5",
+      "yellow": "#FFC212",
+      "blue": "#9C8FD6",
+      "purple": "#F9B0C3",
+      "cyan": "#8ED3E0",
+      "white": "#C4C0EC",
+      "brightBlack": "#7A6FA8",
+      "brightRed": "#F59A99",
+      "brightGreen": "#B5E8CB",
+      "brightYellow": "#FFD65C",
+      "brightBlue": "#B8AEE6",
+      "brightPurple": "#FBC8D5",
+      "brightCyan": "#AEE2EC",
+      "brightWhite": "#F0EFFF"
+    }
+  ],
+
+  "themes": [
+    {
+      "name": "MANAS",
+      "window": {
+        "applicationTheme": "dark",
+        "useMica": false
+      },
+      "tabRow": {
+        "background": "#1E1833FF",
+        "unfocusedBackground": "#1E1833FF"
+      },
+      "tab": {
+        "background": "#9C8FD6FF",
+        "unfocusedBackground": "#2E2650FF",
+        "showCloseButton": "hover"
+      }
+    }
+  ],
+
+  "theme": "MANAS",
+
+  "archProfile": {
+    "colorScheme": "MANAS",
+    "backgroundImage": "C:\\Users\\nilesh.ugale\\Pictures\\dog-manas.png",
+    "backgroundImageOpacity": 0.34,
+    "backgroundImageStretchMode": "uniformToFill",
+    "backgroundImageAlignment": "bottomRight"
+  }
+}
