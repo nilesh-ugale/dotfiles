@@ -30,8 +30,9 @@ STOW_PACKAGES=(zsh tmux bin nvim)
 # Stowed separately, with --no-folding. ~/.claude holds credentials and chat
 # transcripts alongside the settings, so the directory itself must stay real:
 # a folded symlink would send all of that into the repo, which is public.
-# Only settings.json and CLAUDE.md are tracked. The SEDEMAC C style guide
-# CLAUDE.md refers to is deliberately not, and is copied over by hand.
+# Only CLAUDE.md is tracked; settings.json stays local to each machine. The
+# SEDEMAC C style guide CLAUDE.md refers to is deliberately not tracked
+# either, and is copied over by hand.
 STOW_PACKAGES_NOFOLD=(claude)
 
 GIT_NAME="Nilesh Ugale"
@@ -292,7 +293,7 @@ setup_dotfiles() {
     # stow refuses to replace a real file, and oh-my-zsh, the skel or a
     # previous Claude install may have left one. Move those aside, not lose them.
     local f
-    for f in "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"; do
+    for f in "$HOME/.zshrc" "$HOME/.p10k.zsh" "$HOME/.claude/CLAUDE.md"; do
         if [[ -f $f && ! -L $f ]]; then
             warn "moving existing ${f#$HOME/} aside to $(basename "$f").pre-stow"
             mv "$f" "$f.pre-stow"
