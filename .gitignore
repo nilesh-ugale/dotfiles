@@ -1,2 +1,9 @@
 ignore
 hypr/.config/hypr/wallpaper/current
+
+# ~/.claude is stowed with --no-folding, but guard the repo side anyway: that
+# directory also collects credentials, chat transcripts and command history,
+# and this repo is public. Allow only the two files that are meant to be here.
+claude/.claude/*
+!claude/.claude/settings.json
+!claude/.claude/CLAUDE.md

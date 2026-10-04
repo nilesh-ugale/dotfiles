@@ -27,6 +27,13 @@ DOTFILES_SSH=git@github.com:nilesh-ugale/dotfiles.git
 # fastfetch and yazi are for the desktop and are left unstowed here.
 STOW_PACKAGES=(zsh tmux bin nvim)
 
+# Stowed separately, with --no-folding. ~/.claude holds credentials and chat
+# transcripts alongside the settings, so the directory itself must stay real:
+# a folded symlink would send all of that into the repo, which is public.
+# Only settings.json and CLAUDE.md are tracked. The SEDEMAC C style guide
+# CLAUDE.md refers to is deliberately not, and is copied over by hand.
+STOW_PACKAGES_NOFOLD=(claude)
+
 GIT_NAME="Nilesh Ugale"
 GIT_EMAIL=nilesh.ugale@sedemac.com
 # Lives on the Windows side, so the path holds the Windows user name. The
@@ -265,17 +272,18 @@ setup_dotfiles() {
     # Push over SSH from here on.
     git -C "$dir" remote set-url origin "$DOTFILES_SSH"
 
-    # stow refuses to replace a real file, and oh-my-zsh or the skel may have
-    # left one. Move those aside rather than lose them.
+    # stow refuses to replace a real file, and oh-my-zsh, the skel or a
+    # previous Claude install may have left one. Move those aside, not lose them.
     local f
-    for f in "$HOME/.zshrc"; do
+    for f in "$HOME/.zshrc" "$HOME/.claude/settings.json" "$HOME/.claude/CLAUDE.md"; do
         if [[ -f $f && ! -L $f ]]; then
-            warn "moving existing $(basename "$f") to $(basename "$f").pre-stow"
+            warn "moving existing ${f#$HOME/} aside to $(basename "$f").pre-stow"
             mv "$f" "$f.pre-stow"
         fi
     done
 
     stow -d "$dir" -t "$HOME" --restow "${STOW_PACKAGES[@]}"
+    stow -d "$dir" -t "$HOME" --restow --no-folding "${STOW_PACKAGES_NOFOLD[@]}"
 }
 
 write_local_config() {
@@ -391,6 +399,10 @@ Still to do by hand:
   * add the printed SSH key to GitHub, if it generated one
   * run "p10k configure", or copy ~/.p10k.zsh over from the old box -- the
     prompt config is machine-local and not tracked in the repo
+  * copy ~/.claude/c-style-guide.md over by hand. CLAUDE.md points at it,
+    but it is a SEDEMAC internal document and this repo is public
+  * run "claude" once to sign in; that writes ~/.claude/.credentials.json,
+    which is deliberately untracked
   * nvim will fetch its plugins through lazy.nvim on first start
   * Windows Terminal background: point the Arch Linux profile's
     backgroundImage at wsl/dog.png in this repo (the other profiles use
