@@ -36,9 +36,18 @@ STOW_PACKAGES_NOFOLD=(claude)
 
 GIT_NAME="Nilesh Ugale"
 GIT_EMAIL=nilesh.r.ugale@gmail.com
-# Lives on the Windows side, so the path holds the Windows user name. The
-# template is only wired up if the file is actually there.
-GIT_COMMIT_TEMPLATE=/mnt/c/Users/nilesh.ugale/.gitmessage
+# The Windows user name differs between PCs, so ask Windows for it. cmd.exe
+# is called by full path, runs from /mnt/c to avoid its warning about UNC
+# working directories, and ends its output with \r, which tr strips. If
+# interop is off this is empty, and the paths below just won't exist.
+WIN_USER=$(cd /mnt/c && /mnt/c/Windows/System32/cmd.exe /c 'echo %USERNAME%' 2>/dev/null | tr -d '\r') || true
+WIN_HOME=/mnt/c/Users/$WIN_USER
+# Lives on the Windows side. The template is only wired up if the file is
+# actually there.
+GIT_COMMIT_TEMPLATE=$WIN_HOME/.gitmessage
+# The Windows side's ssh key, already on GitHub. It is copied in if present;
+# otherwise a new key is made and has to be added to GitHub by hand.
+WIN_SSH_DIR=$WIN_HOME/.ssh
 
 # Roots for tmux-sessionizer, separated like PATH. /mnt/e is this machine's
 # second drive -- change it if the new PC letters its drives differently.
@@ -217,9 +226,17 @@ setup_ssh_key() {
         say "ssh key already present"
         return 0
     fi
-    say "ssh key"
     mkdir -p "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
+    # Files on /mnt/c show as 777, and ssh refuses a private key that open.
+    if [[ -f $WIN_SSH_DIR/id_ed25519 && -f $WIN_SSH_DIR/id_ed25519.pub ]]; then
+        say "ssh key (copied from $WIN_SSH_DIR)"
+        cp "$WIN_SSH_DIR/id_ed25519" "$WIN_SSH_DIR/id_ed25519.pub" "$HOME/.ssh/"
+        chmod 600 "$key"
+        chmod 644 "$key.pub"
+        return 0
+    fi
+    say "ssh key"
     ssh-keygen -t ed25519 -C "$GIT_EMAIL" -f "$key" -N ""
     cat <<KEY
 
