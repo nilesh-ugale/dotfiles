@@ -403,9 +403,10 @@ Still to do by hand:
     which is deliberately untracked
   * nvim will fetch its plugins through lazy.nvim on first start
   * Windows Terminal background: point the Arch Linux profile's
-    backgroundImage at wsl/dog.png in this repo (the other profiles use
-    backgroundImageOpacity around 0.34). Windows Terminal cannot read a
-    \\wsl$ path reliably, so copy it to the Windows side first.
+    backgroundImage at kitty/.config/kitty/dog.png in this repo (the
+    other profiles use backgroundImageOpacity around 0.34). Windows
+    Terminal cannot read a \\wsl$ path reliably, so copy it to the
+    Windows side first.
 
 DONE
 }
