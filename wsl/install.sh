@@ -35,7 +35,7 @@ STOW_PACKAGES=(zsh tmux bin nvim)
 STOW_PACKAGES_NOFOLD=(claude)
 
 GIT_NAME="Nilesh Ugale"
-GIT_EMAIL=nilesh.ugale@sedemac.com
+GIT_EMAIL=nilesh.r.ugale@gmail.com
 # Lives on the Windows side, so the path holds the Windows user name. The
 # template is only wired up if the file is actually there.
 GIT_COMMIT_TEMPLATE=/mnt/c/Users/nilesh.ugale/.gitmessage
