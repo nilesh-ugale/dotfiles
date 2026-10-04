@@ -50,7 +50,7 @@ PACKAGES=(
     network-manager-applet networkmanager ninja ntfs-3g ntfsprogs obsidian
     pacman-contrib pipewire pipewire-alsa pipewire-jack pipewire-pulse qt6-base
     qt6-declarative qt6-svg ripgrep rpi-imager rsync slurp smartmontools stow
-    tailscale tmux ttf-jetbrains-mono-nerd vim wayland-protocols wget
+    tailscale terminus-font tmux ttf-jetbrains-mono-nerd vim wayland-protocols wget
     wireless_tools wiremix wireplumber wl-clipboard wofi
     xdg-desktop-portal-hyprland xdg-utils xorg-server xorg-xhost xorg-xinit
     xorg-xwayland yazi zram-generator zsh
