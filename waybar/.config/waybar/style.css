@@ -6,6 +6,11 @@
 @define-color yellow   #FFC212;
 @define-color sos      #EF6D6C;
 
+/* Matches kitty's background (dog-manas.png, background_tint 0.66) as seen on
+   the HDR monitor. Picked by eye: the value kitty draws (#382F61) looked too
+   dark next to it on screen. Opaque so the wallpaper does not shift it. */
+@define-color kittybg  #4E4382;
+
 * {
     font-family: "Quicksand", "JetBrainsMono Nerd Font";
     font-weight: 700;
@@ -32,7 +37,7 @@
 #memory,
 #custom-arch,
 #custom-power {
-    background-color: alpha(@purple, 0.85);
+    background-color: @kittybg;
     padding: 0px 7px 0px 7px;
     margin-top: 4px;
     margin-bottom: 4px;
