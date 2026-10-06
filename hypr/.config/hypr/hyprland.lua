@@ -288,7 +288,7 @@ hl.window_rule({
 
 hl.window_rule({
     name      = "obsidian",
-    match     = { class = "^(obsidian)$" },
+    match     = { class = "^(md\\.obsidian\\.Obsidian|obsidian)$" },
     workspace = "3",
 })
 
