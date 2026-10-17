@@ -309,6 +309,21 @@ install_aur() {
     yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
 }
 
+# brave-bin installs its icon as brave-desktop, but Brave tags its audio
+# streams with icon brave-browser, so waybar's privacy tooltip shows a blank
+# space. Alias the name in the user icon theme.
+alias_brave_icon() {
+    say "brave-browser icon alias"
+    local src dst
+    for src in /usr/share/icons/hicolor/*/apps/brave-desktop.png; do
+        [[ -e $src ]] || continue
+        dst=$HOME/.local/share/icons/hicolor/${src#/usr/share/icons/hicolor/}
+        dst=${dst%/*}/brave-browser.png
+        mkdir -p "${dst%/*}"
+        ln -sfn "$src" "$dst"
+    done
+}
+
 install_oh_my_zsh() {
     local zsh_custom=$HOME/.oh-my-zsh/custom
     if [[ -d $HOME/.oh-my-zsh ]]; then
@@ -446,6 +461,7 @@ rebuild_boot
 enable_services
 
 install_aur
+alias_brave_icon
 install_oh_my_zsh
 setup_dotfiles
 write_local_config
