@@ -64,23 +64,23 @@
       "format": "\u001b[90m┌──────────────────────Software──────────────────────┐"
     },
     {
-      "type": "command",
       "key": " OS",
       "keyColor": "blue",
-      // "text": "version=$(omarchy-version); echo \"Gentoo $version\""
-      "text": "echo \"Gentoo\""
+      "type": "os"
     },
     {
       "type": "command",
       "key": "│ ├󰘬",
       "keyColor": "blue",
-      "text": "branch=$(omarchy-version-branch); echo \"$branch\""
+      // dotfiles branch, last commit, and whether there are uncommitted changes
+      "text": "b=$(git -C ~/dotfiles rev-parse --abbrev-ref HEAD); h=$(git -C ~/dotfiles log -1 --format=%h); [ -z \"$(git -C ~/dotfiles status --porcelain)\" ] && s=clean || s=dirty; echo \"dotfiles $b @ $h ($s)\""
     },
     {
       "type": "command",
       "key": "│ ├󰔫",
       "keyColor": "blue",
-      "text": "channel=$(omarchy-version-channel); echo \"$channel\""
+      // testing if any *-testing repo is enabled, otherwise stable
+      "text": "r=$(pacman-conf --repo-list | paste -sd, -); case $r in *testing*) c=testing;; *) c=stable;; esac; echo \"$c ($r)\""
     },
     {
       "type": "kernel",
@@ -113,10 +113,10 @@
       "keyColor": "blue"
     },
     {
-      "type": "command",
+      "type": "colors",
       "key": "│ ├󰸌",
       "keyColor": "blue",
-      "text": "theme=$(omarchy-theme-current); echo -e \"$theme \\e[38m●\\e[37m●\\e[36m●\\e[35m●\\e[34m●\\e[33m●\\e[32m●\\e[31m●\""
+      "symbol": "circle"
     },
     {
       "type": "terminalfont",
@@ -147,7 +147,8 @@
       "type": "command",
       "key": " Update",
       "keyColor": "magenta",
-      "text": "updated=$(omarchy-version-pkgs); echo \"$updated\""
+      // date of the last pacman -Syu
+      "text": "d=$(grep 'starting full system upgrade' /var/log/pacman.log | tail -1 | cut -c2-11); echo \"$d ($(( ($(date +%s) - $(date -d \"$d\" +%s)) / 86400 )) days ago)\""
     },
     {
       "type": "custom",
