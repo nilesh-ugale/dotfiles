@@ -47,13 +47,13 @@ PACKAGES=(
     greetd-regreet grim grub gst-plugin-pipewire hivex htop hypridle hyprland
     hyprlock hyprpaper hyprpolkitagent kitty kitty-terminfo less libpulse linux
     linux-firmware mako memtest86+-efi meson nano nautilus neovim
-    network-manager-applet networkmanager ninja ntfs-3g ntfsprogs obsidian
-    pacman-contrib pipewire pipewire-alsa pipewire-jack pipewire-pulse qt6-base
-    qt6-declarative qt6-svg ripgrep rpi-imager rsync slurp smartmontools stow
-    tailscale terminus-font tmux ttf-jetbrains-mono-nerd vim wayland-protocols wget
-    wireless_tools wiremix wireplumber wl-clipboard wofi
-    xdg-desktop-portal-hyprland xdg-utils xorg-server xorg-xhost xorg-xinit
-    xorg-xwayland yazi zram-generator zsh
+    network-manager-applet networkmanager ninja noto-fonts-emoji ntfs-3g
+    ntfsprogs obsidian pacman-contrib pipewire pipewire-alsa pipewire-jack
+    pipewire-pulse qt6-base qt6-declarative qt6-svg ripgrep rpi-imager rsync
+    slurp smartmontools spotify-launcher stow tailscale terminus-font tmux
+    ttf-jetbrains-mono-nerd vim wayland-protocols wget wireless_tools wiremix
+    wireplumber wl-clipboard wofi xdg-desktop-portal-hyprland xdg-utils
+    xorg-server xorg-xhost xorg-xinit xorg-xwayland yazi zram-generator zsh
 )
 NVIDIA_PACKAGES=(nvidia-open-dkms dkms linux-headers libva-nvidia-driver)
 AUR_PACKAGES=(brave-bin claude-desktop ttf-quicksand-variable waybar-git)
